@@ -1,17 +1,18 @@
 import {type SubmitEvent, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
-import {useNavigate} from "react-router";
 import {registerUser} from "../api/auth.ts";
 import {getErrorMessage, getFieldErrors} from "../api/errors.ts";
-
+import {useNavigate} from "react-router";
+import {toast} from "sonner";
 
 export default function Register() {
     const [formError, setFormError] = useState<string | null>(null);
     const navigate = useNavigate();
     const registerMutation = useMutation({
         mutationFn: registerUser,
-        onSuccess: () => {
-            navigate("/");
+        onSuccess: ({message}) => {
+            toast.success(message);
+            navigate("/login");
         }
     })
 
