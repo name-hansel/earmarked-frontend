@@ -15,12 +15,19 @@ export type LoginInput = {
     password: string
 }
 
+export type ActivateAccountInput = {
+    token: string
+}
 
 export async function registerUser(input: RegisterInput): Promise<RegisterOutput> {
     const response = await api.post<RegisterOutput>('/auth/register', input);
     return response.data;
 }
 
-export async function loginUser(input: LoginInput) {
+export async function loginUser(input: LoginInput): Promise<void> {
     await api.post<void>('/auth/login', input);
+}
+
+export async function activateAccount(input: ActivateAccountInput): Promise<void> {
+    await api.post<void>('/auth/activate-account', input);
 }
