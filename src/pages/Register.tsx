@@ -1,24 +1,38 @@
 import {type SubmitEvent, useState} from "react";
+import {useMutation} from "@tanstack/react-query";
+import {useNavigate} from "react-router";
+import {registerUser} from "../api/auth.ts";
+import {getErrorMessage} from "../api/errors.ts";
+
 
 export default function Register() {
-    const [error, setError] = useState<string | null>(null);
+    const [formError, setFormError] = useState<string | null>(null);
+    const navigate = useNavigate();
+    const registerMutation = useMutation({
+        mutationFn: registerUser,
+        onSuccess: () => {
+            navigate("/");
+        }
+    })
+
+    const errorMessage = formError ?? (registerMutation.isError ? getErrorMessage(registerMutation.error, "Registration failed. Please try again.") : null);
 
     function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        setError(null);
+        setFormError(null);
 
         const data = new FormData(e.currentTarget);
-        // const username = String(data.get("username") ?? "");
-        // const email = String(data.get("email") ?? "");
+        const username = String(data.get("username") ?? "");
+        const email = String(data.get("email") ?? "");
         const password = String(data.get("password") ?? "");
         const confirmPassword = String(data.get("confirmPassword") ?? "");
 
         if (password !== confirmPassword) {
-            setError("Passwords do not match");
+            setFormError("Passwords do not match");
             return;
         }
 
-        console.log(data);
+        registerMutation.mutate({email, password, username});
     }
 
     return <section>
@@ -57,8 +71,11 @@ export default function Register() {
                        maxLength={128}/>
             </div>
 
-            {error && <p role="alert">{error}</p>}
-            <button type="submit">Register</button>
+            {errorMessage && <p role="alert">{errorMessage}</p>}
+
+            <button type="submit" disabled={registerMutation.isPending}>
+                {registerMutation.isPending ? "Registering..." : "Register"}
+            </button>
         </form>
     </section>
 }
