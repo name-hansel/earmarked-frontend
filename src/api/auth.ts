@@ -10,7 +10,17 @@ export type RegisterOutput = {
     message: string,
 }
 
+export type LoginInput = {
+    email: string,
+    password: string
+}
+
+
 export async function registerUser(input: RegisterInput): Promise<RegisterOutput> {
     const response = await api.post<RegisterOutput>('/auth/register', input);
     return response.data;
+}
+
+export async function loginUser(input: LoginInput) {
+    await api.post<void>('/auth/login', input);
 }
