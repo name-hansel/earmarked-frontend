@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {loginUser, resendActivation} from "../api/auth.ts";
-import {useNavigate} from "react-router";
+import {Link, useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
 import {getErrorCode, getErrorMessage} from "../api/errors.ts";
 import {currentUserKey} from "../api/queryKeys.ts";
@@ -78,5 +78,6 @@ export default function Login() {
                 {loginMutation.isPending ? "Logging in..." : "Login"}
             </button>
         </form>
+        <Link to="/forgot-password">Forgot your password?</Link>
     </section>
 }

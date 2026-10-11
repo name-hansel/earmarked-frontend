@@ -40,6 +40,14 @@ export type ChangePasswordOutput = {
     message: string,
 }
 
+export type ForgotPasswordInput = {
+    email: string,
+}
+
+export type ForgotPasswordOutput = {
+    message: string,
+}
+
 export type CurrentUser = {
     userId: string,
     username: string,
@@ -82,5 +90,10 @@ export async function resendActivation(input: ResendActivationInput): Promise<Re
 
 export async function changePassword(input: ChangePasswordInput): Promise<ChangePasswordOutput> {
     const response = await api.patch<ChangePasswordOutput>("/auth/change-password", input);
+    return response.data;
+}
+
+export async function forgotPassword(input: ForgotPasswordInput): Promise<ForgotPasswordOutput> {
+    const response = await api.post<ForgotPasswordOutput>("/auth/forgot-password", input);
     return response.data;
 }
