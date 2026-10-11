@@ -31,6 +31,15 @@ export type ResendActivationOutput = {
     message: string,
 }
 
+export type ChangePasswordInput = {
+    oldPassword: string,
+    newPassword: string
+}
+
+export type ChangePasswordOutput = {
+    message: string,
+}
+
 export type CurrentUser = {
     userId: string,
     username: string,
@@ -68,5 +77,10 @@ export async function deleteAccount(input: DeleteAccountInput): Promise<void> {
 
 export async function resendActivation(input: ResendActivationInput): Promise<ResendActivationOutput> {
     const response = await api.post<ResendActivationOutput>("/auth/resend-activation", input);
+    return response.data;
+}
+
+export async function changePassword(input: ChangePasswordInput): Promise<ChangePasswordOutput> {
+    const response = await api.patch<ChangePasswordOutput>("/auth/change-password", input);
     return response.data;
 }

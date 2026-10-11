@@ -9,6 +9,7 @@ import ActivateAccount from "./pages/ActivateAccount.tsx";
 import GuestOnly from "./components/GuestOnly.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import DeleteAccount from "./pages/DeleteAccount.tsx";
+import ChangePassword from "./pages/ChangePassword.tsx";
 
 function App() {
     return <Routes>
@@ -23,6 +24,7 @@ function App() {
             </Route>
 
             <Route element={<ProtectedRoute/>}>
+                <Route path="/change-password" element={<ChangePassword/>}/>
                 <Route path="/delete-account" element={<DeleteAccount/>}/>
             </Route>
         </Route>
