@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import DeleteAccount from "./pages/DeleteAccount.tsx";
 import ChangePassword from "./pages/ChangePassword.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
 
 function App() {
     return <Routes>
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/activate-account" element={<ActivateAccount/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                <Route path="reset-password" element={<ResetPassword/>}/>
             </Route>
 
             <Route element={<ProtectedRoute/>}>

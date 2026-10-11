@@ -48,6 +48,15 @@ export type ForgotPasswordOutput = {
     message: string,
 }
 
+export type ResetPasswordInput = {
+    token: string,
+    newPassword: string
+}
+
+export type ResetPasswordOutput = {
+    message: string,
+}
+
 export type CurrentUser = {
     userId: string,
     username: string,
@@ -95,5 +104,10 @@ export async function changePassword(input: ChangePasswordInput): Promise<Change
 
 export async function forgotPassword(input: ForgotPasswordInput): Promise<ForgotPasswordOutput> {
     const response = await api.post<ForgotPasswordOutput>("/auth/forgot-password", input);
+    return response.data;
+}
+
+export async function resetPassword(input: ResetPasswordInput): Promise<ResetPasswordOutput> {
+    const response = await api.post<ResetPasswordOutput>("/auth/reset-password", input);
     return response.data;
 }
