@@ -1,14 +1,17 @@
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {loginUser} from "../api/auth.ts";
 import {useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
 import {getErrorMessage} from "../api/errors.ts";
+import {currentUserKey} from "../hooks/useCurrentUser.ts";
 
 export default function Login() {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const loginMutation = useMutation({
         mutationFn: loginUser,
-        onSuccess: () => {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({queryKey: currentUserKey});
             navigate("/");
         }
     });
