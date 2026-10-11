@@ -19,6 +19,10 @@ export type ActivateAccountInput = {
     token: string
 }
 
+export type DeleteAccountInput = {
+    password: string
+}
+
 export type CurrentUser = {
     userId: string,
     username: string,
@@ -44,4 +48,12 @@ export async function fetchCurrentUser(): Promise<CurrentUser> {
 
 export async function logoutUser(): Promise<void> {
     await api.post("/auth/logout");
+}
+
+export async function deleteAccount(input: DeleteAccountInput): Promise<void> {
+    await api.delete("/auth/delete-account", {
+        data: {
+            password: input.password,
+        }
+    });
 }

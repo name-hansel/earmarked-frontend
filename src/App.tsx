@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound.tsx";
 import Login from "./pages/Login.tsx";
 import ActivateAccount from "./pages/ActivateAccount.tsx";
 import GuestOnly from "./components/GuestOnly.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import DeleteAccount from "./pages/DeleteAccount.tsx";
 
 function App() {
     return <Routes>
@@ -18,6 +20,10 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/activate-account" element={<ActivateAccount/>}/>
+            </Route>
+
+            <Route element={<ProtectedRoute/>}>
+                <Route path="/delete-account" element={<DeleteAccount/>}/>
             </Route>
         </Route>
     </Routes>

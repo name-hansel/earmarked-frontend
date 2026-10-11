@@ -14,6 +14,7 @@ export default function Layout() {
                 (currentUser.data ?
                         <>
                             <span>{currentUser.data.username}</span>
+                            <Link to="/delete-account">Delete account</Link>
                             <button type="button"
                                     onClick={() => logout.mutate()}
                                     disabled={logout.isPending}>
