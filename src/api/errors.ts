@@ -21,6 +21,13 @@ export function getErrorMessage(error: unknown, fallback: string = GENERIC_ERROR
     return GENERIC_ERROR;
 }
 
+export function getErrorCode(error: unknown): string | undefined {
+    if (isAxiosError<ApiErrorBody>(error)) {
+        return error.response?.data?.code;
+    }
+    return undefined;
+}
+
 export function getFieldErrors(error: unknown): Record<string, string> {
     if (isAxiosError<ApiErrorBody>(error)) {
         return error.response?.data?.fieldErrors ?? {};

@@ -23,6 +23,14 @@ export type DeleteAccountInput = {
     password: string
 }
 
+export type ResendActivationInput = {
+    email: string,
+}
+
+export type ResendActivationOutput = {
+    message: string,
+}
+
 export type CurrentUser = {
     userId: string,
     username: string,
@@ -56,4 +64,9 @@ export async function deleteAccount(input: DeleteAccountInput): Promise<void> {
             password: input.password,
         }
     });
+}
+
+export async function resendActivation(input: ResendActivationInput): Promise<ResendActivationOutput> {
+    const response = await api.post<ResendActivationOutput>("/auth/resend-activation", input);
+    return response.data;
 }
