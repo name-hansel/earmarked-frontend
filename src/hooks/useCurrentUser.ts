@@ -1,8 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {fetchCurrentUser} from "../api/auth.ts";
 import {isAxiosError} from "axios";
-
-export const currentUserKey = ["currentUser"] as const;
+import {currentUserKey} from "../api/queryKeys.ts";
 
 export function useCurrentUser() {
     return useQuery({

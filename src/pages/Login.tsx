@@ -3,7 +3,7 @@ import {loginUser} from "../api/auth.ts";
 import {useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
 import {getErrorMessage} from "../api/errors.ts";
-import {currentUserKey} from "../hooks/useCurrentUser.ts";
+import {currentUserKey} from "../api/queryKeys.ts";
 
 export default function Login() {
     const navigate = useNavigate();
