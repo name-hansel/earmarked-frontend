@@ -1,4 +1,7 @@
 import axios, {isAxiosError} from "axios";
+import {queryClient} from "./queryClient.ts";
+import {currentUserKey} from "./queryKeys.ts";
+import {toast} from "sonner";
 
 declare module "axios" {
     interface AxiosRequestConfig {
@@ -15,8 +18,22 @@ export const api = axios.create({
 
 let refreshPromise: Promise<void> | null = null;
 
+function handleSessionExpired() {
+    const currentUser = queryClient.getQueryData(currentUserKey);
+    queryClient.setQueryData(currentUserKey, null);
+
+    if (currentUser) {
+        toast.info("Your session has expired. Please log in again.");
+    }
+}
+
 function refreshSession(): Promise<void> {
-    refreshPromise ??= api.post("auth/refresh", null, {skipAuthRefresh: true}).then(() => undefined).finally(() => {
+    refreshPromise ??= api.post("/auth/refresh", null, {skipAuthRefresh: true}).then(() => undefined).catch((error: unknown) => {
+        if (isAxiosError(error) && error.response?.status === 401) {
+            handleSessionExpired();
+        }
+        throw error;
+    }).finally(() => {
         refreshPromise = null;
     });
 
