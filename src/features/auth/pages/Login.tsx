@@ -2,8 +2,8 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {loginUser, resendActivation} from "../api/auth.ts";
 import {Link, useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
-import {getErrorCode, getErrorMessage} from "../api/errors.ts";
-import {currentUserKey} from "../api/queryKeys.ts";
+import {getErrorCode, getErrorMessage} from "../../../lib/errors.ts";
+import {currentUserKey} from "../queryKeys.ts";
 import {toast} from "sonner";
 
 export default function Login() {

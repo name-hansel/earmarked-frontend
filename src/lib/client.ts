@@ -1,6 +1,6 @@
 import axios, {isAxiosError} from "axios";
 import {queryClient} from "./queryClient.ts";
-import {currentUserKey} from "./queryKeys.ts";
+import {currentUserKey} from "../features/auth/queryKeys.ts";
 import {toast} from "sonner";
 
 declare module "axios" {

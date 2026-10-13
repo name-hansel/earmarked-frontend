@@ -3,7 +3,7 @@ import {useEffect, useRef} from "react";
 import {activateAccount} from "../api/auth.ts";
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "sonner";
-import {getErrorMessage} from "../api/errors.ts";
+import {getErrorMessage} from "../../../lib/errors.ts";
 
 export default function ActivateAccount() {
     const navigate = useNavigate();

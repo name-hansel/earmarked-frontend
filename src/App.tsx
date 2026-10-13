@@ -1,17 +1,17 @@
 import './App.css'
 import {Route, Routes} from "react-router";
 import Home from "./pages/Home.tsx";
-import Register from "./pages/Register.tsx";
-import Layout from "./Layout.tsx";
+import Register from "./features/auth/pages/Register.tsx";
+import Layout from "./components/Layout.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import Login from "./pages/Login.tsx";
-import ActivateAccount from "./pages/ActivateAccount.tsx";
-import GuestOnly from "./components/GuestOnly.tsx";
-import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import DeleteAccount from "./pages/DeleteAccount.tsx";
-import ChangePassword from "./pages/ChangePassword.tsx";
-import ForgotPassword from "./pages/ForgotPassword.tsx";
-import ResetPassword from "./pages/ResetPassword.tsx";
+import Login from "./features/auth/pages/Login.tsx";
+import ActivateAccount from "./features/auth/pages/ActivateAccount.tsx";
+import GuestOnly from "./features/auth/components/GuestOnly.tsx";
+import ProtectedRoute from "./features/auth/components/ProtectedRoute.tsx";
+import DeleteAccount from "./features/auth/pages/DeleteAccount.tsx";
+import ChangePassword from "./features/auth/pages/ChangePassword.tsx";
+import ForgotPassword from "./features/auth/pages/ForgotPassword.tsx";
+import ResetPassword from "./features/auth/pages/ResetPassword.tsx";
 
 function App() {
     return <Routes>

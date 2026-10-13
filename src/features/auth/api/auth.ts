@@ -1,4 +1,4 @@
-import {api} from "./client.ts";
+import {api} from "../../../lib/client.ts";
 
 export type RegisterInput = {
     email: string,

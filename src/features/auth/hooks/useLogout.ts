@@ -3,8 +3,8 @@ import {logoutUser} from "../api/auth.ts";
 import {useNavigate} from "react-router";
 import {isAxiosError} from "axios";
 import {toast} from "sonner";
-import {getErrorMessage} from "../api/errors.ts";
-import {currentUserKey} from "../api/queryKeys.ts";
+import {getErrorMessage} from "../../../lib/errors.ts";
+import {currentUserKey} from "../queryKeys.ts";
 
 export function useLogout() {
     const queryClient = useQueryClient();

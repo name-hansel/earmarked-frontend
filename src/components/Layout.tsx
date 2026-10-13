@@ -1,7 +1,7 @@
 import {Link, Outlet} from "react-router";
 import {Toaster} from "sonner";
-import {useCurrentUser} from "./hooks/useCurrentUser.ts";
-import {useLogout} from "./hooks/useLogout.ts";
+import {useCurrentUser} from "../features/auth/hooks/useCurrentUser.ts";
+import {useLogout} from "../features/auth/hooks/useLogout.ts";
 
 export default function Layout() {
     const currentUser = useCurrentUser();

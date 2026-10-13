@@ -3,8 +3,8 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {toast} from "sonner";
 import {useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
-import {getErrorMessage} from "../api/errors.ts";
-import {currentUserKey} from "../api/queryKeys.ts";
+import {getErrorMessage} from "../../../lib/errors.ts";
+import {currentUserKey} from "../queryKeys.ts";
 
 export default function DeleteAccount() {
     const navigate = useNavigate();

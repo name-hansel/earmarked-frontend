@@ -1,24 +1,40 @@
 import {useMutation} from "@tanstack/react-query";
-import {changePassword} from "../api/auth.ts";
+import {resetPassword} from "../api/auth.ts";
 import {toast} from "sonner";
+import {Link, useNavigate, useSearchParams} from "react-router";
+import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {type SubmitEvent, useState} from "react";
-import {getErrorMessage, getFieldErrors} from "../api/errors.ts";
 
-export default function ChangePassword() {
+export default function ResetPassword() {
+    const navigate = useNavigate();
     const [formError, setFormError] = useState<string | null>(null);
-    const changePasswordMutation = useMutation({
-        mutationFn: changePassword,
-        onSuccess: ({message}) => toast.success(message)
-    });
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get("token");
+
+    const resetPasswordMutation = useMutation({
+        mutationFn: resetPassword,
+        onSuccess: ({message}) => {
+            toast.success(message);
+            navigate("/login");
+        }
+    })
+
+    const fieldErrors = getFieldErrors(resetPasswordMutation.error);
+    const hasFieldErrors = Object.keys(fieldErrors).length > 0;
+    const serverError = resetPasswordMutation.isError && !hasFieldErrors;
+    const errorMessage =
+        formError ??
+        (serverError
+            ? getErrorMessage(resetPasswordMutation.error, "Could not reset the password. Please try again.")
+            : null);
 
     function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
+        if (!token) return;
         setFormError(null);
-        changePasswordMutation.reset();
-        const form = e.currentTarget;
+        resetPasswordMutation.reset();
 
-        const data = new FormData(form);
-        const oldPassword = String(data.get("currentPassword") ?? "");
+        const data = new FormData(e.currentTarget);
         const newPassword = String(data.get("newPassword") ?? "");
         const confirmPassword = String(data.get("confirmPassword") ?? "");
 
@@ -27,30 +43,21 @@ export default function ChangePassword() {
             return;
         }
 
-        changePasswordMutation.mutate({oldPassword, newPassword}, {onSuccess: () => form.reset()});
+        resetPasswordMutation.mutate({token, newPassword});
     }
 
-    const fieldErrors = getFieldErrors(changePasswordMutation.error);
-    const hasFieldErrors = Object.keys(fieldErrors).length > 0;
-    const errorMessage =
-        formError ??
-        (changePasswordMutation.isError && !hasFieldErrors
-            ? getErrorMessage(changePasswordMutation.error, "Could not change the password. Please try again.")
-            : null);
+    if (!token) {
+        return (
+            <section>
+                <p role="alert">This password reset link is invalid.</p>
+                <Link to="/forgot-password">Request a new link</Link>
+            </section>
+        );
+    }
 
     return <section>
-        <h1>Change password</h1>
+        <h1>Reset password</h1>
         <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="currentPassword">Current password</label>
-                <input
-                    id="currentPassword"
-                    name="currentPassword"
-                    type="password"
-                    required
-                    autoComplete="current-password"
-                />
-            </div>
             <div>
                 <label htmlFor="newPassword">New password</label>
                 <input
@@ -79,8 +86,10 @@ export default function ChangePassword() {
                 />
             </div>
             {errorMessage && <p role="alert">{errorMessage}</p>}
-            <button type="submit" disabled={changePasswordMutation.isPending}>
-                {changePasswordMutation.isPending ? "Saving..." : "Change password"}
+            {serverError && <Link to="/forgot-password">Request a new link</Link>}
+
+            <button type="submit" disabled={resetPasswordMutation.isPending}>
+                {resetPasswordMutation.isPending ? "Resetting..." : "Reset password"}
             </button>
         </form>
     </section>

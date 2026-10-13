@@ -2,7 +2,7 @@ import {forgotPassword} from "../api/auth.ts";
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "sonner";
 import {Link, useNavigate} from "react-router";
-import {getErrorMessage, getFieldErrors} from "../api/errors.ts";
+import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {type SubmitEvent} from "react";
 
 export default function ForgotPassword() {

@@ -1,7 +1,7 @@
 import {type SubmitEvent, useState} from "react";
 import {useMutation} from "@tanstack/react-query";
 import {registerUser} from "../api/auth.ts";
-import {getErrorMessage, getFieldErrors} from "../api/errors.ts";
+import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {useNavigate} from "react-router";
 import {toast} from "sonner";
 
