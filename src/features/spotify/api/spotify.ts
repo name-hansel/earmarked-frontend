@@ -1,6 +1,6 @@
 import {api} from "../../../lib/client.ts";
 
-export type SpotifyAlbum = {
+export type SpotifyAlbumSearch = {
     id: string;
     name: string;
     artists: string[];
@@ -8,8 +8,8 @@ export type SpotifyAlbum = {
     releaseDate: string;
 }
 
-export async function searchAlbums(query: string): Promise<SpotifyAlbum[]> {
-    const response = await api.get<SpotifyAlbum[]>("/spotify/albums/search", {
+export async function searchAlbums(query: string): Promise<SpotifyAlbumSearch[]> {
+    const response = await api.get<SpotifyAlbumSearch[]>("/spotify/albums/search", {
         params: {
             q: query
         }

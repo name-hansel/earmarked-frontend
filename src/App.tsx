@@ -12,6 +12,7 @@ import DeleteAccount from "./features/auth/pages/DeleteAccount.tsx";
 import ChangePassword from "./features/auth/pages/ChangePassword.tsx";
 import ForgotPassword from "./features/auth/pages/ForgotPassword.tsx";
 import ResetPassword from "./features/auth/pages/ResetPassword.tsx";
+import AlbumPage from "./pages/AlbumPage.tsx";
 
 function App() {
     return <Routes>
@@ -24,12 +25,13 @@ function App() {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/activate-account" element={<ActivateAccount/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
-                <Route path="reset-password" element={<ResetPassword/>}/>
+                <Route path="/reset-password" element={<ResetPassword/>}/>
             </Route>
 
             <Route element={<ProtectedRoute/>}>
                 <Route path="/change-password" element={<ChangePassword/>}/>
                 <Route path="/delete-account" element={<DeleteAccount/>}/>
+                <Route path="/albums/:spotifyId" element={<AlbumPage/>}/>
             </Route>
         </Route>
     </Routes>
