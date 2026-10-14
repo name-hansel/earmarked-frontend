@@ -1,3 +1,10 @@
+import {useCurrentUser} from "../features/auth/hooks/useCurrentUser.ts";
+import {Landing} from "./Landing.tsx";
+import Dashboard from "./Dashboard.tsx";
+
 export default function Home() {
-    return <h1>Home</h1>
+    const {data: user, isPending} = useCurrentUser();
+
+    if (isPending) return <p>Loading...</p>;
+    return user ? <Dashboard/> : <Landing/>
 }
