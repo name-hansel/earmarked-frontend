@@ -1,13 +1,13 @@
 import {useState} from "react";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
-import {useAlbumSearch} from "../hooks/useAlbumSearch.ts";
+import {useSpotifyAlbumSearch} from "../hooks/useSpotifyAlbumSearch.ts";
 import SpotifyAlbumCard from "./SpotifyAlbumCard.tsx";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 
 export default function SpotifyAlbumSearch() {
     const [input, setInput] = useState("");
     const debouncedInput = useDebounce(input);
-    const {data: albums, isFetching, isError, error} = useAlbumSearch(debouncedInput);
+    const {data: albums, isFetching, isError, error} = useSpotifyAlbumSearch(debouncedInput);
     const activeQuery = input.trim().length > 1 ? debouncedInput : "";
     const isSearching = activeQuery.trim().length > 1;
 

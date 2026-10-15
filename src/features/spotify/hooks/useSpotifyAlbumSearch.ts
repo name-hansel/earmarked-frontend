@@ -2,7 +2,7 @@ import {useQuery} from "@tanstack/react-query";
 import {searchAlbums} from "../api/spotify.ts";
 import {spotifyKeys} from "../queryKeys.ts";
 
-export function useAlbumSearch(query: string) {
+export function useSpotifyAlbumSearch(query: string) {
     const trimmed = query.trim();
 
     return useQuery({
