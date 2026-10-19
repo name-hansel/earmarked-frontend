@@ -1,5 +1,6 @@
 import type {SpotifyAlbum} from "../api/spotify.ts";
 import {Link, useLocation} from "react-router";
+import EarmarkToggleButton from "../../earmark/components/EarmarkToggleButton.tsx";
 
 export default function SpotifyAlbumCard({album}: {
     album: SpotifyAlbum
@@ -15,6 +16,7 @@ export default function SpotifyAlbumCard({album}: {
             <span>{album.artists.join(", ")}</span>
             <span>{album.releaseDate}</span>
             <span>{album.albumType}</span>
+            <EarmarkToggleButton spotifyAlbumId={album.id}/>
         </div>
     </li>
 }
