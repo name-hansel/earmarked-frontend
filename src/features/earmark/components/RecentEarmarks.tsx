@@ -1,5 +1,6 @@
 import {useRecentEarmarks} from "../hooks/useFetchRecentEarmarks.ts";
 import EarmarkCard from "./EarmarkCard.tsx";
+import {Link} from "react-router";
 
 export default function RecentEarmarks() {
     const {data: earmarks, isPending, isError, refetch} = useRecentEarmarks();
@@ -25,8 +26,9 @@ export default function RecentEarmarks() {
         <h2>Recent earmarks</h2>
         <ul>
             {
-                earmarks.map((earmark) => <EarmarkCard earmark={earmark}/>)
+                earmarks.map((earmark) => <EarmarkCard key={earmark.id} earmark={earmark}/>)
             }
         </ul>
+        <Link to="/earmarks">View all</Link>
     </section>
 }

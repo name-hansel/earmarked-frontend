@@ -1,6 +1,9 @@
 export type PageResponse<T> = {
     content: T[];
-    number: number;
-    last: boolean;
-    totalElements: number;
+    page: {
+        size: number;
+        number: number;
+        totalElements: number;
+        totalPages: number;
+    };
 };
