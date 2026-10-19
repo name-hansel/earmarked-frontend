@@ -1,4 +1,5 @@
 import {api} from "../../../lib/client.ts";
+import type {PageResponse} from "../../../lib/types.ts";
 
 export interface Earmark {
     id: string;
@@ -25,4 +26,11 @@ export async function getAlbumEarmark(spotifyAlbumId: string): Promise<AlbumEarm
 
 export async function deleteEarmark(earmarkUuid: string): Promise<void> {
     await api.delete(`/earmark/${earmarkUuid}`);
+}
+
+export async function fetchRecentEarmarks(size: number): Promise<Earmark[]> {
+    const response = await api.get<PageResponse<Earmark>>("/earmark", {
+        params: {page: 0, size},
+    });
+    return response.data.content;
 }
