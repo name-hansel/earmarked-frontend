@@ -1,4 +1,5 @@
 import {useRecentEarmarks} from "../hooks/useFetchEarmarks.ts";
+import EarmarkCard from "./EarmarkCard.tsx";
 
 export default function RecentEarmarks() {
     const {data: earmarks, isPending, isError, refetch} = useRecentEarmarks();
@@ -24,7 +25,7 @@ export default function RecentEarmarks() {
         <h2>Recent earmarks</h2>
         <ul>
             {
-                earmarks.map((earmark) => <li key={earmark.id}>{earmark.spotifyAlbumId}</li>)
+                earmarks.map((earmark) => <EarmarkCard earmark={earmark}/>)
             }
         </ul>
     </section>

@@ -1,11 +1,13 @@
 import {api} from "../../../lib/client.ts";
 import type {PageResponse} from "../../../lib/types.ts";
+import type {SpotifyAlbum} from "../../spotify/api/spotify.ts";
 
 export interface Earmark {
     id: string;
     spotifyAlbumId: string;
     note: string | null;
     createdAt: string;
+    album: SpotifyAlbum | null;
 }
 
 interface AlbumEarmarkResponse {
