@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import {useSpotifyAlbumSearch} from "../hooks/useSpotifyAlbumSearch.ts";
 import SpotifyAlbumCard from "./SpotifyAlbumCard.tsx";
@@ -14,12 +14,25 @@ export default function SpotifyAlbumSearch() {
     const activeQuery = input.trim().length > 1 ? debouncedInput : "";
     const isSearching = activeQuery.trim().length > 1;
 
+    const urlQuery = searchParams.get("q") ?? "";
+    const lastWrittenRef = useRef(urlQuery);
+
+    // debounced input -> URL
     useEffect(() => {
         const next = debouncedInput.trim();
-        if (next === (searchParams.get("q") ?? "")) return;
+        if (next !== input.trim()) return;
+        if (next === lastWrittenRef.current) return;
 
+        lastWrittenRef.current = next;
         setSearchParams(next ? {q: next} : {}, {replace: true});
-    }, [debouncedInput, searchParams, setSearchParams]);
+    }, [debouncedInput, input, setSearchParams]);
+
+    // URL -> input: only for changes we didn't make (Home link, back/forward)
+    useEffect(() => {
+        if (urlQuery === lastWrittenRef.current) return;
+        lastWrittenRef.current = urlQuery;
+        setInput(urlQuery);
+    }, [urlQuery]);
 
     return <section>
         <input type="search" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search albums..."
