@@ -19,6 +19,10 @@ export async function createEarmark(spotifyAlbumId: string): Promise<Earmark> {
 }
 
 export async function getAlbumEarmark(spotifyAlbumId: string): Promise<AlbumEarmarkResponse> {
-    const response = await api.get<AlbumEarmarkResponse>(`/earmark/album/${encodeURIComponent(spotifyAlbumId)}`);
+    const response = await api.get<AlbumEarmarkResponse>(`/earmark/album/${spotifyAlbumId}`);
     return response.data;
+}
+
+export async function deleteEarmark(earmarkUuid: string): Promise<void> {
+    await api.delete(`/earmark/${earmarkUuid}`);
 }
