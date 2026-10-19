@@ -9,7 +9,7 @@ export function useCreateEarmark() {
     return useMutation({
         mutationFn: createEarmark,
         onSuccess: (earmark, spotifyAlbumId) => {
-            queryClient.setQueryData(earmarkKeys.album(spotifyAlbumId), earmark)
+            queryClient.setQueryData(earmarkKeys.album(spotifyAlbumId), {earmark});
         },
         onError: (error, spotifyAlbumId) => {
             if (getErrorCode(error) === ALREADY_EARMARKED_CODE) {

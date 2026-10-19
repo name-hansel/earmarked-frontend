@@ -5,7 +5,7 @@ import {getErrorMessage} from "../../../lib/errors.ts";
 export default function QuickEarmarkButton({spotifyAlbumId}: {
     spotifyAlbumId: string
 }) {
-    const {mutate, isPending: isCreating, error} = useCreateEarmark();
+    const {mutate, isPending: isCreating, error, isError} = useCreateEarmark();
     const {
         data: albumEarmarkResponse,
         isPending: isStatusPending,
@@ -13,7 +13,7 @@ export default function QuickEarmarkButton({spotifyAlbumId}: {
         refetch
     } = useAlbumEarmark(spotifyAlbumId);
 
-    const errorMessage = getErrorMessage(error);
+    const errorMessage = isError && getErrorMessage(error);
 
     if (isStatusPending) {
         return <button type="button" disabled>Earmark</button>;
@@ -29,7 +29,7 @@ export default function QuickEarmarkButton({spotifyAlbumId}: {
     }
 
     return <div>
-        <button type="button" onClick={() => mutate(spotifyAlbumId)}>
+        <button type="button" disabled={isStatusPending} onClick={() => mutate(spotifyAlbumId)}>
             {albumEarmarkResponse.earmark ? "Earmarked" : isCreating ? "Earmarking..." : "Earmark"}
         </button>
         {/*TODO change to toast*/}
