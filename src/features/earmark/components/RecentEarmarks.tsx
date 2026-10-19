@@ -1,4 +1,4 @@
-import {useRecentEarmarks} from "../hooks/useFetchEarmarks.ts";
+import {useRecentEarmarks} from "../hooks/useFetchRecentEarmarks.ts";
 import EarmarkCard from "./EarmarkCard.tsx";
 
 export default function RecentEarmarks() {
