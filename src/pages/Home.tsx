@@ -6,5 +6,5 @@ export default function Home() {
     const {data: user, isPending} = useCurrentUser();
 
     if (isPending) return <p>Loading...</p>;
-    return user ? <Dashboard/> : <Landing/>
+    return user ? <Dashboard username={user.username}/> : <Landing/>
 }

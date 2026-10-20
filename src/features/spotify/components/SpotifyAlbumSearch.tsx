@@ -4,6 +4,7 @@ import {useSpotifyAlbumSearch} from "../hooks/useSpotifyAlbumSearch.ts";
 import SpotifyAlbumCard from "./SpotifyAlbumCard.tsx";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 import {useSearchParams} from "react-router";
+import styles from "./SpotifyAlbumSearch.module.css";
 
 export default function SpotifyAlbumSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -34,12 +35,14 @@ export default function SpotifyAlbumSearch() {
         setInput(urlQuery);
     }, [urlQuery]);
 
-    return <section>
-        <input type="search" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Search albums..."
-               aria-label="Search albums"/>
-        {
-            input && <button type="button" onClick={() => setInput("")}>Clear</button>
-        }
+    return <section className={styles.search}>
+        <div className={styles.field}>
+            <input className={styles.input} type="search" value={input} onChange={(e) => setInput(e.target.value)}
+                   placeholder="Search albums..." aria-label="Search albums"/>
+            {
+                input && <button className={styles.clear} type="button" onClick={() => setInput("")}>Clear</button>
+            }
+        </div>
 
         {isSearching && isFetching && <p>Searching...</p>}
         {isSearching && isError && <p role="alert">{getSearchErrorMessage(error)}</p>}
@@ -47,7 +50,7 @@ export default function SpotifyAlbumSearch() {
 
         {
             isSearching && albums && albums.length > 0 &&
-            <ul>
+            <ul className={styles.results}>
                 {albums.map((album) => <SpotifyAlbumCard key={album.id} album={album}/>)}
             </ul>
         }
