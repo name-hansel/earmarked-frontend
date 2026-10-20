@@ -8,6 +8,27 @@ export default function Layout() {
         <main>
             <Outlet/>
         </main>
-        <Toaster/>
+        <Toaster
+            position="bottom-center"
+            theme="dark"
+            richColors
+            style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: "var(--font-weight-medium)",
+                "--border-radius": "0.75rem",
+
+                "--normal-bg": "var(--color-surface)",
+                "--normal-border": "var(--color-border)",
+                "--normal-text": "var(--color-text)",
+
+                "--success-bg": "var(--color-surface)",
+                "--success-border": "var(--color-success)",
+                "--success-text": "var(--color-success)",
+
+                "--error-bg": "var(--color-surface)",
+                "--error-border": "var(--color-danger)",
+                "--error-text": "var(--color-danger)",
+            } as React.CSSProperties}
+        />
     </>
 }
