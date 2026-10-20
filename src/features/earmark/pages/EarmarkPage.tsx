@@ -1,7 +1,7 @@
 import {Link, useNavigate, useParams} from "react-router";
 import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import type {Earmark} from "../api/earmark.ts";
-import {SubmitEvent, useState} from "react";
+import {type SubmitEvent, useRef, useState} from "react";
 import {useCreateEarmark} from "../hooks/useCreateEarmark.ts";
 import {useUpdateEarmark} from "../hooks/useUpdateEarmark.ts";
 import {useDeleteEarmark} from "../hooks/useDeleteEarmark.ts";
@@ -44,6 +44,7 @@ function EarmarkForm({spotifyAlbumId, earmark}: {
     const albumPath = `/albums/${spotifyAlbumId}`;
     const [note, setNote] = useState(earmark?.note ?? "");
     const navigate = useNavigate();
+    const dialogRef = useRef<HTMLDialogElement>(null);
 
     const {mutate: createEarmark, isPending: isCreating} = useCreateEarmark(spotifyAlbumId);
     const {mutate: updateEarmark, isPending: isUpdating} = useUpdateEarmark(spotifyAlbumId);
@@ -73,13 +74,29 @@ function EarmarkForm({spotifyAlbumId, earmark}: {
         }
     }
 
+    function handleDelete() {
+        if (!earmark) return;
+
+        deleteEarmark(earmark.id, {
+            onSuccess: () => {
+                toast.success("Earmark removed");
+                navigate(albumPath);
+            },
+            onError: (error) => {
+                dialogRef.current?.close();
+                toast.error(getErrorMessage(error));
+            }
+        });
+    }
+
     return <section>
         <Link to={albumPath}>Back</Link>
         <h1>{earmark ? "Edit earmark" : "Earmark album"}</h1>
 
         <form onSubmit={handleSubmit}>
             <label htmlFor="earmark-note">Note</label>
-            <textarea id="earmark-note" value={note} maxLength={256} rows={5}/>
+            <textarea id="earmark-note" value={note} onChange={(event) => setNote(event.target.value)} maxLength={256}
+                      rows={5}/>
             <p>{note.length}/256</p>
 
             <button type="submit" disabled={isBusy}>
@@ -89,5 +106,23 @@ function EarmarkForm({spotifyAlbumId, earmark}: {
             </button>
             <Link to={albumPath}>Cancel</Link>
         </form>
+        {
+            earmark &&
+            <>
+                <button type="button" disabled={isBusy} onClick={() => dialogRef.current?.showModal()}>
+                    Delete earmark
+                </button>
+                <dialog ref={dialogRef}>
+                    <p>Delete this earmark?</p>
+                    <button type="button" onClick={handleDelete} disabled={isDeleting}>
+                        {isDeleting ? "Deleting..." : "Delete"}
+                    </button>
+                    <button type="button" onClick={() => dialogRef.current?.close()} disabled={isDeleting}>
+                        Cancel
+                    </button>
+                </dialog>
+            </>
+
+        }
     </section>
 }
