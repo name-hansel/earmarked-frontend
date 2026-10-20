@@ -54,6 +54,8 @@ export default function ChangePassword() {
             </div>
             <div className={styles.field}>
                 <label className={styles.label} htmlFor="newPassword">New password</label>
+                {fieldErrors.newPassword &&
+                    <p className={styles.error} id="newPassword-error">{fieldErrors.newPassword}</p>}
                 <input className={styles.input}
                        id="newPassword"
                        name="newPassword"
@@ -65,8 +67,6 @@ export default function ChangePassword() {
                        aria-invalid={fieldErrors.newPassword ? true : undefined}
                        aria-describedby={fieldErrors.newPassword ? "newPassword-error" : undefined}
                 />
-                {fieldErrors.newPassword &&
-                    <p className={styles.error} id="newPassword-error">{fieldErrors.newPassword}</p>}
             </div>
             <div className={styles.field}>
                 <label className={styles.label} htmlFor="confirmPassword">Confirm new password</label>
