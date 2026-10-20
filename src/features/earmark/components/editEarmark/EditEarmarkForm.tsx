@@ -70,8 +70,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
     return <section className={styles.earmarkForm}>
         <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
-        <EarmarkAlbumHeader spotifyAlbumId={spotifyAlbumId}/>
         <h1 className={styles.title}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
+        <EarmarkAlbumHeader spotifyAlbumId={spotifyAlbumId}/>
 
         <form className={styles.form} onSubmit={handleSubmit}>
             <EarmarkNoteField value={note} onChange={setNote}/>

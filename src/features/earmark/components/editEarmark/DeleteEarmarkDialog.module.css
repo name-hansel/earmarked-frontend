@@ -1,0 +1,95 @@
+.trigger {
+    min-height: 2.75rem;
+    border: 2px dashed var(--color-danger);
+    border-radius: 999px;
+    font: inherit;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-danger);
+    background-color: var(--color-surface);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.trigger:hover:not(:disabled) {
+    background-color: var(--color-surface-raised);
+}
+
+.trigger:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.trigger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.dialog {
+    width: min(90vw, 22rem);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    color: var(--color-text);
+    background-color: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+}
+
+.dialog::backdrop {
+    background-color: rgb(0 0 0 / 0.6);
+}
+
+.text {
+    margin: 0 0 1.25rem;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-medium);
+    font-size: 1.125rem;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.confirm,
+.cancel {
+    flex: 1;
+    min-height: 2.75rem;
+    border-radius: 999px;
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 150ms ease, filter 150ms ease;
+}
+
+.confirm {
+    border: none;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-on-primary);
+    background-color: var(--color-danger);
+}
+
+.confirm:hover:not(:disabled) {
+    filter: brightness(0.9);
+}
+
+.cancel {
+    border: 2px solid var(--color-border);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    background-color: transparent;
+}
+
+.cancel:hover:not(:disabled) {
+    background-color: var(--color-surface);
+}
+
+.confirm:focus-visible,
+.cancel:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.confirm:disabled,
+.cancel:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
