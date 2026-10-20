@@ -1,6 +1,12 @@
-import {useParams} from "react-router";
+import {Link, useNavigate, useParams} from "react-router";
 import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import type {Earmark} from "../api/earmark.ts";
+import {SubmitEvent, useState} from "react";
+import {useCreateEarmark} from "../hooks/useCreateEarmark.ts";
+import {useUpdateEarmark} from "../hooks/useUpdateEarmark.ts";
+import {useDeleteEarmark} from "../hooks/useDeleteEarmark.ts";
+import {toast} from "sonner";
+import {getErrorMessage} from "../../../lib/errors.ts";
 
 export default function EarmarkPage() {
     const {spotifyAlbumId} = useParams();
@@ -35,5 +41,53 @@ function EarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
     earmark: Earmark | null;
 }) {
-    return <h1>Earmark form</h1>
+    const albumPath = `/albums/${spotifyAlbumId}`;
+    const [note, setNote] = useState(earmark?.note ?? "");
+    const navigate = useNavigate();
+
+    const {mutate: createEarmark, isPending: isCreating} = useCreateEarmark(spotifyAlbumId);
+    const {mutate: updateEarmark, isPending: isUpdating} = useUpdateEarmark(spotifyAlbumId);
+    const {mutate: deleteEarmark, isPending: isDeleting} = useDeleteEarmark(spotifyAlbumId);
+    const isBusy = isCreating || isUpdating || isDeleting;
+
+    function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const trimmedNote = note.trim();
+
+        if (earmark) {
+            updateEarmark({earmarkId: earmark.id, note: trimmedNote}, {
+                onSuccess: () => {
+                    toast.success("Earmark updated");
+                    navigate(albumPath);
+                },
+                onError: (error) => toast.error(getErrorMessage(error))
+            });
+        } else {
+            createEarmark({note: trimmedNote}, {
+                onSuccess: () => {
+                    toast.success("Album earmarked");
+                    navigate(albumPath);
+                },
+                onError: (error) => toast.error(getErrorMessage(error))
+            });
+        }
+    }
+
+    return <section>
+        <Link to={albumPath}>Back</Link>
+        <h1>{earmark ? "Edit earmark" : "Earmark album"}</h1>
+
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="earmark-note">Note</label>
+            <textarea id="earmark-note" value={note} maxLength={256} rows={5}/>
+            <p>{note.length}/256</p>
+
+            <button type="submit" disabled={isBusy}>
+                {
+                    earmark ? (isUpdating ? "Saving..." : "Save") : (isCreating ? "Earmarking..." : "Earmark")
+                }
+            </button>
+            <Link to={albumPath}>Cancel</Link>
+        </form>
+    </section>
 }
