@@ -39,6 +39,7 @@ export default function ForgotPassword() {
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.field}>
                 <label className={styles.label} htmlFor="email">Email</label>
+                {fieldErrors.email && <p className={styles.error} id="email-error">{fieldErrors.email}</p>}
                 <input className={styles.input}
                        id="email"
                        name="email"
@@ -48,7 +49,6 @@ export default function ForgotPassword() {
                        aria-invalid={fieldErrors.email ? true : undefined}
                        aria-describedby={fieldErrors.email ? "email-error" : undefined}
                 />
-                {fieldErrors.email && <p className={styles.error} id="email-error">{fieldErrors.email}</p>}
             </div>
             {errorMessage && <p className={styles.alert} role="alert">{errorMessage}</p>}
             <button className={styles.submit} type="submit" disabled={forgotPasswordMutation.isPending}>
