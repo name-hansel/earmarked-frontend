@@ -2,6 +2,7 @@ import {useCreateEarmark} from "../hooks/useCreateEarmark.ts";
 import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
+import styles from "./QuickEarmarkButton.module.css";
 
 export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark"}: {
     spotifyAlbumId: string,
@@ -16,20 +17,20 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark"}: 
     } = useAlbumEarmark(spotifyAlbumId);
 
     if (isStatusPending) {
-        return <button type="button" disabled>Earmark</button>;
+        return <button className={styles.button} type="button" disabled>Earmark</button>;
     }
 
     if (isStatusError) {
         return (
-            <div>
-                <p role="alert">Couldn't load earmark status.</p>
-                <button type="button" onClick={() => refetch()}>Retry</button>
+            <div className={styles.error}>
+                <p className={styles.errorText} role="alert">Couldn't load earmark status.</p>
+                <button className={styles.retry} type="button" onClick={() => refetch()}>Retry</button>
             </div>
         );
     }
 
     if (albumEarmarkResponse.earmark) {
-        return <span>Earmarked</span>;
+        return <span className={styles.earmarked}>Earmarked</span>;
     }
 
     function handleClick() {
@@ -39,6 +40,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark"}: 
     }
 
     return <button
+        className={styles.button}
         type="button"
         disabled={isCreating}
         onClick={handleClick}
