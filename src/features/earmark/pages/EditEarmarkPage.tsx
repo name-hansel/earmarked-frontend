@@ -9,7 +9,7 @@ import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import EarmarkAlbumHeader from "../components/EarmarkAlbumHeader.tsx";
 
-export default function EarmarkPage() {
+export default function EditEarmarkPage() {
     const {spotifyAlbumId} = useParams();
 
     if (!spotifyAlbumId) {
