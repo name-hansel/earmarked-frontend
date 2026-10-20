@@ -4,6 +4,7 @@ import {activateAccount} from "../api/auth.ts";
 import {useMutation} from "@tanstack/react-query";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
+import styles from "../../../styles/Form.module.css";
 
 export default function ActivateAccount() {
     const navigate = useNavigate();
@@ -26,16 +27,20 @@ export default function ActivateAccount() {
     }, [token, activateAccountMutation]);
 
     if (!token) {
-        return <p role="alert">Invalid activation link</p>;
+        return <section className={styles.card}>
+            <p className={styles.alert} role="alert">Invalid activation link</p>
+        </section>;
     }
 
     if (activateAccountMutation.isError) {
-        return <section>
-            <p role="alert">
+        return <section className={styles.card}>
+            <p className={styles.alert} role="alert">
                 {getErrorMessage(activateAccountMutation.error, "Activation failed. The link may have expired.")}
             </p>
         </section>
     }
 
-    return <p>Activating account...</p>
+    return <section className={styles.card}>
+        <p className={styles.status}>Activating account...</p>
+    </section>
 }

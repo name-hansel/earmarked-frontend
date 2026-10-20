@@ -141,3 +141,8 @@
     margin: 0 0 1.25rem;
     color: var(--color-text-muted);
 }
+
+.status {
+    margin: 0;
+    text-align: center;
+}
