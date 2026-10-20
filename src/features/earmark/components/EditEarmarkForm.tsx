@@ -1,44 +1,14 @@
-import {Link, useNavigate, useParams} from "react-router";
-import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import type {Earmark} from "../api/earmark.ts";
-import {type SubmitEvent, useRef, useState} from "react";
 import {useCreateEarmark} from "../hooks/useCreateEarmark.ts";
-import {useUpdateEarmark} from "../hooks/useUpdateEarmark.ts";
+import {useRef, useState} from "react";
+import {Link, useNavigate} from "react-router";
 import {useDeleteEarmark} from "../hooks/useDeleteEarmark.ts";
+import {useUpdateEarmark} from "../hooks/useUpdateEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
-import EarmarkAlbumHeader from "../components/EarmarkAlbumHeader.tsx";
+import EarmarkAlbumHeader from "./EarmarkAlbumHeader.tsx";
 
-export default function EditEarmarkPage() {
-    const {spotifyAlbumId} = useParams();
-
-    if (!spotifyAlbumId) {
-        return <p role="alert">Missing album</p>
-    }
-
-    return <EarmarkPageContent spotifyAlbumId={spotifyAlbumId}/>
-}
-
-function EarmarkPageContent({spotifyAlbumId}: { spotifyAlbumId: string }) {
-    const {data, isPending, isError, refetch} = useAlbumEarmark(spotifyAlbumId);
-
-    if (isPending) {
-        return <p>Loading...</p>
-    }
-
-    if (isError) {
-        return (
-            <div>
-                <p role="alert">Couldn't load earmark status.</p>
-                <button type="button" onClick={() => refetch()}>Retry</button>
-            </div>
-        );
-    }
-
-    return <EarmarkForm spotifyAlbumId={spotifyAlbumId} earmark={data.earmark}/>
-}
-
-function EarmarkForm({spotifyAlbumId, earmark}: {
+export default function EarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
     earmark: Earmark | null;
 }) {
@@ -52,7 +22,7 @@ function EarmarkForm({spotifyAlbumId, earmark}: {
     const {mutate: deleteEarmark, isPending: isDeleting} = useDeleteEarmark(spotifyAlbumId);
     const isBusy = isCreating || isUpdating || isDeleting;
 
-    function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+    function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         const trimmedNote = note.trim();
 

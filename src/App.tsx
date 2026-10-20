@@ -14,7 +14,7 @@ import ForgotPassword from "./features/auth/pages/ForgotPassword.tsx";
 import ResetPassword from "./features/auth/pages/ResetPassword.tsx";
 import AlbumPage from "./pages/AlbumPage.tsx";
 import Earmarks from "./features/earmark/pages/Earmarks.tsx";
-import EditEarmarkPage from "./features/earmark/pages/EditEarmarkPage.tsx";
+import EditEarmarkPage from "./features/earmark/pages/edit/EditEarmarkPage.tsx";
 import '@fontsource/poppins';
 import '@fontsource-variable/fraunces';
 import "./App.css"
