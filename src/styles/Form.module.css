@@ -136,3 +136,8 @@
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
 }
+
+.intro {
+    margin: 0 0 1.25rem;
+    color: var(--color-text-muted);
+}

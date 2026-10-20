@@ -4,6 +4,7 @@ import {toast} from "sonner";
 import {Link, useNavigate} from "react-router";
 import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {type SubmitEvent} from "react";
+import styles from "../../../styles/Form.module.css";
 
 export default function ForgotPassword() {
     const navigate = useNavigate();
@@ -32,30 +33,28 @@ export default function ForgotPassword() {
             ? getErrorMessage(forgotPasswordMutation.error, "Could not send the password reset link. Please try again.")
             : null;
 
-    return <section>
-        <h1>Forgot password</h1>
-        <p>Enter your email and we'll send you a link to reset it.</p>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    aria-invalid={fieldErrors.email ? true : undefined}
-                    aria-describedby={fieldErrors.email ? "email-error" : undefined}
+    return <section className={styles.card}>
+        <h1 className={styles.title}>Forgot password</h1>
+        <p className={styles.intro}>Enter your email and we'll send you a link to reset it.</p>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="email">Email</label>
+                <input className={styles.input}
+                       id="email"
+                       name="email"
+                       type="email"
+                       required
+                       autoComplete="email"
+                       aria-invalid={fieldErrors.email ? true : undefined}
+                       aria-describedby={fieldErrors.email ? "email-error" : undefined}
                 />
-                {fieldErrors.email && <p id="email-error">{fieldErrors.email}</p>}
+                {fieldErrors.email && <p className={styles.error} id="email-error">{fieldErrors.email}</p>}
             </div>
-            {errorMessage && <p role="alert">{errorMessage}</p>}
-            <button type="submit" disabled={forgotPasswordMutation.isPending}>
+            {errorMessage && <p className={styles.alert} role="alert">{errorMessage}</p>}
+            <button className={styles.submit} type="submit" disabled={forgotPasswordMutation.isPending}>
                 {forgotPasswordMutation.isPending ? "Sending..." : "Send reset link"}
             </button>
         </form>
-        <p>
-            <Link to="/login">Back to login</Link>
-        </p>
+        <Link className={styles.link} to="/login">Back to login</Link>
     </section>
 }
