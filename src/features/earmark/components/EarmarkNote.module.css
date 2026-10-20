@@ -1,0 +1,25 @@
+.note {
+    margin-top: 0.25rem;
+    padding: 0.75rem 1rem;
+    box-sizing: border-box;
+    border: 1px dashed var(--color-border);
+    border-radius: 0.75rem;
+}
+
+.title {
+    margin: 0 0 0.375rem;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-medium);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.text {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
