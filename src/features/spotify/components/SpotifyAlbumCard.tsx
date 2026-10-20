@@ -2,6 +2,7 @@ import type {SpotifyAlbum} from "../api/spotify.ts";
 import {Link, useLocation} from "react-router";
 import QuickEarmarkButton from "../../earmark/components/QuickEarmarkButton.tsx";
 import styles from "./SpotifyAlbumCard.module.css";
+import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 
 export default function SpotifyAlbumCard({album}: {
     album: SpotifyAlbum
@@ -18,7 +19,10 @@ export default function SpotifyAlbumCard({album}: {
                 {album.name}
             </Link>
             <span className={styles.artists}>{album.artists.join(", ")}</span>
-            <span className={styles.meta}>{album.releaseDate} · {album.albumType}</span>
+            <div className={styles.meta}>
+                <span>{formatReleaseDate(album.releaseDate)}</span>
+                <span className={styles.type}>{album.albumType}</span>
+            </div>
             <div className={styles.action}>
                 <QuickEarmarkButton spotifyAlbumId={album.id}/>
             </div>
