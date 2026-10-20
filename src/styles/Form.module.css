@@ -146,3 +146,13 @@
     margin: 0;
     text-align: center;
 }
+
+.danger {
+    composes: submit;
+    background-color: var(--color-danger);
+}
+
+.danger:hover:not(:disabled) {
+    background-color: var(--color-danger);
+    filter: brightness(0.9);
+}

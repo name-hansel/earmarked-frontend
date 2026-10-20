@@ -5,6 +5,7 @@ import {useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import {currentUserKey} from "../queryKeys.ts";
+import styles from "../../../styles/Form.module.css";
 
 export default function DeleteAccount() {
     const navigate = useNavigate();
@@ -31,24 +32,24 @@ export default function DeleteAccount() {
 
     const errorMessage = deleteMutation.isError ? getErrorMessage(deleteMutation.error, "Could not delete account. Please try again.") : null;
 
-    return <section>
-        <h1>Delete account</h1>
-        <p>
+    return <section className={styles.card}>
+        <h1 className={styles.title}>Delete account</h1>
+        <p className={styles.intro}>
             This permanently deletes your account. Enter your password to confirm.
         </p>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    autoComplete="current-password"
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="password">Password</label>
+                <input className={styles.input}
+                       id="password"
+                       name="password"
+                       type="password"
+                       required
+                       autoComplete="current-password"
                 />
             </div>
-            {errorMessage && <p role="alert">{errorMessage}</p>}
-            <button type="submit" disabled={deleteMutation.isPending}>
+            {errorMessage && <p className={styles.alert} role="alert">{errorMessage}</p>}
+            <button className={styles.danger} type="submit" disabled={deleteMutation.isPending}>
                 {
                     deleteMutation.isPending ? "Deleting account..." : "Delete account"
                 }
