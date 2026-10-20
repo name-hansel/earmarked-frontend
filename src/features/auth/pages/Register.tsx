@@ -4,6 +4,7 @@ import {registerUser} from "../api/auth.ts";
 import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {useNavigate} from "react-router";
 import {toast} from "sonner";
+import styles from "../../../styles/Form.module.css";
 
 export default function Register() {
     const [formError, setFormError] = useState<string | null>(null);
@@ -39,54 +40,56 @@ export default function Register() {
         registerMutation.mutate({email, password, username});
     }
 
-    return <section>
-        <h1>Create an account</h1>
-        <form onSubmit={handleSubmit}>
+    return <section className={styles.card}>
+        <h1 className={styles.title}>Create an account</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
             {/* Username */}
-            <div>
-                <label htmlFor="username">Username</label>
-                {fieldErrors.username && <p id="username-error">{fieldErrors.username}</p>}
-                <input id="username" type="text" name="username" minLength={3} maxLength={16} required
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="username">Username</label>
+                {fieldErrors.username && <p className={styles.error} id="username-error">{fieldErrors.username}</p>}
+                <input className={styles.input} id="username" type="text" name="username" minLength={3} maxLength={16}
+                       required
                        aria-invalid={fieldErrors.username ? true : undefined}
                        aria-describedby={fieldErrors.username ? "username-error" : undefined}/>
             </div>
 
             {/* Email */}
-            <div>
-                <label htmlFor="email">Email</label>
-                {fieldErrors.email && <p id="email-error">{fieldErrors.email}</p>}
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    aria-invalid={fieldErrors.email ? true : undefined}
-                    aria-describedby={fieldErrors.email ? "email-error" : undefined}
-                    maxLength={320}/>
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="email">Email</label>
+                {fieldErrors.email && <p className={styles.error} id="email-error">{fieldErrors.email}</p>}
+                <input className={styles.input}
+                       id="email"
+                       name="email"
+                       type="email"
+                       required
+                       autoComplete="email"
+                       aria-invalid={fieldErrors.email ? true : undefined}
+                       aria-describedby={fieldErrors.email ? "email-error" : undefined}
+                       maxLength={320}/>
             </div>
 
             {/* Password */}
-            <div>
-                <label htmlFor="password">Password</label>
-                {fieldErrors.password && <p id="password-error">{fieldErrors.password}</p>}
-                <input id="password" name="password" type="password" required
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="password">Password</label>
+                {fieldErrors.password && <p className={styles.error} id="password-error">{fieldErrors.password}</p>}
+                <input className={styles.input} id="password" name="password" type="password" required
                        autoComplete="password" minLength={3} maxLength={128}
                        aria-invalid={fieldErrors.password ? true : undefined}
                        aria-describedby={fieldErrors.password ? "password-error" : undefined}/>
             </div>
 
             {/* Confirm password */}
-            <div>
-                <label htmlFor="confirmPassword">Confirm password</label>
-                <input id="confirmPassword" name="confirmPassword" type="password" required autoComplete="password"
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="confirmPassword">Confirm password</label>
+                <input className={styles.input} id="confirmPassword" name="confirmPassword" type="password" required
+                       autoComplete="password"
                        minLength={3}
                        maxLength={128}/>
             </div>
 
-            {errorMessage && <p role="alert">{errorMessage}</p>}
+            {errorMessage && <p className={styles.alert} role="alert">{errorMessage}</p>}
 
-            <button type="submit" disabled={registerMutation.isPending}>
+            <button className={styles.submit} type="submit" disabled={registerMutation.isPending}>
                 {registerMutation.isPending ? "Registering..." : "Register"}
             </button>
         </form>
