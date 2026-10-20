@@ -1,0 +1,83 @@
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cover,
+.placeholder {
+    display: block;
+    flex: 0 0 6rem;
+    width: 6rem;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+.placeholder {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.name {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin: 0;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.125rem;
+    line-height: 1.3;
+}
+
+.artists {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.date {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.status {
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+.alert {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-danger);
+    border-radius: 0.625rem;
+    color: var(--color-danger);
+}
+
+@media (min-width: 640px) {
+    .header {
+        gap: 1.25rem;
+    }
+
+    .cover,
+    .placeholder {
+        flex-basis: 7.5rem;
+        width: 7.5rem;
+    }
+
+    .name {
+        font-size: 1.375rem;
+    }
+}

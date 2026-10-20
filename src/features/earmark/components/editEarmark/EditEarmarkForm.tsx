@@ -7,8 +7,12 @@ import {useUpdateEarmark} from "../../hooks/useUpdateEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../../lib/errors.ts";
 import EarmarkAlbumHeader from "../EarmarkAlbumHeader.tsx";
+import EarmarkNoteField from "./EarmarkNoteField.tsx";
+import DeleteEarmarkDialog from "./DeleteEarmarkDialog.tsx";
+import formStyles from "../../../../styles/Form.module.css";
+import styles from "./EditEarmarkForm.module.css";
 
-export default function EarmarkForm({spotifyAlbumId, earmark}: {
+export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
     earmark: Earmark | null;
 }) {
@@ -60,41 +64,24 @@ export default function EarmarkForm({spotifyAlbumId, earmark}: {
         });
     }
 
-    return <section>
-        <Link to={albumPath}>Back</Link>
+    const submitLabel = earmark
+        ? (isUpdating ? "Saving..." : "Save")
+        : (isCreating ? "Earmarking..." : "Earmark");
+
+    return <section className={styles.earmarkForm}>
+        <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
         <EarmarkAlbumHeader spotifyAlbumId={spotifyAlbumId}/>
-        <h1>{earmark ? "Edit earmark" : "Earmark album"}</h1>
+        <h1 className={styles.title}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
 
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="earmark-note">Note</label>
-            <textarea id="earmark-note" value={note} onChange={(event) => setNote(event.target.value)} maxLength={256}
-                      rows={5}/>
-            <p>{note.length}/256</p>
-
-            <button type="submit" disabled={isBusy}>
-                {
-                    earmark ? (isUpdating ? "Saving..." : "Save") : (isCreating ? "Earmarking..." : "Earmark")
-                }
-            </button>
-            <Link to={albumPath}>Cancel</Link>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <EarmarkNoteField value={note} onChange={setNote}/>
+            <div className={styles.actions}>
+                <button className={formStyles.submit} type="submit" disabled={isBusy}>{submitLabel}</button>
+                <Link className={styles.cancel} to={albumPath}>Cancel</Link>
+            </div>
         </form>
-        {
-            earmark &&
-            <>
-                <button type="button" disabled={isBusy} onClick={() => dialogRef.current?.showModal()}>
-                    Delete earmark
-                </button>
-                <dialog ref={dialogRef}>
-                    <p>Delete this earmark?</p>
-                    <button type="button" onClick={handleDelete} disabled={isDeleting}>
-                        {isDeleting ? "Deleting..." : "Delete"}
-                    </button>
-                    <button type="button" onClick={() => dialogRef.current?.close()} disabled={isDeleting}>
-                        Cancel
-                    </button>
-                </dialog>
-            </>
 
-        }
+        {earmark &&
+            <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
     </section>
 }

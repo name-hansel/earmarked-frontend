@@ -1,5 +1,5 @@
 import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
-import EarmarkForm from "./EditEarmarkForm.tsx";
+import EditEarmarkForm from "./EditEarmarkForm.tsx";
 import styles from "./EditEarmarkContent.module.css";
 
 export default function EditEarmarkContent({spotifyAlbumId}: { spotifyAlbumId: string }) {
@@ -18,5 +18,5 @@ export default function EditEarmarkContent({spotifyAlbumId}: { spotifyAlbumId: s
         );
     }
 
-    return <EarmarkForm spotifyAlbumId={spotifyAlbumId} earmark={data.earmark}/>
+    return <EditEarmarkForm spotifyAlbumId={spotifyAlbumId} earmark={data.earmark}/>
 }
