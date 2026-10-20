@@ -1,12 +1,12 @@
-import type {Earmark} from "../api/earmark.ts";
-import {useCreateEarmark} from "../hooks/useCreateEarmark.ts";
+import type {Earmark} from "../../api/earmark.ts";
+import {useCreateEarmark} from "../../hooks/useCreateEarmark.ts";
 import {useRef, useState} from "react";
 import {Link, useNavigate} from "react-router";
-import {useDeleteEarmark} from "../hooks/useDeleteEarmark.ts";
-import {useUpdateEarmark} from "../hooks/useUpdateEarmark.ts";
+import {useDeleteEarmark} from "../../hooks/useDeleteEarmark.ts";
+import {useUpdateEarmark} from "../../hooks/useUpdateEarmark.ts";
 import {toast} from "sonner";
-import {getErrorMessage} from "../../../lib/errors.ts";
-import EarmarkAlbumHeader from "./EarmarkAlbumHeader.tsx";
+import {getErrorMessage} from "../../../../lib/errors.ts";
+import EarmarkAlbumHeader from "../EarmarkAlbumHeader.tsx";
 
 export default function EarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
