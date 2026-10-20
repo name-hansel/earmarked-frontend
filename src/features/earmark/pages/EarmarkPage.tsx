@@ -7,6 +7,7 @@ import {useUpdateEarmark} from "../hooks/useUpdateEarmark.ts";
 import {useDeleteEarmark} from "../hooks/useDeleteEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
+import EarmarkAlbumHeader from "../components/EarmarkAlbumHeader.tsx";
 
 export default function EarmarkPage() {
     const {spotifyAlbumId} = useParams();
@@ -91,6 +92,7 @@ function EarmarkForm({spotifyAlbumId, earmark}: {
 
     return <section>
         <Link to={albumPath}>Back</Link>
+        <EarmarkAlbumHeader spotifyAlbumId={spotifyAlbumId}/>
         <h1>{earmark ? "Edit earmark" : "Earmark album"}</h1>
 
         <form onSubmit={handleSubmit}>
