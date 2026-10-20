@@ -14,6 +14,7 @@ import ForgotPassword from "./features/auth/pages/ForgotPassword.tsx";
 import ResetPassword from "./features/auth/pages/ResetPassword.tsx";
 import AlbumPage from "./pages/AlbumPage.tsx";
 import Earmarks from "./features/earmark/pages/Earmarks.tsx";
+import EarmarkPage from "./features/earmark/pages/EarmarkPage.tsx";
 
 function App() {
     return <Routes>
@@ -32,8 +33,9 @@ function App() {
             <Route element={<ProtectedRoute/>}>
                 <Route path="/change-password" element={<ChangePassword/>}/>
                 <Route path="/delete-account" element={<DeleteAccount/>}/>
-                <Route path="/albums/:spotifyId" element={<AlbumPage/>}/>
+                <Route path="/albums/:spotifyAlbumId" element={<AlbumPage/>}/>
                 <Route path="/earmarks" element={<Earmarks/>}/>
+                <Route path="/albums/:spotifyAlbumId/earmark" element={<EarmarkPage/>}/>
             </Route>
         </Route>
     </Routes>

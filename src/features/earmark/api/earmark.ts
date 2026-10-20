@@ -21,7 +21,7 @@ export async function createEarmark(spotifyAlbumId: string, note?: string): Prom
     return response.data;
 }
 
-export async function editEarmark(earmarkId: string, note: string): Promise<Earmark> {
+export async function updateEarmark(earmarkId: string, note: string): Promise<Earmark> {
     const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note});
     return response.data;
 }

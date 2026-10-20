@@ -8,8 +8,8 @@ import EarmarkPageLink from "../features/earmark/components/EarmarkPageButton.ts
 
 export default function AlbumPage() {
     const location = useLocation();
-    const {spotifyId} = useParams<{ spotifyId: string }>();
-    const {data: album, isPending, isError, error} = useSpotifyAlbum(spotifyId);
+    const {spotifyAlbumId} = useParams<{ spotifyAlbumId: string }>();
+    const {data: album, isPending, isError, error} = useSpotifyAlbum(spotifyAlbumId);
     const fromSearch = (location.state as { fromSearch?: string })?.fromSearch ?? "";
     const backTo = `/${fromSearch}`
 
