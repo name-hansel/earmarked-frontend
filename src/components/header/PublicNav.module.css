@@ -1,0 +1,44 @@
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: background-color 150ms ease;
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.primary {
+    composes: button;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.secondary {
+    composes: button;
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.secondary:hover {
+    background-color: var(--color-surface);
+}

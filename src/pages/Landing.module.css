@@ -1,0 +1,40 @@
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    padding: 4rem 1.5rem;
+}
+
+.title {
+    margin: 0;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-semibold);
+    font-size: clamp(2.5rem, 12vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.title::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 0.25rem;
+    margin: 0.75rem auto 0;
+    border-radius: 999px;
+    background-color: var(--color-primary);
+}
+
+.tagline {
+    margin: 0;
+    max-width: 28rem;
+    font-size: clamp(1rem, 4vw, 1.25rem);
+    color: var(--color-text-muted);
+}
+
+@media (min-width: 640px) {
+    .hero {
+        padding: 6rem 2rem;
+    }
+}

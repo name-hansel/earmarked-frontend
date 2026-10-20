@@ -1,0 +1,38 @@
+.header {
+    padding: 0.75rem 1rem;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.home {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 0.5rem;
+    border-radius: 999px;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.125rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.home:hover {
+    color: var(--color-primary);
+}
+
+.home:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+    .header {
+        padding: 1rem 2rem;
+    }
+}
