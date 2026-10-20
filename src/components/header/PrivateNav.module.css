@@ -1,0 +1,46 @@
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem 1.25rem;
+    margin-left: auto;
+}
+
+.username {
+    max-width: 8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.secondary {
+    composes: secondary from "./PublicNav.module.css";
+}
+
+.danger {
+    composes: secondary from "./PublicNav.module.css";
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+.logout {
+    composes: primary from "./PublicNav.module.css";
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.logout:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
