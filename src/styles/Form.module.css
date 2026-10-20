@@ -94,3 +94,45 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+.secondary {
+    min-height: 2.75rem;
+    border: 2px solid var(--color-border);
+    border-radius: 999px;
+    font: inherit;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.secondary:hover:not(:disabled) {
+    background-color: var(--color-surface-raised);
+}
+
+.secondary:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.secondary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.link {
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--color-primary);
+}
+
+.link:hover {
+    color: var(--color-primary-hover);
+}
+
+.link:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}

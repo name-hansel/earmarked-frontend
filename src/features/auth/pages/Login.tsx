@@ -5,6 +5,7 @@ import {type SubmitEvent} from "react";
 import {getErrorCode, getErrorMessage} from "../../../lib/errors.ts";
 import {currentUserKey} from "../queryKeys.ts";
 import {toast} from "sonner";
+import styles from "../../../styles/Form.module.css";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -42,30 +43,30 @@ export default function Login() {
         loginMutation.mutate({email, password});
     }
 
-    return <section>
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    maxLength={320}/>
+    return <section className={styles.card}>
+        <h1 className={styles.title}>Login</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="email">Email</label>
+                <input className={styles.input}
+                       id="email"
+                       name="email"
+                       type="email"
+                       required
+                       autoComplete="email"
+                       maxLength={320}/>
             </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input id="password" name="password" type="password" required
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="password">Password</label>
+                <input className={styles.input} id="password" name="password" type="password" required
                        autoComplete="password" minLength={3} maxLength={128}
                 />
             </div>
 
-            {errorMessage && <p role="alert">{errorMessage}</p>}
+            {errorMessage && <p className={styles.alert} role="alert">{errorMessage}</p>}
             {
                 isNotActivated && emailToResend && (
-                    <button type="button"
+                    <button className={styles.secondary} type="button"
                             onClick={() => resendActivationMutation.mutate({email: emailToResend})}
                             disabled={resendActivationMutation.isPending || resendActivationMutation.isSuccess}
                     >
@@ -74,10 +75,10 @@ export default function Login() {
                         }
                     </button>)
             }
-            <button type="submit" disabled={loginMutation.isPending}>
+            <button className={styles.submit} type="submit" disabled={loginMutation.isPending}>
                 {loginMutation.isPending ? "Logging in..." : "Login"}
             </button>
         </form>
-        <Link to="/forgot-password">Forgot your password?</Link>
+        <Link className={styles.link} to="/forgot-password">Forgot your password?</Link>
     </section>
 }
