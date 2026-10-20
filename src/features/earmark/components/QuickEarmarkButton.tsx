@@ -7,7 +7,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark"}: 
     spotifyAlbumId: string,
     label?: string
 }) {
-    const {mutate: createEarmark, isPending: isCreating} = useCreateEarmark();
+    const {mutate: createEarmark, isPending: isCreating} = useCreateEarmark(spotifyAlbumId);
     const {
         data: albumEarmarkResponse,
         isPending: isStatusPending,
@@ -33,7 +33,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark"}: 
     }
 
     function handleClick() {
-        createEarmark(spotifyAlbumId, {
+        createEarmark({}, {
             onError: (error) => toast.error(getErrorMessage(error))
         })
     }

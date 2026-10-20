@@ -4,6 +4,7 @@ import {isAxiosError} from "axios";
 import type {ApiErrorBody} from "../lib/errors.ts";
 import {formatDuration} from "../features/spotify/utils/formatDuration.ts";
 import QuickEarmarkButton from "../features/earmark/components/QuickEarmarkButton.tsx";
+import EarmarkPageLink from "../features/earmark/components/EarmarkPageButton.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -34,7 +35,10 @@ export default function AlbumPage() {
         <Link to={backTo}>Back</Link>
         {album.imageUrl && <img src={album.imageUrl} alt={`Cover of ${album.name}`} width={300} height={300}/>}
         <h1>{album.name}</h1>
-        <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick Earmark"/>
+        <div>
+            <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark"/>
+            <EarmarkPageLink spotifyAlbumId={album.id}/>
+        </div>
         <p>{album.artists.join(", ")}</p>
         <p>
             {album.releaseDate}
