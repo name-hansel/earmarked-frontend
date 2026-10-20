@@ -15,6 +15,9 @@ import ResetPassword from "./features/auth/pages/ResetPassword.tsx";
 import AlbumPage from "./pages/AlbumPage.tsx";
 import Earmarks from "./features/earmark/pages/Earmarks.tsx";
 import EarmarkPage from "./features/earmark/pages/EarmarkPage.tsx";
+import '@fontsource/poppins';
+import '@fontsource-variable/fraunces';
+import "./App.css"
 
 function App() {
     return <Routes>

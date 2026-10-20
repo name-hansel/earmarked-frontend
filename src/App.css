@@ -1,0 +1,26 @@
+:root {
+    --font-hero: 'Poppins', system-ui, sans-serif;
+    --font-body: 'Fraunces Variable', Georgia, serif;
+    --font-body-weight: 400;
+
+    --color-bg: #30638e;
+    --color-surface: #234b6e;
+    --color-surface-raised: #2b5a83;
+    --color-border: #6f9cc4;
+    --color-text: #f4f8fb;
+    --color-text-muted: #d3e0eb;
+
+    --color-primary: #f5a623;
+    --color-primary-hover: #ffb94d;
+    --color-on-primary: #1a1205;
+
+    --color-danger: #ffa39e;
+    --color-success: #6ee7a6;
+
+    --color-focus-ring: #ffffff;
+}
+
+body {
+    font-family: var(--font-body);
+    font-weight: var(--font-body-weight);
+}
