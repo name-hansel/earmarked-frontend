@@ -1,0 +1,22 @@
+.button {
+    width: 100%;
+    min-height: 2.5rem;
+    border: 2px solid var(--color-border);
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.button:hover {
+    background-color: var(--color-surface);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}

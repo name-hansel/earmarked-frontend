@@ -1,7 +1,8 @@
 import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import {useNavigate} from "react-router";
+import styles from "./CreateOrEditEarmarkButton.module.css";
 
-export default function EarmarkPageButton({spotifyAlbumId}: { spotifyAlbumId: string }) {
+export default function CreateOrEditEarmarkButton({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const navigate = useNavigate();
     const {data} = useAlbumEarmark(spotifyAlbumId);
 
@@ -10,7 +11,7 @@ export default function EarmarkPageButton({spotifyAlbumId}: { spotifyAlbumId: st
     }
 
     return (
-        <button type="button" onClick={() => navigate(`/albums/${spotifyAlbumId}/earmark`)}>
+        <button className={styles.button} type="button" onClick={() => navigate(`/albums/${spotifyAlbumId}/earmark`)}>
             {data.earmark ? "Edit earmark" : "Earmark..."}
         </button>
     );

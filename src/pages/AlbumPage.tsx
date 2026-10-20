@@ -4,7 +4,7 @@ import {isAxiosError} from "axios";
 import type {ApiErrorBody} from "../lib/errors.ts";
 import {formatDuration} from "../features/spotify/utils/formatDuration.ts";
 import QuickEarmarkButton from "../features/earmark/components/QuickEarmarkButton.tsx";
-import EarmarkPageLink from "../features/earmark/components/EarmarkPageButton.tsx";
+import EarmarkPageLink from "../features/earmark/components/CreateOrEditEarmarkButton.tsx";
 import EarmarkNote from "../features/earmark/components/EarmarkNote.tsx";
 import styles from "./AlbumPage.module.css";
 import {formatReleaseDate} from "../utils/formatReleaseDate.ts";
