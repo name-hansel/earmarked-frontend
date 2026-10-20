@@ -5,6 +5,7 @@ import type {ApiErrorBody} from "../lib/errors.ts";
 import {formatDuration} from "../features/spotify/utils/formatDuration.ts";
 import QuickEarmarkButton from "../features/earmark/components/QuickEarmarkButton.tsx";
 import EarmarkPageLink from "../features/earmark/components/EarmarkPageButton.tsx";
+import EarmarkNote from "../features/earmark/components/EarmarkNote.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -38,6 +39,7 @@ export default function AlbumPage() {
         <div>
             <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark"/>
             <EarmarkPageLink spotifyAlbumId={album.id}/>
+            <EarmarkNote spotifyAlbumId={album.id}/>
         </div>
         <p>{album.artists.join(", ")}</p>
         <p>
