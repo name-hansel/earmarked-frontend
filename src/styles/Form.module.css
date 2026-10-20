@@ -137,6 +137,10 @@
     outline-offset: 2px;
 }
 
+.form .link {
+    margin-top: 0;
+}
+
 .intro {
     margin: 0 0 1.25rem;
     color: var(--color-text-muted);

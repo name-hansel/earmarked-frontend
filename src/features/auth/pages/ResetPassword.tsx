@@ -4,6 +4,7 @@ import {toast} from "sonner";
 import {Link, useNavigate, useSearchParams} from "react-router";
 import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {type SubmitEvent, useState} from "react";
+import styles from "../../../styles/Form.module.css";
 
 export default function ResetPassword() {
     const navigate = useNavigate();
@@ -48,47 +49,48 @@ export default function ResetPassword() {
 
     if (!token) {
         return (
-            <section>
-                <p role="alert">This password reset link is invalid.</p>
-                <Link to="/forgot-password">Request a new link</Link>
+            <section className={styles.card}>
+                <p className={styles.alert} role="alert">This password reset link is invalid.</p>
+                <Link className={styles.link} to="/forgot-password">Request a new link</Link>
             </section>
         );
     }
 
-    return <section>
-        <h1>Reset password</h1>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="newPassword">New password</label>
-                <input
-                    id="newPassword"
-                    name="newPassword"
-                    type="password"
-                    required
-                    minLength={8}
-                    maxLength={128}
-                    autoComplete="new-password"
-                    aria-invalid={fieldErrors.newPassword ? true : undefined}
-                    aria-describedby={fieldErrors.newPassword ? "newPassword-error" : undefined}
-                />
+    return <section className={styles.card}>
+        <h1 className={styles.title}>Reset password</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="newPassword">New password</label>
                 {fieldErrors.newPassword && <p id="newPassword-error">{fieldErrors.newPassword}</p>}
-            </div>
-            <div>
-                <label htmlFor="confirmPassword">Confirm new password</label>
-                <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    required
-                    minLength={8}
-                    maxLength={128}
-                    autoComplete="new-password"
+                <input className={styles.input}
+                       id="newPassword"
+                       name="newPassword"
+                       type="password"
+                       required
+                       minLength={8}
+                       maxLength={128}
+                       autoComplete="new-password"
+                       aria-invalid={fieldErrors.newPassword ? true : undefined}
+                       aria-describedby={fieldErrors.newPassword ? "newPassword-error" : undefined}
                 />
             </div>
-            {errorMessage && <p role="alert">{errorMessage}</p>}
-            {serverError && <Link to="/forgot-password">Request a new link</Link>}
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="confirmPassword">Confirm new password</label>
+                <input className={styles.input}
+                       id="confirmPassword"
+                       name="confirmPassword"
+                       type="password"
+                       required
+                       minLength={8}
+                       maxLength={128}
+                       autoComplete="new-password"
+                />
+            </div>
 
-            <button type="submit" disabled={resetPasswordMutation.isPending}>
+            {errorMessage && <p className={styles.alert} role="alert">{errorMessage}</p>}
+            {serverError && <Link className={styles.link} to="/forgot-password">Request a new link</Link>}
+
+            <button className={styles.submit} type="submit" disabled={resetPasswordMutation.isPending}>
                 {resetPasswordMutation.isPending ? "Resetting..." : "Reset password"}
             </button>
         </form>
