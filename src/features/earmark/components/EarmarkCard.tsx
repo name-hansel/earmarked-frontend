@@ -22,7 +22,7 @@ export default function EarmarkCard({earmark}: { earmark: Earmark }) {
                     {album ? album.name : "Album unavailable"}
                 </span>
                 {album && <span className={styles.artists}>{album.artists.join(", ")}</span>}
-                {earmark.note && <p className={styles.note}>{earmark.note}</p>}
+                {earmark.note && <p className={styles.note} title={earmark.note}>{earmark.note}</p>}
                 <time className={styles.date}
                       dateTime={earmark.createdAt}
                       title={`Earmarked on ${formatDate(earmark.createdAt)}`}>
