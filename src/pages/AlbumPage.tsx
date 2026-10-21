@@ -9,6 +9,7 @@ import EarmarkNote from "../features/earmark/components/EarmarkNote.tsx";
 import styles from "./AlbumPage.module.css";
 import {formatReleaseDate} from "../utils/formatReleaseDate.ts";
 import {pickImage} from "../utils/pickImage.ts";
+import SpotifyLogoLink from "../components/spotify/SpotifyLogoLink.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -42,10 +43,13 @@ export default function AlbumPage() {
     return <article className={styles.page}>
         <Link className={styles.back} to={backTo}><span aria-hidden="true">←</span> Back</Link>
         <div className={styles.hero}>
-            {albumCover
-                ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`} width={300}
-                       height={300}/>
-                : <div className={styles.placeholder} aria-hidden="true"/>}
+            <div className={styles.imageRow}>
+                {albumCover
+                    ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`} width={300}
+                           height={300}/>
+                    : <div className={styles.placeholder} aria-hidden="true"/>}
+                <SpotifyLogoLink className={styles.spotify} url={album.spotifyUrl}/>
+            </div>
             <div className={styles.info}>
                 <h1 className={styles.title}>{album.name}</h1>
                 <p className={styles.artists}>{album.artists.join(", ")}</p>
