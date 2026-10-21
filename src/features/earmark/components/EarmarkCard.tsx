@@ -3,6 +3,7 @@ import type {Earmark} from "../api/earmark.ts";
 import styles from "./EarmarkCard.module.css";
 import {formatDate} from "../../../utils/formatDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
+import {BookmarkIcon} from "../../../components/Icon.tsx";
 
 export default function EarmarkCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
@@ -24,9 +25,7 @@ export default function EarmarkCard({earmark}: { earmark: Earmark }) {
                 <time className={styles.date}
                       dateTime={earmark.createdAt}
                       title={`Earmarked on ${formatDate(earmark.createdAt)}`}>
-                    <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/>
-                    </svg>
+                    <BookmarkIcon className={styles.icon}/>
                     <span className={styles.srOnly}>Earmarked on </span>
                     {formatDate(earmark.createdAt)}
                 </time>

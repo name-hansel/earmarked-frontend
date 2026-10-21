@@ -95,10 +95,6 @@
 .icon {
     width: 0.75rem;
     height: 0.75rem;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linejoin: round;
 }
 
 .srOnly {

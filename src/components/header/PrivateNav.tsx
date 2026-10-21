@@ -2,6 +2,7 @@ import {Link} from "react-router";
 import {useLogout} from "../../features/auth/hooks/useLogout.ts";
 import styles from "./PrivateNav.module.css";
 import {useEffect, useRef, useState} from "react";
+import {CloseIcon, MenuIcon} from "../Icon.tsx";
 
 export default function PrivateNav({username}: { username: string }) {
     const logout = useLogout();
@@ -33,9 +34,7 @@ export default function PrivateNav({username}: { username: string }) {
                 aria-expanded={open}
                 aria-controls="private-nav-menu"
                 onClick={() => setOpen((current) => !current)}>
-            <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true">
-                <path d={open ? "M6 6l12 12M18 6L6 18" : "M4 6h16M4 12h16M4 18h16"}/>
-            </svg>
+            {open ? <CloseIcon className={styles.icon}/> : <MenuIcon className={styles.icon}/>}
             Menu
         </button>
         <div id="private-nav-menu" className={`${styles.menu} ${open ? styles.open : ""}`}>
