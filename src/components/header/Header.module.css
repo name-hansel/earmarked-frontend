@@ -11,24 +11,30 @@
 .home {
     display: inline-flex;
     align-items: center;
-    min-height: 2.75rem;
-    padding: 0 0.5rem;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 999px;
-    font-family: var(--font-hero);
-    font-weight: var(--font-weight-semibold);
-    font-size: 1.125rem;
     color: var(--color-text);
-    text-decoration: none;
-    transition: color 150ms ease;
+    transition: background-color 150ms ease;
 }
 
 .home:hover {
-    color: var(--color-primary);
+    background-color: var(--color-surface);
 }
 
 .home:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
+}
+
+.homeIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linejoin: round;
 }
 
 @media (min-width: 640px) {
