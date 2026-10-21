@@ -1,10 +1,12 @@
 import {api} from "../../../lib/client.ts";
 
+export type AlbumImage = { url: string; width: number; height: number };
+
 export type SpotifyAlbum = {
     id: string;
     name: string;
     artists: string[];
-    imageUrl: string | null;
+    images: AlbumImage[];
     releaseDate: string;
     albumType: string;
 }

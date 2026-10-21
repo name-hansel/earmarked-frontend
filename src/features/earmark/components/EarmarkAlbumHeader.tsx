@@ -1,6 +1,7 @@
 import {useSpotifyAlbum} from "../../spotify/hooks/useSpotifyAlbum.ts";
 import styles from "./EarmarkAlbumHeader.module.css";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
+import {pickImage} from "../../../utils/pickImage.ts";
 
 export default function EarmarkAlbumHeader({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data: album, isPending, isError} = useSpotifyAlbum(spotifyAlbumId);
@@ -13,10 +14,12 @@ export default function EarmarkAlbumHeader({spotifyAlbumId}: { spotifyAlbumId: s
         return <p className={styles.alert} role="alert">Couldn't load album details.</p>;
     }
 
+    const albumCover = pickImage(album.images, 240);
+
     return <header className={styles.header}>
-        {album.imageUrl
-            ?
-            <img className={styles.cover} src={album.imageUrl} alt={`Cover of ${album.name}`} width={120} height={120}/>
+        {albumCover
+            ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`}
+                   width={albumCover.width} height={albumCover.height}/>
             : <div className={styles.placeholder} aria-hidden="true"/>}
         <div className={styles.info}>
             <h2 className={styles.name}>{album.name}</h2>

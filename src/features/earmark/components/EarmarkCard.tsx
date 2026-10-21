@@ -2,14 +2,17 @@ import {Link} from "react-router";
 import type {Earmark} from "../api/earmark.ts";
 import styles from "./EarmarkCard.module.css";
 import {formatDate} from "../../../utils/formatDate.ts";
+import {pickImage} from "../../../utils/pickImage.ts";
 
 export default function EarmarkCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
 
+    const albumCover = album ? pickImage(album.images, 300) : undefined;
+
     return <li className={styles.card}>
         <Link className={styles.link} to={`/albums/${spotifyAlbumId}`}>
-            {album?.imageUrl
-                ? <img className={styles.cover} src={album.imageUrl} alt={`Cover of ${album.name}`} width={64}
+            {album && albumCover
+                ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`} width={64}
                        height={64}/>
                 : <div className={styles.placeholder} aria-hidden="true"/>}
             <div className={styles.body}>

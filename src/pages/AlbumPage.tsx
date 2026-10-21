@@ -8,6 +8,7 @@ import EarmarkPageLink from "../features/earmark/components/CreateOrEditEarmarkB
 import EarmarkNote from "../features/earmark/components/EarmarkNote.tsx";
 import styles from "./AlbumPage.module.css";
 import {formatReleaseDate} from "../utils/formatReleaseDate.ts";
+import {pickImage} from "../utils/pickImage.ts";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -36,11 +37,13 @@ export default function AlbumPage() {
         );
     }
 
+    const albumCover = pickImage(album.images, 640);
+
     return <article className={styles.page}>
         <Link className={styles.back} to={backTo}><span aria-hidden="true">←</span> Back</Link>
         <div className={styles.hero}>
-            {album.imageUrl
-                ? <img className={styles.cover} src={album.imageUrl} alt={`Cover of ${album.name}`} width={300}
+            {albumCover
+                ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`} width={300}
                        height={300}/>
                 : <div className={styles.placeholder} aria-hidden="true"/>}
             <div className={styles.info}>
