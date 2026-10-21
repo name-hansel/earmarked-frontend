@@ -9,6 +9,7 @@ export type SpotifyAlbum = {
     images: AlbumImage[];
     releaseDate: string;
     albumType: string;
+    spotifyUrl: string;
 }
 
 export type SpotifyTrack = {

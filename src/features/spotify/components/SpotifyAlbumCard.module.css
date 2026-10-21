@@ -92,3 +92,24 @@
     margin-top: auto;
     padding-top: 0.5rem;
 }
+
+.action {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.action > :first-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.action .spotify {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+}

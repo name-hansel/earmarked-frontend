@@ -4,6 +4,7 @@ import QuickEarmarkButton from "../../earmark/components/QuickEarmarkButton.tsx"
 import styles from "./SpotifyAlbumCard.module.css";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
+import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
 
 export default function SpotifyAlbumCard({album}: {
     album: SpotifyAlbum
@@ -28,6 +29,7 @@ export default function SpotifyAlbumCard({album}: {
             </div>
             <div className={styles.action}>
                 <QuickEarmarkButton spotifyAlbumId={album.id}/>
+                <SpotifyLink className={styles.spotify} url={album.spotifyUrl}/>
             </div>
         </div>
     </li>
