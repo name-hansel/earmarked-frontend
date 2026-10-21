@@ -22,8 +22,8 @@ export default function EarmarkAlbumHeader({spotifyAlbumId}: { spotifyAlbumId: s
                    width={albumCover.width} height={albumCover.height}/>
             : <div className={styles.placeholder} aria-hidden="true"/>}
         <div className={styles.info}>
-            <h2 className={styles.name}>{album.name}</h2>
-            <p className={styles.artists}>{album.artists.join(", ")}</p>
+            <h2 className={styles.name} title={album.name}>{album.name}</h2>
+            <p className={styles.artists} title={album.artists.join(", ")}>{album.artists.join(", ")}</p>
             <p className={styles.date}>{formatReleaseDate(album.releaseDate)}</p>
         </div>
     </header>

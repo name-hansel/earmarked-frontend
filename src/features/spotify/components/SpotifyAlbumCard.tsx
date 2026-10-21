@@ -17,7 +17,8 @@ export default function SpotifyAlbumCard({album}: {
             <img className={styles.cover} src={albumCover.url} alt={`Cover for ${album.name}`} width={64} height={64}/>
             : <div className={styles.placeholder} aria-hidden="true"/>}
         <div className={styles.body}>
-            <Link className={styles.link} to={`/albums/${album.id}`} state={{fromSearch: location.search}}>
+            <Link className={styles.link} to={`/albums/${album.id}`} state={{fromSearch: location.search}}
+                  title={`${album.name} — ${album.artists.join(", ")}`}>
                 {album.name}
             </Link>
             <span className={styles.artists}>{album.artists.join(", ")}</span>

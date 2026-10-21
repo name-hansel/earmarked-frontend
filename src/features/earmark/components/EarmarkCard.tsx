@@ -11,7 +11,8 @@ export default function EarmarkCard({earmark}: { earmark: Earmark }) {
     const albumCover = album ? pickImage(album.images, 300) : undefined;
 
     return <li className={styles.card}>
-        <Link className={styles.link} to={`/albums/${spotifyAlbumId}`}>
+        <Link className={styles.link} to={`/albums/${spotifyAlbumId}`}
+              title={album ? `${album.name} — ${album.artists.join(", ")}` : undefined}>
             {album && albumCover
                 ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`} width={64}
                        height={64}/>
