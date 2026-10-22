@@ -14,6 +14,7 @@ export default function DeleteEarmarkButton({spotifyAlbumId}: { spotifyAlbumId: 
 
     function handleDelete() {
         deleteEarmark(earmarkId, {
+            onSuccess: () => toast.success("Earmark removed"),
             onError: (error) => toast.error(getErrorMessage(error))
         });
     }
