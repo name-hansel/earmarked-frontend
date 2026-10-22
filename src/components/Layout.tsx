@@ -14,6 +14,7 @@ export default function Layout() {
             position="bottom-center"
             theme="dark"
             richColors
+            closeButton
             style={{
                 fontFamily: "var(--font-body)",
                 fontWeight: "var(--font-weight-medium)",
