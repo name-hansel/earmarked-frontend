@@ -4,12 +4,12 @@ import {isAxiosError} from "axios";
 import type {ApiErrorBody} from "../lib/errors.ts";
 import {formatDuration} from "../features/spotify/utils/formatDuration.ts";
 import QuickEarmarkButton from "../features/earmark/components/QuickEarmarkButton.tsx";
-import EarmarkPageLink from "../features/earmark/components/CreateOrEditEarmarkButton.tsx";
 import EarmarkNote from "../features/earmark/components/EarmarkNote.tsx";
 import styles from "./AlbumPage.module.css";
 import {formatReleaseDate} from "../utils/formatReleaseDate.ts";
 import {pickImage} from "../utils/pickImage.ts";
 import SpotifyLogoLink from "../components/spotify/SpotifyLogoLink.tsx";
+import CreateOrEditEarmarkButton from "../features/earmark/components/CreateOrEditEarmarkButton.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -60,7 +60,7 @@ export default function AlbumPage() {
                 <EarmarkNote spotifyAlbumId={album.id}/>
                 <div className={styles.actions}>
                     <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark"/>
-                    <EarmarkPageLink spotifyAlbumId={album.id}/>
+                    <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
                 </div>
             </div>
         </div>

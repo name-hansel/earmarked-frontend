@@ -164,6 +164,11 @@
     flex: none;
 }
 
+.info .actions > :not([data-icon-only]) {
+    width: auto;
+    padding: 0 1.25rem;
+}
+
 @media (min-width: 768px) {
     .page {
         gap: 2rem;
