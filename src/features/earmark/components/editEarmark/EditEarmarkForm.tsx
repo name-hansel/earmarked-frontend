@@ -71,17 +71,24 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     return <section className={styles.earmarkForm}>
         <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
         <h1 className={styles.title}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
-        <EarmarkAlbumHeader spotifyAlbumId={spotifyAlbumId}/>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <EarmarkNoteField value={note} onChange={setNote}/>
-            <div className={styles.actions}>
-                <button className={formStyles.submit} type="submit" disabled={isBusy}>{submitLabel}</button>
-                <Link className={styles.cancel} to={albumPath}>Cancel</Link>
+        <div className={styles.layout}>
+            <div className={styles.album}>
+                <EarmarkAlbumHeader spotifyAlbumId={spotifyAlbumId}/>
             </div>
-        </form>
 
-        {earmark &&
-            <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <EarmarkNoteField value={note} onChange={setNote}/>
+                <div className={styles.actions}>
+                    <button className={formStyles.submit} type="submit" disabled={isBusy}>{submitLabel}</button>
+                    <Link className={styles.cancel} to={albumPath}>Cancel</Link>
+                </div>
+            </form>
+
+            {earmark &&
+                <div className={styles.delete}>
+                    <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>
+                </div>}
+        </div>
     </section>
 }

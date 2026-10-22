@@ -4,6 +4,27 @@
     gap: 1.5rem;
 }
 
+.layout {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-areas:
+    "album"
+    "form"
+    "delete";
+}
+
+.album {
+    grid-area: album;
+}
+
+.form {
+    grid-area: form;
+}
+
+.delete {
+    grid-area: delete;
+}
+
 .back {
     display: inline-flex;
     align-items: center;
@@ -80,5 +101,17 @@
 @media (min-width: 640px) {
     .form {
         padding: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .layout {
+        grid-template-columns: 16rem 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+      "album form"
+      "delete form";
+        align-items: start;
+        gap: 1rem 2rem;
     }
 }
