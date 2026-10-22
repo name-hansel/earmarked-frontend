@@ -2,11 +2,11 @@ import {useFetchEarmarks} from "../hooks/useFetchEarmarks.ts";
 import EarmarkCard from "../components/EarmarkCard.tsx";
 import styles from "./Earmarks.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
-import {DEFAULT_EARMARK_SORT, isEarmarkSort} from "../utils/earmarkSort.ts";
+import {DEFAULT_EARMARK_SORT, EARMARK_SORT_OPTIONS, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
 import {useSearchParams} from "react-router";
 
 export default function Earmarks() {
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const param = searchParams.get("sort");
     const sort = isEarmarkSort(param) ? param : DEFAULT_EARMARK_SORT;
 
@@ -51,8 +51,37 @@ export default function Earmarks() {
         </>
     }
 
+    function handleSortChange(next: EarmarkSort) {
+        setSearchParams(
+            (prev) => {
+                const params = new URLSearchParams(prev);
+                params.set("sort", next);
+                return params;
+            },
+            {replace: true},
+        );
+    }
+
     return <section className={styles.page}>
-        <h1 className={styles.title}>Your earmarks</h1>
+        <div className={styles.header}>
+            <h1 className={styles.title}>Your earmarks</h1>
+            {sortDropdown(sort, handleSortChange)}
+        </div>
         {renderContent()}
     </section>
+}
+
+function sortDropdown(sort: EarmarkSort, handleSortChange: (next: EarmarkSort) => void) {
+    return <label className={styles.sortLabel}>
+        <span>Sort by</span>
+        <select
+            className={styles.sortSelect}
+            value={sort}
+            onChange={(e) => handleSortChange(e.target.value as EarmarkSort)}
+        >
+            {EARMARK_SORT_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+            ))}
+        </select>
+    </label>
 }
