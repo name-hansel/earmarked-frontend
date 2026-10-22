@@ -21,6 +21,10 @@
     --color-success: #6ee7a6;
 
     --color-focus-ring: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 body {
@@ -30,4 +34,8 @@ body {
     font-family: var(--font-body);
     font-weight: var(--font-weight-regular);
     line-height: 1.5;
+}
+
+main {
+    flex: 1;
 }

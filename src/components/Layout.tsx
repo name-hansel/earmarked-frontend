@@ -1,6 +1,7 @@
 import {Outlet} from "react-router";
 import {Toaster} from "sonner";
 import Header from "./header/Header.tsx";
+import Footer from "./header/Footer.tsx";
 
 export default function Layout() {
     return <>
@@ -8,6 +9,7 @@ export default function Layout() {
         <main>
             <Outlet/>
         </main>
+        <Footer/>
         <Toaster
             position="bottom-center"
             theme="dark"
