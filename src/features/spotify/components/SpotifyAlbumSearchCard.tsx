@@ -1,13 +1,13 @@
 import type {SpotifyAlbum} from "../api/spotify.ts";
 import {Link, useLocation} from "react-router";
 import QuickEarmarkButton from "../../earmark/components/QuickEarmarkButton.tsx";
-import styles from "./SpotifyAlbumCard.module.css";
+import styles from "./SpotifyAlbumSearchCard.module.css";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
 import CoverImage from "../../../components/CoverImage.tsx";
 
-export default function SpotifyAlbumCard({album}: {
+export default function SpotifyAlbumSearchCard({album}: {
     album: SpotifyAlbum
 }) {
     const location = useLocation();

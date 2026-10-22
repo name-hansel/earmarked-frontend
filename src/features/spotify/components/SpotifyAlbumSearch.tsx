@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import {useSpotifyAlbumSearch} from "../hooks/useSpotifyAlbumSearch.ts";
-import SpotifyAlbumCard from "./SpotifyAlbumCard.tsx";
+import SpotifyAlbumSearchCard from "./SpotifyAlbumSearchCard.tsx";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 import {useSearchParams} from "react-router";
 import styles from "./SpotifyAlbumSearch.module.css";
@@ -51,7 +51,7 @@ export default function SpotifyAlbumSearch() {
         {
             isSearching && albums && albums.length > 0 &&
             <ul className={styles.results}>
-                {albums.map((album) => <SpotifyAlbumCard key={album.id} album={album}/>)}
+                {albums.map((album) => <SpotifyAlbumSearchCard key={album.id} album={album}/>)}
             </ul>
         }
     </section>
