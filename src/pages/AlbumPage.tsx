@@ -57,10 +57,10 @@ export default function AlbumPage() {
                     {formatReleaseDate(album.releaseDate)}
                     {album.totalTracks != null && ` · ${album.totalTracks} tracks`}
                 </p>
+                <EarmarkNote spotifyAlbumId={album.id}/>
                 <div className={styles.actions}>
                     <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark"/>
                     <EarmarkPageLink spotifyAlbumId={album.id}/>
-                    <EarmarkNote spotifyAlbumId={album.id}/>
                 </div>
             </div>
         </div>

@@ -172,7 +172,7 @@
 
     .hero {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 2rem;
     }
 
@@ -190,5 +190,24 @@
 
     .tracks {
         padding: 0.5rem 1.5rem;
+    }
+
+    .imageRow .spotify {
+        margin-top: auto;
+        margin-bottom: -0.75rem;
+    }
+
+    .actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        max-width: none;
+        margin-top: auto;
+        padding-top: 1rem;
+    }
+
+    .info .actions > * {
+        width: auto;
+        padding: 0 1.25rem;
     }
 }
