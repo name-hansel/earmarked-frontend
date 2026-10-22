@@ -4,11 +4,13 @@
     gap: 1.5rem;
 }
 
-.titleRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 .layout {
@@ -48,14 +50,6 @@
     outline-offset: 2px;
 }
 
-.title {
-    margin: 0;
-    font-family: var(--font-hero);
-    font-weight: var(--font-weight-semibold);
-    font-size: clamp(1.5rem, 6vw, 2.25rem);
-    line-height: 1.2;
-}
-
 .form {
     display: flex;
     flex-direction: column;
@@ -68,10 +62,11 @@
 
 .actions {
     display: flex;
+    align-items: center;
     gap: 0.75rem;
 }
 
-.actions > button,
+.actions > [type="submit"],
 .actions > a {
     flex: 1;
     margin-top: 0;
@@ -115,5 +110,9 @@
 
     .form > :first-child {
         flex: 1;
+    }
+
+    .earmarkForm {
+        gap: 2rem;
     }
 }

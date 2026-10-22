@@ -8,9 +8,9 @@ import {toast} from "sonner";
 import {getErrorMessage} from "../../../../lib/errors.ts";
 import EarmarkAlbumHeader from "../EarmarkAlbumHeader.tsx";
 import EarmarkNoteField from "./EarmarkNoteField.tsx";
-import DeleteEarmarkDialog from "./DeleteEarmarkDialog.tsx";
 import formStyles from "../../../../styles/Form.module.css";
 import styles from "./EditEarmarkForm.module.css";
+import DeleteEarmarkDialog from "./DeleteEarmarkDialog.tsx";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
@@ -70,11 +70,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
     return <section className={styles.earmarkForm}>
         <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
-        <div className={styles.titleRow}>
-            <h1 className={styles.title}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
-            {earmark &&
-                <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
-        </div>
+        <h1 className={styles.srOnly}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
 
         <div className={styles.layout}>
             <div className={styles.album}>
@@ -86,6 +82,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                 <div className={styles.actions}>
                     <button className={formStyles.submit} type="submit" disabled={isBusy}>{submitLabel}</button>
                     <Link className={styles.cancel} to={albumPath}>Cancel</Link>
+                    {earmark &&
+                        <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
                 </div>
             </form>
         </div>
