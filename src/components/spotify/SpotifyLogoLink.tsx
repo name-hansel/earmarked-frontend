@@ -10,6 +10,6 @@ export default function SpotifyLogoLink({url, className}: { url: string; classNa
         aria-label="Open in Spotify"
         title="Open in Spotify"
     >
-        <img className={styles.icon} src={spotifyIcon} alt="" width={24} height={24}/>
+        <img className={styles.icon} src={spotifyIcon} alt=""/>
     </a>
 }
