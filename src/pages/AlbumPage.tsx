@@ -9,6 +9,7 @@ import styles from "./AlbumPage.module.css";
 import {formatReleaseDate} from "../utils/formatReleaseDate.ts";
 import {pickImage} from "../utils/pickImage.ts";
 import SpotifyLogoLink from "../components/spotify/SpotifyLogoLink.tsx";
+import DeleteEarmarkButton from "../features/earmark/components/DeleteEarmarkButton.tsx";
 import CreateOrEditEarmarkButton from "../features/earmark/components/CreateOrEditEarmarkButton.tsx";
 
 export default function AlbumPage() {
@@ -60,7 +61,10 @@ export default function AlbumPage() {
                 <EarmarkNote spotifyAlbumId={album.id}/>
                 <div className={styles.actions}>
                     <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark"/>
-                    <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
+                    <div className={styles.iconGroup}>
+                        <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
+                        <DeleteEarmarkButton spotifyAlbumId={album.id}/>
+                    </div>
                 </div>
             </div>
         </div>

@@ -169,6 +169,13 @@
     padding: 0 1.25rem;
 }
 
+.iconGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     .page {
         gap: 2rem;
@@ -211,8 +218,12 @@
         padding-top: 1rem;
     }
 
-    .info .actions > * {
+    .info .actions > :not(.iconGroup) {
         width: auto;
         padding: 0 1.25rem;
+    }
+
+    .iconGroup {
+        width: auto;
     }
 }

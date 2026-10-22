@@ -3,8 +3,6 @@
     align-items: center;
     justify-content: center;
     flex: none;
-    width: 2.75rem;
-    height: 2.75rem;
     padding: 0;
     border: 2px dashed var(--color-danger);
     border-radius: 999px;
@@ -12,6 +10,8 @@
     background-color: var(--color-surface);
     cursor: pointer;
     transition: background-color 150ms ease;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .trigger:hover:not(:disabled) {
