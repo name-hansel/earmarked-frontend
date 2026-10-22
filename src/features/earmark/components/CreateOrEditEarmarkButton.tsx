@@ -13,13 +13,13 @@ export default function CreateOrEditEarmarkButton({spotifyAlbumId}: { spotifyAlb
 
     const isEdit = Boolean(data.earmark);
 
-    return <button className={isEdit ? `${styles.button} ${styles.iconOnly}` : styles.button}
+    return <button className={`${styles.button} ${styles.iconOnly}`}
                    type="button"
                    data-icon-only={isEdit ? "" : undefined}
                    aria-label={isEdit ? "Edit earmark" : undefined}
                    title={isEdit ? "Edit earmark" : undefined}
                    onClick={() => navigate(`/albums/${spotifyAlbumId}/earmark`)}>
-        {isEdit ? <PencilIcon className={styles.icon}/> : "Earmark..."}
+        <PencilIcon className={styles.icon}/>
     </button>;
 
 }

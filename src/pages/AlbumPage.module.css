@@ -217,6 +217,7 @@
         max-width: none;
         margin-top: auto;
         padding-top: 1rem;
+        gap: 0;
     }
 
     .info .actions > :not(.iconGroup) {
