@@ -12,6 +12,7 @@ import SpotifyLogoLink from "../components/spotify/SpotifyLogoLink.tsx";
 import DeleteEarmarkButton from "../features/earmark/components/DeleteEarmarkButton.tsx";
 import CreateOrEditEarmarkButton from "../features/earmark/components/CreateOrEditEarmarkButton.tsx";
 import PageLoader from "../components/PageLoader.tsx";
+import CoverImage from "../components/CoverImage.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -40,16 +41,13 @@ export default function AlbumPage() {
         );
     }
 
-    const albumCover = pickImage(album.images, 640);
 
     return <article className={styles.page}>
         <Link className={styles.back} to={backTo}><span aria-hidden="true">←</span> Back</Link>
         <div className={styles.hero}>
             <div className={styles.imageRow}>
-                {albumCover
-                    ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`} width={300}
-                           height={300}/>
-                    : <div className={styles.placeholder} aria-hidden="true"/>}
+                <CoverImage image={pickImage(album.images, 640)} alt={`Cover of ${album.name}`}
+                            className={styles.cover}/>
                 <SpotifyLogoLink className={styles.spotify} url={album.spotifyUrl}/>
             </div>
             <div className={styles.info}>

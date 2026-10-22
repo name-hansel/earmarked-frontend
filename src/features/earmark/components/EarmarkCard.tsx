@@ -5,6 +5,7 @@ import {formatDate} from "../../../utils/formatDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import {BookmarkIcon} from "../../../components/Icon.tsx";
 import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
+import CoverImage from "../../../components/CoverImage.tsx";
 
 export default function EarmarkCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
@@ -12,10 +13,7 @@ export default function EarmarkCard({earmark}: { earmark: Earmark }) {
     const albumCover = album ? pickImage(album.images, 300) : undefined;
 
     return <li className={styles.card}>
-        {album && albumCover
-            ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`}
-                   width={albumCover.width} height={albumCover.height}/>
-            : <div className={styles.placeholder} aria-hidden="true"/>}
+        <CoverImage className={styles.cover} image={albumCover} alt={album ? `Cover of ${album.name}` : ""}/>
         <div className={styles.body}>
             <Link className={album ? styles.link : `${styles.link} ${styles.unavailable}`}
                   to={`/albums/${spotifyAlbumId}`}

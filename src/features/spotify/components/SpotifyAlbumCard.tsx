@@ -5,6 +5,7 @@ import styles from "./SpotifyAlbumCard.module.css";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
+import CoverImage from "../../../components/CoverImage.tsx";
 
 export default function SpotifyAlbumCard({album}: {
     album: SpotifyAlbum
@@ -13,10 +14,7 @@ export default function SpotifyAlbumCard({album}: {
     const albumCover = pickImage(album.images, 300);
 
     return <li className={styles.card}>
-        {albumCover
-            ?
-            <img className={styles.cover} src={albumCover.url} alt={`Cover for ${album.name}`} width={64} height={64}/>
-            : <div className={styles.placeholder} aria-hidden="true"/>}
+        <CoverImage className={styles.cover} image={albumCover} alt={`Cover for ${album.name}`}/>
         <div className={styles.body}>
             <Link className={styles.link} to={`/albums/${album.id}`} state={{fromSearch: location.search}}
                   title={`${album.name} — ${album.artists.join(", ")}`}>

@@ -8,7 +8,7 @@ export function useSpotifyAlbumSearch(query: string) {
     return useQuery({
         queryKey: spotifyKeys.search(trimmed.toLowerCase()),
         queryFn: () => searchAlbums(trimmed),
-        enabled: trimmed.length > 3,
+        enabled: trimmed.length > 2,
         staleTime: 5 * 60 * 1000,
         retry: false
     });

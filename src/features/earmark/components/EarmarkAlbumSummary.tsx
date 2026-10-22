@@ -4,6 +4,7 @@ import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import SpotifyLogoLink from "../../../components/spotify/SpotifyLogoLink.tsx";
 import PageLoader from "../../../components/PageLoader.tsx";
+import CoverImage from "../../../components/CoverImage.tsx";
 
 export default function EarmarkAlbumSummary({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data: album, isPending, isError} = useSpotifyAlbum(spotifyAlbumId);
@@ -16,13 +17,8 @@ export default function EarmarkAlbumSummary({spotifyAlbumId}: { spotifyAlbumId: 
         return <p className={styles.alert} role="alert">Couldn't load album details.</p>;
     }
 
-    const albumCover = pickImage(album.images, 240);
-
     return <header className={styles.header}>
-        {albumCover
-            ? <img className={styles.cover} src={albumCover.url} alt={`Cover of ${album.name}`}
-                   width={albumCover.width} height={albumCover.height}/>
-            : <div className={styles.placeholder} aria-hidden="true"/>}
+        <CoverImage image={pickImage(album.images, 240)} alt={`Cover of ${album.name}`} className={styles.cover}/>
         <div className={styles.info}>
             <h2 className={styles.name} title={album.name}>{album.name}</h2>
             <p className={styles.artists} title={album.artists.join(", ")}>{album.artists.join(", ")}</p>
