@@ -68,6 +68,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         ? (isUpdating ? "Saving..." : "Save")
         : (isCreating ? "Earmarking..." : "Earmark");
 
+    const isUnchanged = earmark ? note === (earmark.note ?? "") : false;
+
     return <section className={styles.earmarkForm}>
         <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
         <h1 className={styles.srOnly}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
@@ -80,7 +82,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <EarmarkNoteField value={note} onChange={setNote}/>
                 <div className={styles.actions}>
-                    <button className={formStyles.submit} type="submit" disabled={isBusy}>{submitLabel}</button>
+                    <button className={formStyles.submit} type="submit"
+                            disabled={isBusy || isUnchanged}>{submitLabel}</button>
                     <Link className={styles.cancel} to={albumPath}>Cancel</Link>
                     {earmark &&
                         <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
