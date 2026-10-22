@@ -1,14 +1,15 @@
 import {useSpotifyAlbum} from "../../spotify/hooks/useSpotifyAlbum.ts";
-import styles from "./EarmarkAlbumHeader.module.css";
+import styles from "./EarmarkAlbumSummary.module.css";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import SpotifyLogoLink from "../../../components/spotify/SpotifyLogoLink.tsx";
+import PageLoader from "../../../components/PageLoader.tsx";
 
-export default function EarmarkAlbumHeader({spotifyAlbumId}: { spotifyAlbumId: string }) {
+export default function EarmarkAlbumSummary({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data: album, isPending, isError} = useSpotifyAlbum(spotifyAlbumId);
 
     if (isPending) {
-        return <p className={styles.status}>Loading album...</p>
+        return <PageLoader label="Loading album..."/>
     }
 
     if (isError) {

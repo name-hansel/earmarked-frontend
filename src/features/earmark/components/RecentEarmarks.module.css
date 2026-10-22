@@ -48,11 +48,6 @@
     list-style: none;
 }
 
-.status {
-    margin: 0;
-    color: var(--color-text-muted);
-}
-
 .empty {
     margin: 0;
     padding: 1.5rem 1rem;

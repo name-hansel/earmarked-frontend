@@ -11,6 +11,7 @@ import {pickImage} from "../utils/pickImage.ts";
 import SpotifyLogoLink from "../components/spotify/SpotifyLogoLink.tsx";
 import DeleteEarmarkButton from "../features/earmark/components/DeleteEarmarkButton.tsx";
 import CreateOrEditEarmarkButton from "../features/earmark/components/CreateOrEditEarmarkButton.tsx";
+import PageLoader from "../components/PageLoader.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -21,7 +22,7 @@ export default function AlbumPage() {
 
     if (isPending) {
         return <section className={styles.page}>
-            <p className={styles.status}>Loading album...</p>
+            <PageLoader label="Loading album..."/>
         </section>
     }
 

@@ -1,13 +1,14 @@
 import {useFetchEarmarks} from "../hooks/useFetchEarmarks.ts";
 import EarmarkCard from "../components/EarmarkCard.tsx";
 import styles from "./Earmarks.module.css";
+import PageLoader from "../../../components/PageLoader.tsx";
 
 export default function Earmarks() {
     const {data, isPending, isError, refetch, hasNextPage, isFetchingNextPage, fetchNextPage} = useFetchEarmarks();
 
     function renderContent() {
         if (isPending) {
-            return <p className={styles.status}>Loading...</p>
+            return <PageLoader/>
         }
 
         if (isError) {

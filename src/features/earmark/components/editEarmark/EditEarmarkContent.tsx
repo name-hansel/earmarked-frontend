@@ -1,12 +1,13 @@
 import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import EditEarmarkForm from "./EditEarmarkForm.tsx";
 import styles from "./EditEarmarkContent.module.css";
+import PageLoader from "../../../../components/PageLoader.tsx";
 
 export default function EditEarmarkContent({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data, isPending, isError, refetch} = useAlbumEarmark(spotifyAlbumId);
 
     if (isPending) {
-        return <p className={styles.status}>Loading...</p>
+        return <PageLoader/>
     }
 
     if (isError) {
