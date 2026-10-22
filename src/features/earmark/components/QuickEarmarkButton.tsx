@@ -35,6 +35,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark"}: 
 
     function handleClick() {
         createEarmark({}, {
+            onSuccess: () => toast.success("Album earmarked"),
             onError: (error) => toast.error(getErrorMessage(error))
         })
     }
