@@ -1,6 +1,6 @@
-import {useRef} from "react";
+import {useId, useRef} from "react";
 import styles from "./DeleteEarmarkDialog.module.css";
-import {TrashIcon} from "../../../../components/Icon.tsx";
+import {CloseIcon, TrashIcon} from "../../../../components/Icon.tsx";
 
 export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
     onConfirm: () => void;
@@ -8,6 +8,7 @@ export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
     disabled: boolean;
 }) {
     const dialogRef = useRef<HTMLDialogElement>(null);
+    const titleId = useId();
 
     return <>
         <button className={styles.trigger} type="button" disabled={disabled}
@@ -15,8 +16,15 @@ export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
                 onClick={() => dialogRef.current?.showModal()}>
             <TrashIcon className={styles.icon}/>
         </button>
-        <dialog className={styles.dialog} ref={dialogRef}>
-            <p className={styles.text}>Delete this earmark?</p>
+        <dialog className={styles.dialog} ref={dialogRef} aria-labelledby={titleId}>
+            <div className={styles.header}>
+                <h2 className={styles.title} id={titleId}>Delete earmark</h2>
+                <button className={styles.close} type="button" aria-label="Close"
+                        onClick={() => dialogRef.current?.close()} disabled={isDeleting}>
+                    <CloseIcon className={styles.closeIcon}/>
+                </button>
+            </div>
+            <p className={styles.text}>This will also remove your note.</p>
             <div className={styles.actions}>
                 <button className={styles.confirm} type="button" onClick={onConfirm} disabled={isDeleting}>
                     {isDeleting ? "Deleting..." : "Delete"}
