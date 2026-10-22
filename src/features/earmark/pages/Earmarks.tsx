@@ -2,9 +2,23 @@ import {useFetchEarmarks} from "../hooks/useFetchEarmarks.ts";
 import EarmarkCard from "../components/EarmarkCard.tsx";
 import styles from "./Earmarks.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
+import {DEFAULT_EARMARK_SORT, isEarmarkSort} from "../utils/earmarkSort.ts";
+import {useSearchParams} from "react-router";
 
 export default function Earmarks() {
-    const {data, isPending, isError, refetch, hasNextPage, isFetchingNextPage, fetchNextPage} = useFetchEarmarks();
+    const [searchParams] = useSearchParams();
+    const param = searchParams.get("sort");
+    const sort = isEarmarkSort(param) ? param : DEFAULT_EARMARK_SORT;
+
+    const {
+        data,
+        isPending,
+        isError,
+        refetch,
+        hasNextPage,
+        isFetchingNextPage,
+        fetchNextPage
+    } = useFetchEarmarks(sort);
 
     function renderContent() {
         if (isPending) {
