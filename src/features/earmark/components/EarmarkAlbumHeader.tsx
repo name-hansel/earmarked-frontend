@@ -2,6 +2,7 @@ import {useSpotifyAlbum} from "../../spotify/hooks/useSpotifyAlbum.ts";
 import styles from "./EarmarkAlbumHeader.module.css";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
+import SpotifyLogoLink from "../../../components/spotify/SpotifyLogoLink.tsx";
 
 export default function EarmarkAlbumHeader({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data: album, isPending, isError} = useSpotifyAlbum(spotifyAlbumId);
@@ -25,6 +26,7 @@ export default function EarmarkAlbumHeader({spotifyAlbumId}: { spotifyAlbumId: s
             <h2 className={styles.name} title={album.name}>{album.name}</h2>
             <p className={styles.artists} title={album.artists.join(", ")}>{album.artists.join(", ")}</p>
             <p className={styles.date}>{formatReleaseDate(album.releaseDate)}</p>
+            <SpotifyLogoLink className={styles.spotify} url={album.spotifyUrl}/>
         </div>
     </header>
 }

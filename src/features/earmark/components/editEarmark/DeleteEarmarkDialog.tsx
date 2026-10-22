@@ -1,5 +1,6 @@
 import {useRef} from "react";
 import styles from "./DeleteEarmarkDialog.module.css";
+import {TrashIcon} from "../../../../components/Icon.tsx";
 
 export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
     onConfirm: () => void;
@@ -10,8 +11,9 @@ export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
 
     return <>
         <button className={styles.trigger} type="button" disabled={disabled}
+                aria-label="Delete earmark" title="Delete earmark"
                 onClick={() => dialogRef.current?.showModal()}>
-            Delete earmark
+            <TrashIcon className={styles.icon}/>
         </button>
         <dialog className={styles.dialog} ref={dialogRef}>
             <p className={styles.text}>Delete this earmark?</p>

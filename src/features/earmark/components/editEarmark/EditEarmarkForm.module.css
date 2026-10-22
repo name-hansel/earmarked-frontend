@@ -4,13 +4,19 @@
     gap: 1.5rem;
 }
 
+.titleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
 .layout {
     display: grid;
     gap: 1.5rem;
     grid-template-areas:
     "album"
-    "form"
-    "delete";
+    "form";
 }
 
 .album {
@@ -19,10 +25,6 @@
 
 .form {
     grid-area: form;
-}
-
-.delete {
-    grid-area: delete;
 }
 
 .back {
@@ -107,11 +109,11 @@
 @media (min-width: 768px) {
     .layout {
         grid-template-columns: 16rem 1fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas:
-      "album form"
-      "delete form";
-        align-items: start;
-        gap: 1rem 2rem;
+        grid-template-areas: "album form";
+        gap: 2rem;
+    }
+
+    .form > :first-child {
+        flex: 1;
     }
 }

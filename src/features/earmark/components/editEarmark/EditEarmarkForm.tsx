@@ -70,7 +70,11 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
     return <section className={styles.earmarkForm}>
         <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
-        <h1 className={styles.title}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
+        <div className={styles.titleRow}>
+            <h1 className={styles.title}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
+            {earmark &&
+                <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
+        </div>
 
         <div className={styles.layout}>
             <div className={styles.album}>
@@ -84,11 +88,6 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                     <Link className={styles.cancel} to={albumPath}>Cancel</Link>
                 </div>
             </form>
-
-            {earmark &&
-                <div className={styles.delete}>
-                    <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>
-                </div>}
         </div>
     </section>
 }
