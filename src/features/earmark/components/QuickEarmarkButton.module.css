@@ -12,6 +12,15 @@
     transition: background-color 150ms ease;
 }
 
+.buttonCompact {
+    width: auto;
+    min-width: 0;
+    padding: 0 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .button:hover:not(:disabled) {
     background-color: var(--color-primary-hover);
 }
@@ -43,6 +52,22 @@
 .earmarked::before {
     content: "✓";
     margin-right: 0.375rem;
+}
+
+.earmarkedCompact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 2rem;
+    height: 2.5rem;
+    color: var(--color-success);
+}
+
+.earmarkedIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: currentColor;
 }
 
 .error {

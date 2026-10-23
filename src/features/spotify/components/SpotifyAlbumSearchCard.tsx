@@ -6,6 +6,7 @@ import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
 import CoverImage from "../../../components/CoverImage.tsx";
+import QuickDeleteEarmarkButton from "../../earmark/components/QuickDeleteEarmarkButton.tsx";
 
 export default function SpotifyAlbumSearchCard({album}: {
     album: SpotifyAlbum
@@ -26,7 +27,10 @@ export default function SpotifyAlbumSearchCard({album}: {
                 <span className={styles.type}>{album.albumType}</span>
             </div>
             <div className={styles.action}>
-                <QuickEarmarkButton spotifyAlbumId={album.id}/>
+                <div className={styles.earmarkTools}>
+                    <QuickEarmarkButton spotifyAlbumId={album.id} compact/>
+                    <QuickDeleteEarmarkButton spotifyAlbumId={album.id}/>
+                </div>
                 <SpotifyLink className={styles.spotify} url={album.spotifyUrl}/>
             </div>
         </div>
