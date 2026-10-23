@@ -82,6 +82,10 @@
     color: var(--color-text-muted);
 }
 
+.albumType {
+    text-transform: capitalize;
+}
+
 .actions {
     display: flex;
     flex-direction: column;

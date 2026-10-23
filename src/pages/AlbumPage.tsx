@@ -41,7 +41,6 @@ export default function AlbumPage() {
         );
     }
 
-
     return <article className={styles.page}>
         <Link className={styles.back} to={backTo}><span aria-hidden="true">←</span> Back</Link>
         <div className={styles.hero}>
@@ -54,8 +53,9 @@ export default function AlbumPage() {
                 <h1 className={styles.title}>{album.name}</h1>
                 <p className={styles.artists}>{album.artists.join(", ")}</p>
                 <p className={styles.meta}>
-                    {formatReleaseDate(album.releaseDate)}
-                    {album.totalTracks != null && ` · ${album.totalTracks} tracks`}
+                    {`${formatReleaseDate(album.releaseDate)} · `}
+                    <span className={styles.albumType}>{album.albumType}</span>
+                    {album.totalTracks != null && ` · ${album.totalTracks} ${album.totalTracks === 1 ? "track" : "tracks"}`}
                 </p>
                 <EarmarkNote spotifyAlbumId={album.id}/>
                 <div className={styles.actions}>
