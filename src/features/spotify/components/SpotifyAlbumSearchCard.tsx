@@ -15,21 +15,27 @@ export default function SpotifyAlbumSearchCard({album}: {
     const albumCover = pickImage(album.images, 300);
 
     return <li className={styles.card}>
-        <CoverImage className={styles.cover} image={albumCover} alt={`Cover for ${album.name}`}/>
-        <div className={styles.body}>
-            <Link className={styles.link} to={`/albums/${album.id}`} state={{fromSearch: location.search}}
-                  title={`${album.name} — ${album.artists.join(", ")}`}>
-                {album.name}
-            </Link>
-            <span className={styles.artists}>{album.artists.join(", ")}</span>
-            <p className={styles.meta}>
-                {[formatReleaseDate(album.releaseDate), album.albumType].filter(Boolean).join(" · ")}
-            </p>
-            <div className={styles.action}>
-                <div className={styles.earmarkTools}>
-                    <QuickEarmarkButton spotifyAlbumId={album.id} compact/>
-                    <QuickDeleteEarmarkButton spotifyAlbumId={album.id}/>
+        <div className={styles.main}>
+            <CoverImage className={styles.cover} image={albumCover} alt={`Cover for ${album.name}`}/>
+            <div className={styles.body}>
+                <Link className={styles.link} to={`/albums/${album.id}`} state={{fromSearch: location.search}}
+                      title={`${album.name} — ${album.artists.join(", ")}`}>
+                    {album.name}
+                </Link>
+                <span className={styles.artists}>{album.artists.join(", ")}</span>
+                <div className={styles.action}>
+                    <div className={styles.earmarkTools}>
+                        <QuickEarmarkButton spotifyAlbumId={album.id} compact/>
+                        <QuickDeleteEarmarkButton spotifyAlbumId={album.id}/>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div className={styles.footer}>
+            <div className={styles.footerEnd}>
+                <p className={styles.meta}>
+                    {[formatReleaseDate(album.releaseDate), album.albumType].filter(Boolean).join(" · ")}
+                </p>
                 <SpotifyLink className={styles.spotify} url={album.spotifyUrl}/>
             </div>
         </div>

@@ -27,18 +27,18 @@ export default function EarmarkCard({earmark}: { earmark: Earmark }) {
             </div>
         </div>
         <div className={styles.footer}>
-            {album &&
-                <p className={styles.meta}>
-                    {[formatReleaseDate(album.releaseDate), album.albumType].filter(Boolean).join(" · ")}
-                </p>}
+            <time className={styles.date}
+                  dateTime={earmark.createdAt}
+                  title={`Earmarked on ${formatDate(earmark.createdAt)}`}>
+                <BookmarkIcon className={styles.icon}/>
+                <span className={styles.srOnly}>Earmarked on </span>
+                {formatDate(earmark.createdAt)}
+            </time>
             <div className={styles.footerEnd}>
-                <time className={styles.date}
-                      dateTime={earmark.createdAt}
-                      title={`Earmarked on ${formatDate(earmark.createdAt)}`}>
-                    <BookmarkIcon className={styles.icon}/>
-                    <span className={styles.srOnly}>Earmarked on </span>
-                    {formatDate(earmark.createdAt)}
-                </time>
+                {album &&
+                    <p className={styles.meta}>
+                        {[formatReleaseDate(album.releaseDate), album.albumType].filter(Boolean).join(" · ")}
+                    </p>}
                 {album && <SpotifyLink className={styles.spotify} url={album.spotifyUrl}/>}
             </div>
         </div>
