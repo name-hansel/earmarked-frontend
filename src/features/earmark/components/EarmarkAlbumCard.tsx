@@ -1,10 +1,9 @@
 import type {Earmark} from "../api/earmark.ts";
 import styles from "./EarmarkAlbumCard.module.css";
-import {formatDate} from "../../../utils/formatDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
-import {BookmarkIcon} from "../../../components/Icon.tsx";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
 import QuickDeleteEarmarkButton from "./QuickDeleteEarmarkButton.tsx";
+import EarmarkDate from "./EarmarkDate.tsx";
 
 export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
@@ -22,15 +21,7 @@ export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
         releaseDate={album?.releaseDate}
         albumType={album?.albumType}
         spotifyUrl={album?.spotifyUrl}
-        footerStart={
-            <time className={styles.date}
-                  dateTime={earmark.createdAt}
-                  title={`Earmarked on ${formatDate(earmark.createdAt)}`}>
-                <BookmarkIcon className={styles.icon}/>
-                <span className={styles.srOnly}>Earmarked on </span>
-                {formatDate(earmark.createdAt)}
-            </time>
-        }
+        footerStart={<EarmarkDate spotifyAlbumId={spotifyAlbumId} showIcon/>}
         actions={
             <QuickDeleteEarmarkButton spotifyAlbumId={spotifyAlbumId}/>
         }>

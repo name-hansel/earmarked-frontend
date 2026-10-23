@@ -89,10 +89,10 @@
 .actions {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
     width: 100%;
     max-width: 24rem;
     margin-top: 1rem;
+    flex-wrap: wrap;
 }
 
 .tracks {
@@ -165,7 +165,7 @@
 
 .info .actions > :not([data-icon-only]) {
     width: auto;
-    padding: 0 1.25rem;
+    padding: 0 0.5rem;
 }
 
 .iconGroup {
@@ -174,6 +174,13 @@
     justify-content: center;
     gap: 0.5rem;
     width: 100%;
+}
+
+.earmarkStatus {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
 }
 
 @media (min-width: 768px) {
@@ -219,7 +226,7 @@
         gap: 0;
     }
 
-    .info .actions > :not(.iconGroup) {
+    .earmarkStatus > :not(time) {
         width: auto;
         padding: 0 1.25rem;
     }
