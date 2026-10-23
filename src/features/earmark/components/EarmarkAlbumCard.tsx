@@ -1,12 +1,12 @@
 import type {Earmark} from "../api/earmark.ts";
-import styles from "./EarmarkCard.module.css";
+import styles from "./EarmarkAlbumCard.module.css";
 import {formatDate} from "../../../utils/formatDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import {BookmarkIcon} from "../../../components/Icon.tsx";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
 import QuickDeleteEarmarkButton from "./QuickDeleteEarmarkButton.tsx";
 
-export default function EarmarkCard({earmark}: { earmark: Earmark }) {
+export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
 
     const albumCover = album ? pickImage(album.images, 300) : undefined;

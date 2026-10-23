@@ -1,5 +1,5 @@
 import {useFetchEarmarks} from "../hooks/useFetchEarmarks.ts";
-import EarmarkCard from "../components/EarmarkCard.tsx";
+import EarmarkAlbumCard from "../components/EarmarkAlbumCard.tsx";
 import styles from "./Earmarks.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
 import {DEFAULT_EARMARK_SORT, EARMARK_SORT_OPTIONS, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
@@ -40,7 +40,7 @@ export default function Earmarks() {
 
         return <>
             <ul className={styles.list}>{
-                earmarks.map(earmark => <EarmarkCard key={earmark.id} earmark={earmark}/>)
+                earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
             }</ul>
             {
                 hasNextPage && <button className={styles.loadMore} type="button" onClick={() => fetchNextPage()}

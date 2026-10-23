@@ -5,7 +5,7 @@ import AlbumCard from "../../album/components/AlbumCard.tsx";
 import QuickEarmarkButton from "../../earmark/components/QuickEarmarkButton.tsx";
 import QuickDeleteEarmarkButton from "../../earmark/components/QuickDeleteEarmarkButton.tsx";
 
-export default function SpotifyAlbumSearchCard({album}: {
+export default function SpotifySearchAlbumCard({album}: {
     album: SpotifyAlbum
 }) {
     const location = useLocation();

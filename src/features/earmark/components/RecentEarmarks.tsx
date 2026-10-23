@@ -1,5 +1,5 @@
 import {useRecentEarmarks} from "../hooks/useFetchRecentEarmarks.ts";
-import EarmarkCard from "./EarmarkCard.tsx";
+import EarmarkAlbumCard from "./EarmarkAlbumCard.tsx";
 import {Link} from "react-router";
 import styles from "./RecentEarmarks.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
@@ -33,7 +33,7 @@ export default function RecentEarmarks() {
         </div>
         <ul className={styles.list}>
             {
-                earmarks.map((earmark) => <EarmarkCard key={earmark.id} earmark={earmark}/>)
+                earmarks.map((earmark) => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
             }
         </ul>
     </section>
