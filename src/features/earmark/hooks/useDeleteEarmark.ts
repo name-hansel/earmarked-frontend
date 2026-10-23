@@ -13,6 +13,7 @@ export function useDeleteEarmark(spotifyAlbumId: string) {
             });
         },
         onSettled: () => {
+            queryClient.removeQueries({queryKey: earmarkKeys.lists(), type: "inactive"});
             void queryClient.invalidateQueries({queryKey: earmarkKeys.lists()})
         }
     });
