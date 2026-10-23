@@ -5,11 +5,12 @@ import SpotifySearchAlbumCard from "./SpotifySearchAlbumCard.tsx";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 import {useSearchParams} from "react-router";
 import styles from "./SpotifyAlbumSearch.module.css";
+import PageLoader from "../../../components/PageLoader.tsx";
 
 export default function SpotifyAlbumSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [input, setInput] = useState(searchParams.get("q") ?? "");
-    const debouncedInput = useDebounce(input);
+    const debouncedInput = useDebounce(input, 500);
 
     const {data: albums, isFetching, isError, error} = useSpotifyAlbumSearch(debouncedInput);
     const activeQuery = input.trim().length > 1 ? debouncedInput : "";
@@ -44,7 +45,7 @@ export default function SpotifyAlbumSearch() {
             }
         </div>
 
-        {isSearching && isFetching && <p>Searching...</p>}
+        {isSearching && isFetching && <PageLoader/>}
         {isSearching && isError && <p role="alert">{getSearchErrorMessage(error)}</p>}
         {isSearching && !isFetching && albums?.length === 0 && <p>No albums found.</p>}
 
