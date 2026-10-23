@@ -3,11 +3,13 @@ import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import styles from "./QuickEarmarkButton.module.css";
+import {getEarmarkAddedMessage} from "../../../utils/formatEarmarkToastMessage.ts";
 
-export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", compact = false}: {
+export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", compact = false, albumName}: {
     spotifyAlbumId: string,
     label?: string,
-    compact?: boolean
+    compact?: boolean,
+    albumName: string
 }) {
     const {mutate: createEarmark, isPending: isCreating} = useCreateEarmark(spotifyAlbumId);
     const {
@@ -42,7 +44,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", c
 
     function handleClick() {
         createEarmark({}, {
-            onSuccess: () => toast.success("Album earmarked"),
+            onSuccess: () => toast.success(getEarmarkAddedMessage(albumName)),
             onError: (error) => toast.error(getErrorMessage(error))
         })
     }

@@ -11,6 +11,12 @@ import EarmarkNoteField from "./EarmarkNoteField.tsx";
 import formStyles from "../../../../styles/Form.module.css";
 import styles from "./EditEarmarkForm.module.css";
 import DeleteEarmarkDialog from "./DeleteEarmarkDialog.tsx";
+import {useSpotifyAlbum} from "../../../spotify/hooks/useSpotifyAlbum.ts";
+import {
+    getEarmarkAddedMessage,
+    getEarmarkRemovedMessage,
+    getEarmarkUpdatedMessage
+} from "../../../../utils/formatEarmarkToastMessage.ts";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
@@ -26,6 +32,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     const {mutate: deleteEarmark, isPending: isDeleting} = useDeleteEarmark(spotifyAlbumId);
     const isBusy = isCreating || isUpdating || isDeleting;
 
+    const {data: album} = useSpotifyAlbum(spotifyAlbumId);
+
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         const trimmedNote = note.trim();
@@ -33,7 +41,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         if (earmark) {
             updateEarmark({earmarkId: earmark.id, note: trimmedNote}, {
                 onSuccess: () => {
-                    toast.success("Earmark updated");
+                    toast.success(getEarmarkUpdatedMessage(album?.name));
                     navigate(albumPath);
                 },
                 onError: (error) => toast.error(getErrorMessage(error))
@@ -41,7 +49,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         } else {
             createEarmark({note: trimmedNote}, {
                 onSuccess: () => {
-                    toast.success("Album earmarked");
+                    toast.success(getEarmarkAddedMessage(album?.name));
                     navigate(albumPath);
                 },
                 onError: (error) => toast.error(getErrorMessage(error))
@@ -54,7 +62,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
         deleteEarmark(earmark.id, {
             onSuccess: () => {
-                toast.success("Earmark removed");
+                toast.success(getEarmarkRemovedMessage(album?.name));
                 navigate(albumPath);
             },
             onError: (error) => {

@@ -4,9 +4,11 @@ import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import styles from "./QuickDeleteEarmarkButton.module.css";
+import {getEarmarkRemovedMessage} from "../../../utils/formatEarmarkToastMessage.ts";
 
-export default function QuickDeleteEarmarkButton({spotifyAlbumId}: {
+export default function QuickDeleteEarmarkButton({spotifyAlbumId, albumName}: {
     spotifyAlbumId: string;
+    albumName: string | undefined
 }) {
     const {data} = useAlbumEarmark(spotifyAlbumId);
     const {mutate: deleteEarmark, isPending} = useDeleteEarmark(spotifyAlbumId);
@@ -16,7 +18,7 @@ export default function QuickDeleteEarmarkButton({spotifyAlbumId}: {
 
     function handleClick() {
         deleteEarmark(earmarkId, {
-            onSuccess: () => toast.success("Earmark removed"),
+            onSuccess: () => toast.success(getEarmarkRemovedMessage(albumName)),
             onError: (error) => toast.error(getErrorMessage(error))
         });
     }

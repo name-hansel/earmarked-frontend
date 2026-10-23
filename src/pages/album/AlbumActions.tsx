@@ -9,11 +9,11 @@ export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
     return <div className={styles.actions}>
         <div className={styles.earmarkStatus}>
             <EarmarkDate spotifyAlbumId={album.id} showIcon={false}/>
-            <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark"/>
+            <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark" albumName={album.name}/>
         </div>
         <div className={styles.iconGroup}>
             <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
-            <DeleteEarmarkButton spotifyAlbumId={album.id}/>
+            <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name}/>
         </div>
     </div>
 }

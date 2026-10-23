@@ -23,7 +23,7 @@ export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
         spotifyUrl={album?.spotifyUrl}
         footerStart={<EarmarkDate spotifyAlbumId={spotifyAlbumId} showIcon/>}
         actions={
-            <QuickDeleteEarmarkButton spotifyAlbumId={spotifyAlbumId}/>
+            <QuickDeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name}/>
         }>
         {earmark.note && <p className={styles.note}>{earmark.note}</p>}
     </AlbumCard>

@@ -26,8 +26,8 @@ export default function SpotifySearchAlbumCard({album}: {
         footerStart={<EarmarkDate spotifyAlbumId={album.id} showIcon/>}
         actions={
             <>
-                <QuickEarmarkButton spotifyAlbumId={album.id} compact/>
-                <QuickDeleteEarmarkButton spotifyAlbumId={album.id}/>
+                <QuickEarmarkButton spotifyAlbumId={album.id} compact albumName={album.name}/>
+                <QuickDeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name}/>
             </>
         }
     />
