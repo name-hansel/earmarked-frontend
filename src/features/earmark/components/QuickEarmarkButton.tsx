@@ -54,6 +54,8 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", c
         className={buttonClass}
         type="button"
         disabled={isCreating}
+        aria-label={isCreating ? "Earmarking..." : undefined}
+        data-loading={isCreating && compact ? "" : undefined}
         onClick={handleClick}
     >
         {isCreating && !compact ? "Earmarking..." : label}
