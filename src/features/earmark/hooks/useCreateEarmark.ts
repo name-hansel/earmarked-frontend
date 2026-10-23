@@ -16,7 +16,9 @@ export function useCreateEarmark(spotifyAlbumId: string) {
                 void queryClient.invalidateQueries({queryKey: earmarkKeys.album(spotifyAlbumId)});
             }
         },
-        onSettled: () =>
-            queryClient.invalidateQueries({queryKey: earmarkKeys.lists()}),
+        onSettled: () => {
+            queryClient.removeQueries({queryKey: earmarkKeys.lists(), type: "inactive"});
+            return queryClient.invalidateQueries({queryKey: earmarkKeys.lists()});
+        },
     });
 }

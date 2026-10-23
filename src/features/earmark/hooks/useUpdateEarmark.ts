@@ -14,6 +14,10 @@ export function useUpdateEarmark(spotifyAlbumId: string) {
         },
         onError: () => {
             void queryClient.invalidateQueries({queryKey: earmarkKeys.lists()})
-        }
+        },
+        onSettled: () => {
+            queryClient.removeQueries({queryKey: earmarkKeys.lists(), type: "inactive"});
+            return queryClient.invalidateQueries({queryKey: earmarkKeys.lists()});
+        },
     });
 }
