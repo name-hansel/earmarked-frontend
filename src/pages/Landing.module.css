@@ -10,7 +10,7 @@
 .title {
     margin: 0;
     font-family: var(--font-hero);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-extrabold);
     font-size: clamp(2.5rem, 12vw, 5rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
