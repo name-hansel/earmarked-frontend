@@ -3,7 +3,6 @@ import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import styles from "./QuickEarmarkButton.module.css";
-import {BookmarkIcon} from "../../../components/Icon.tsx";
 
 export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", compact = false}: {
     spotifyAlbumId: string,
@@ -35,9 +34,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", c
 
     if (albumEarmarkResponse.earmark) {
         if (compact) {
-            return <span className={styles.earmarkedCompact} role="img" aria-label="Earmarked" title="Earmarked">
-            <BookmarkIcon className={styles.earmarkedIcon}/>
-        </span>;
+            return null;
         }
 
         return <span className={styles.earmarked}>Earmarked</span>;
