@@ -22,10 +22,9 @@ export default function SpotifyAlbumSearchCard({album}: {
                 {album.name}
             </Link>
             <span className={styles.artists}>{album.artists.join(", ")}</span>
-            <div className={styles.meta}>
-                <span>{formatReleaseDate(album.releaseDate)}</span>
-                <span className={styles.type}>{album.albumType}</span>
-            </div>
+            <p className={styles.meta}>
+                {[formatReleaseDate(album.releaseDate), album.albumType].filter(Boolean).join(" · ")}
+            </p>
             <div className={styles.action}>
                 <div className={styles.earmarkTools}>
                     <QuickEarmarkButton spotifyAlbumId={album.id} compact/>

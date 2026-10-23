@@ -56,6 +56,6 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", c
         disabled={isCreating}
         onClick={handleClick}
     >
-        {isCreating ? "Earmarking..." : label}
+        {isCreating && !compact ? "Earmarking..." : label}
     </button>
 } 
