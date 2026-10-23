@@ -1,12 +1,10 @@
 import type {SpotifyAlbum} from "../api/spotify.ts";
-import {Link, useLocation} from "react-router";
+import {useLocation} from "react-router";
 import QuickEarmarkButton from "../../earmark/components/QuickEarmarkButton.tsx";
 import styles from "./SpotifyAlbumSearchCard.module.css";
-import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
-import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
-import CoverImage from "../../../components/CoverImage.tsx";
 import QuickDeleteEarmarkButton from "../../earmark/components/QuickDeleteEarmarkButton.tsx";
+import AlbumCard from "../../album/components/AlbumCard.tsx";
 
 export default function SpotifyAlbumSearchCard({album}: {
     album: SpotifyAlbum
@@ -14,30 +12,22 @@ export default function SpotifyAlbumSearchCard({album}: {
     const location = useLocation();
     const albumCover = pickImage(album.images, 300);
 
-    return <li className={styles.card}>
-        <div className={styles.main}>
-            <CoverImage className={styles.cover} image={albumCover} alt={`Cover for ${album.name}`}/>
-            <div className={styles.body}>
-                <Link className={styles.link} to={`/albums/${album.id}`} state={{fromSearch: location.search}}
-                      title={`${album.name} — ${album.artists.join(", ")}`}>
-                    {album.name}
-                </Link>
-                <span className={styles.artists}>{album.artists.join(", ")}</span>
-                <div className={styles.action}>
-                    <div className={styles.earmarkTools}>
-                        <QuickEarmarkButton spotifyAlbumId={album.id} compact/>
-                        <QuickDeleteEarmarkButton spotifyAlbumId={album.id}/>
-                    </div>
-                </div>
+    return <AlbumCard
+        to={`/albums/${album.id}`}
+        linkState={{fromSearch: location.search}}
+        linkTitle={`${album.name} — ${album.artists.join(", ")}`}
+        name={album.name}
+        artists={album.artists.join(", ")}
+        cover={albumCover}
+        coverAlt={`Cover for ${album.name}`}
+        releaseDate={album.releaseDate}
+        albumType={album.albumType}
+        spotifyUrl={album.spotifyUrl}>
+        <div className={styles.action}>
+            <div className={styles.earmarkTools}>
+                <QuickEarmarkButton spotifyAlbumId={album.id} compact/>
+                <QuickDeleteEarmarkButton spotifyAlbumId={album.id}/>
             </div>
         </div>
-        <div className={styles.footer}>
-            <div className={styles.footerEnd}>
-                <p className={styles.meta}>
-                    {[formatReleaseDate(album.releaseDate), album.albumType].filter(Boolean).join(" · ")}
-                </p>
-                <SpotifyLink className={styles.spotify} url={album.spotifyUrl}/>
-            </div>
-        </div>
-    </li>
+    </AlbumCard>
 }
