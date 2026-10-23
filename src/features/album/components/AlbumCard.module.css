@@ -106,6 +106,21 @@
     margin: -0.5rem -0.5rem -0.5rem 0;
 }
 
+.action {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding-top: 0.25rem;
+}
+
+.earmarkTools {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
 @media (min-width: 640px) {
     .cover {
         width: 8rem;

@@ -9,7 +9,7 @@ import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 export default function AlbumCard({
                                       to, linkState, linkTitle, name, artists, unavailable,
                                       cover, coverAlt, releaseDate, albumType, spotifyUrl,
-                                      footerStart, children
+                                      footerStart, actions, children
                                   }: {
     to: string;
     linkState?: LinkProps["state"];
@@ -23,6 +23,7 @@ export default function AlbumCard({
     albumType?: string | undefined;
     spotifyUrl?: string | undefined;
     footerStart?: ReactNode;
+    actions?: ReactNode;
     children?: ReactNode;
 }) {
     const meta = [releaseDate && formatReleaseDate(releaseDate), albumType]
@@ -41,6 +42,11 @@ export default function AlbumCard({
                 </Link>
                 {artists && <span className={styles.artists}>{artists}</span>}
                 {children}
+                {
+                    actions && <div className={styles.action}>
+                        <div className={styles.earmarkTools}>{actions}</div>
+                    </div>
+                }
             </div>
         </div>
         <div className={styles.footer}>

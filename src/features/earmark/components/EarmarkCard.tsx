@@ -4,6 +4,7 @@ import {formatDate} from "../../../utils/formatDate.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import {BookmarkIcon} from "../../../components/Icon.tsx";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
+import QuickDeleteEarmarkButton from "./QuickDeleteEarmarkButton.tsx";
 
 export default function EarmarkCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
@@ -29,6 +30,9 @@ export default function EarmarkCard({earmark}: { earmark: Earmark }) {
                 <span className={styles.srOnly}>Earmarked on </span>
                 {formatDate(earmark.createdAt)}
             </time>
+        }
+        actions={
+            <QuickDeleteEarmarkButton spotifyAlbumId={spotifyAlbumId}/>
         }>
         {earmark.note && <p className={styles.note}>{earmark.note}</p>}
     </AlbumCard>
