@@ -12,7 +12,7 @@ import DeleteAccount from "./features/auth/pages/DeleteAccount.tsx";
 import ChangePassword from "./features/auth/pages/ChangePassword.tsx";
 import ForgotPassword from "./features/auth/pages/ForgotPassword.tsx";
 import ResetPassword from "./features/auth/pages/ResetPassword.tsx";
-import AlbumPage from "./pages/AlbumPage.tsx";
+import AlbumPage from "./pages/album/AlbumPage.tsx";
 import Earmarks from "./features/earmark/pages/Earmarks.tsx";
 import EditEarmarkPage from "./features/earmark/pages/EditEarmarkPage.tsx";
 import '@fontsource/poppins';
