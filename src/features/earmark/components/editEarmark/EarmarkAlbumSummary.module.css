@@ -65,6 +65,13 @@
     color: var(--color-danger);
 }
 
+.meta {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: capitalize;
+}
+
 @media (min-width: 640px) {
     .header {
         gap: 1.25rem;

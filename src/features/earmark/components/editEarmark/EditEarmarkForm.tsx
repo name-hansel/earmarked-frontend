@@ -6,7 +6,7 @@ import {useDeleteEarmark} from "../../hooks/useDeleteEarmark.ts";
 import {useUpdateEarmark} from "../../hooks/useUpdateEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../../lib/errors.ts";
-import EarmarkAlbumSummary from "../EarmarkAlbumSummary.tsx";
+import EarmarkAlbumSummary from "./EarmarkAlbumSummary.tsx";
 import EarmarkNoteField from "./EarmarkNoteField.tsx";
 import formStyles from "../../../../styles/Form.module.css";
 import styles from "./EditEarmarkForm.module.css";
