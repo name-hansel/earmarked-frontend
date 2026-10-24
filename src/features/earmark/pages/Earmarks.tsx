@@ -4,9 +4,12 @@ import styles from "./Earmarks.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
 import {DEFAULT_EARMARK_SORT, EARMARK_SORT_OPTIONS, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
 import {useSearchParams} from "react-router";
+import {useState} from "react";
+import EarmarkSearch from "../components/EarmarkSearch.tsx";
 
 export default function Earmarks() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const [q, setQ] = useState("");
     const param = searchParams.get("sort");
     const sort = isEarmarkSort(param) ? param : DEFAULT_EARMARK_SORT;
 
@@ -65,6 +68,7 @@ export default function Earmarks() {
     return <section className={styles.page}>
         <div className={styles.header}>
             <h1 className={styles.title}>Your earmarks</h1>
+            <EarmarkSearch value={q} onChange={setQ}/>
             {sortDropdown(sort, handleSortChange)}
         </div>
         {renderContent()}

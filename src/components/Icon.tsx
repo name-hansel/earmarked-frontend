@@ -44,3 +44,9 @@ export const PencilIcon = (props: SVGProps<SVGSVGElement>) =>
     <Icon {...props}>
         <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
     </Icon>;
+
+export const SearchIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+    </Icon>;
