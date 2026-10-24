@@ -30,7 +30,9 @@ export default function SpotifySearchAlbumCard({album}: {
         actions={
             <>
                 <QuickEarmarkButton spotifyAlbumId={album.id} compact albumName={album.name}/>
-                <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name}/>
+                {
+                    earmark && <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name} earmark={earmark}/>
+                }
             </>
         }
     />

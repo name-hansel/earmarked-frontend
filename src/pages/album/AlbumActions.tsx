@@ -18,7 +18,10 @@ export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
         </div>
         <div className={styles.iconGroup}>
             <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
-            <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name} withConfirmation/>
+            {
+                data?.earmark && <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name} withConfirmation
+                                                      earmark={data.earmark}/>
+            }
         </div>
     </div>
 }
