@@ -72,7 +72,6 @@ export default function Earmarks() {
                         aria-label="Search earmarks"
                         maxLength={100}
                         autoFocus
-                        onKeyDown={(e) => e.key === "Escape" && toggleSearch()}
                     />
                 </div>
             )}
