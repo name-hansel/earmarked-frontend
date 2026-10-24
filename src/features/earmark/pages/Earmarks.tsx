@@ -58,7 +58,7 @@ export default function Earmarks() {
         <div className={styles.header}>
             <div className={styles.titleRow}>
                 <h1 className={styles.title}>Your earmarks</h1>
-                <EarmarksSearchToggle open={searchOpen} onClick={toggleSearch}/>
+                {!searchOpen && <EarmarksSearchToggle onClick={toggleSearch}/>}
             </div>
             {searchOpen && (
                 <div className={styles.search}>
