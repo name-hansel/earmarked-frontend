@@ -33,6 +33,7 @@ export default function EarmarksContent({sort, q, status, hasNote}: {
     }
 
     const earmarks = data.pages.flatMap(page => page.content);
+    const total = data.pages.at(-1)!.page.totalElements;
 
     if (earmarks.length === 0) {
         if (q) {
@@ -42,11 +43,12 @@ export default function EarmarksContent({sort, q, status, hasNote}: {
         if (status !== undefined || hasNote !== undefined) {
             return <p className={styles.empty}>No earmarks match these filters.</p>;
         }
-        
+
         return <p className={styles.empty}>You haven't earmarked anything yet.</p>;
     }
 
     return <>
+        <p className={styles.count}>{total} {total === 1 ? "earmark" : "earmarks"}</p>
         <ul className={styles.list}>
             {
                 earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
