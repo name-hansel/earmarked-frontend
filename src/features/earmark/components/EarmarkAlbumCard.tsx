@@ -4,14 +4,16 @@ import {pickImage} from "../../../utils/pickImage.ts";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
 import EarmarkDate from "./EarmarkDate.tsx";
 import DeleteEarmarkButton from "./DeleteEarmarkButton.tsx";
+import {useLocation} from "react-router";
 
 export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
-
     const albumCover = album ? pickImage(album.images, 300) : undefined;
+    const location = useLocation();
 
     return <AlbumCard
         to={`/albums/${spotifyAlbumId}`}
+        linkState={{from: location.pathname + location.search}}
         linkTitle={album ? `${album.name} — ${album.artists.join(", ")}` : undefined}
         name={album ? album.name : "Album unavailable"}
         artists={album?.artists.join(", ")}

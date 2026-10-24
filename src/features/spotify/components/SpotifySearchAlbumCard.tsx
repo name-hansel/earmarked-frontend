@@ -14,7 +14,7 @@ export default function SpotifySearchAlbumCard({album}: {
 
     return <AlbumCard
         to={`/albums/${album.id}`}
-        linkState={{fromSearch: location.search}}
+        linkState={{from: location.pathname + location.search}}
         linkTitle={`${album.name} — ${album.artists.join(", ")}`}
         name={album.name}
         artists={album.artists.join(", ")}

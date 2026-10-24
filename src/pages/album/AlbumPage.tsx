@@ -16,8 +16,7 @@ export default function AlbumPage() {
     const location = useLocation();
     const {spotifyAlbumId} = useParams<{ spotifyAlbumId: string }>();
     const {data: album, isPending, isError, error} = useSpotifyAlbum(spotifyAlbumId);
-    const fromSearch = (location.state as { fromSearch?: string })?.fromSearch ?? "";
-    const backTo = `/${fromSearch}`
+    const backTo = (location.state as { from?: string } | null)?.from ?? "/";
 
     if (isPending) {
         return <section className={styles.page}>
