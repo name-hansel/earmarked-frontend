@@ -11,6 +11,7 @@ export interface Earmark {
     createdAt: string;
     album: SpotifyAlbum | null;
     listenedAt: string | null;
+    listened: boolean;
 }
 
 interface AlbumEarmarkResponse {
@@ -24,8 +25,8 @@ export async function createEarmark(spotifyAlbumId: string, note?: string): Prom
     return response.data;
 }
 
-export async function updateEarmark(earmarkId: string, note: string, listenedAt: string | null): Promise<Earmark> {
-    const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note, listenedAt});
+export async function updateEarmark(earmarkId: string, note: string, listenedAt: string | null, listened: boolean): Promise<Earmark> {
+    const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note, listenedAt, listened});
     return response.data;
 }
 
@@ -61,8 +62,8 @@ export async function fetchEarmarks(
     return response.data;
 }
 
-export async function updateListened(earmarkId: string, listenedAt: string | null) {
-    const response = await api.patch<Earmark>(`/earmark/${earmarkId}/listened`, {listenedAt});
+export async function updateListened(earmarkId: string, listened: boolean) {
+    const response = await api.patch<Earmark>(`/earmark/${earmarkId}/listened`, {listened});
 
     return response.data;
 }

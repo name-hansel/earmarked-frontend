@@ -1,5 +1,4 @@
 import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
-import {todayLocalDate} from "../../../../utils/todayLocalDate.ts";
 import {useUpdateListened} from "../../hooks/useUpdateListened.ts";
 import {toast} from "sonner";
 import {getEarmarkUpdatedAsListened, getEarmarkUpdatedAsToListen} from "../../../../utils/formatEarmarkToastMessage.ts";
@@ -17,15 +16,16 @@ export default function ListenedEarmarkButton({spotifyAlbumId, albumName}: {
 
     if (!earmark) return null;
 
-    const isListened = earmark.listenedAt !== null;
-
     const updateListened = () => {
         mutate({
             earmarkId: earmark.id,
-            listenedAt: isListened ? null : todayLocalDate(),
+            listened: !earmark.listened
         }, {
-            onSuccess: () => toast.success(earmark.listenedAt ? getEarmarkUpdatedAsToListen(albumName) : getEarmarkUpdatedAsListened(albumName)),
-            onError: (error) => toast.error(getErrorMessage(error))
+            onSuccess: (updated) => toast.success(
+                updated.listened
+                    ? getEarmarkUpdatedAsListened(albumName)
+                    : getEarmarkUpdatedAsToListen(albumName)
+            ), onError: (error) => toast.error(getErrorMessage(error))
         });
     };
 
@@ -35,10 +35,10 @@ export default function ListenedEarmarkButton({spotifyAlbumId, albumName}: {
             className={styles.button}
             disabled={isPending}
             onClick={updateListened}
-            aria-label={isListened ? "Move back to To listen" : "Mark as listened"}
+            aria-label={earmark.listened ? "Move back to To listen" : "Mark as listened"}
         >
             {isPending ? <span className={styles.spinner} aria-hidden="true"/> : <ArrowRightIcon/>}
-            {isListened ? "To listen" : "Listened"}
+            {earmark.listened ? "To listen" : "Listened"}
         </button>
     );
 }

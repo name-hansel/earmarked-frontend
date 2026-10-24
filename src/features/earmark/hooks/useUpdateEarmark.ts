@@ -6,9 +6,9 @@ export function useUpdateEarmark(spotifyAlbumId: string) {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({earmarkId, note, listenedAt}: {
-            earmarkId: string, note: string, listenedAt: string | null
-        }) => updateEarmark(earmarkId, note, listenedAt),
+        mutationFn: ({earmarkId, note, listenedAt, listened}: {
+            earmarkId: string, note: string, listenedAt: string | null, listened: boolean
+        }) => updateEarmark(earmarkId, note, listenedAt, listened),
         onSuccess: (earmark) => {
             queryClient.setQueryData(earmarkKeys.album(spotifyAlbumId), {earmark});
         },

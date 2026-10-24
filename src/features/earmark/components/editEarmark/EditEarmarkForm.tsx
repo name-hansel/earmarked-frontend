@@ -26,6 +26,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     const albumPath = `/albums/${spotifyAlbumId}`;
     const [note, setNote] = useState(earmark?.note ?? "");
     const [listenedAt, setListenedAt] = useState(earmark?.listenedAt ?? "");
+    const [listened, setListened] = useState(earmark?.listened ?? false);
     const navigate = useNavigate();
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -41,7 +42,12 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         const trimmedNote = note.trim();
 
         if (earmark) {
-            updateEarmark({earmarkId: earmark.id, note: trimmedNote, listenedAt: listenedAt || null}, {
+            updateEarmark({
+                earmarkId: earmark.id,
+                note: trimmedNote,
+                listened,
+                listenedAt: listenedAt || null,
+            }, {
                 onSuccess: () => {
                     toast.success(getEarmarkUpdatedMessage(album?.name));
                     navigate(albumPath);
@@ -74,11 +80,20 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         });
     }
 
+    function handleListenedChange(next: boolean) {
+        setListened(next);
+        if (!next) setListenedAt("");
+    }
+
     const submitLabel = earmark
         ? (isUpdating ? "Saving..." : "Save")
         : (isCreating ? "Earmarking..." : "Earmark");
 
-    const isUnchanged = earmark ? note === (earmark.note ?? "") && listenedAt === (earmark.listenedAt ?? "") : false;
+    const isUnchanged = earmark
+        ? note === (earmark.note ?? "")
+        && listened === earmark.listened
+        && listenedAt === (earmark.listenedAt ?? "")
+        : false;
 
     return <section className={styles.earmarkForm}>
         <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
@@ -88,7 +103,10 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <h1 className={styles.heading}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
-                {earmark && <EarmarkListenedOnDatePicker listenedAt={listenedAt} setListenedAt={setListenedAt}/>}
+                {earmark && <EarmarkListenedOnDatePicker listened={listened}
+                                                         setListened={handleListenedChange}
+                                                         listenedAt={listenedAt}
+                                                         setListenedAt={setListenedAt}/>}
                 <div className={styles.note}>
                     <EarmarkNoteField value={note} onChange={setNote}/>
                 </div>

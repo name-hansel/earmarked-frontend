@@ -1,27 +1,34 @@
 import {todayLocalDate} from "../../../../utils/todayLocalDate.ts";
 import styles from "./EarmarkListenedOnDatePicker.module.css"
 
-export default function EarmarkListenedOnDatePicker({listenedAt, setListenedAt}: {
+export default function EarmarkListenedOnDatePicker({listenedAt, setListenedAt, listened, setListened}: {
     listenedAt: string | undefined,
-    setListenedAt: (value: (((prevState: string) => string) | string)) => void
+    setListenedAt: (value: (((prevState: string) => string) | string)) => void,
+    listened: boolean,
+    setListened: (next: boolean) => void
 }) {
-    return <div className={styles.dateField}>
-        <label className={styles.dateLabel} htmlFor="listenedAt">Listened on</label>
-        <div className={styles.dateRow}>
+    return <div className={styles.listenedField}>
+        <label className={styles.checkbox}>
             <input
-                id="listenedAt"
-                className={styles.dateInput}
-                type="date"
-                value={listenedAt}
-                max={todayLocalDate()}
-                onChange={(e) => setListenedAt(e.target.value)}
+                type="checkbox"
+                checked={listened}
+                onChange={(e) => setListened(e.target.checked)}
             />
-            {
-                listenedAt &&
-                <button className={styles.dateClear} type="button" onClick={() => setListenedAt("")}>
-                    Clear
-                </button>
-            }
-        </div>
+            Listened
+        </label>
+
+        {listened && (
+            <div className={styles.dateField}>
+                <label className={styles.dateLabel} htmlFor="listenedAt">Listened on (optional)</label>
+                <input
+                    id="listenedAt"
+                    className={styles.dateInput}
+                    type="date"
+                    value={listenedAt}
+                    max={todayLocalDate()}
+                    onChange={(e) => setListenedAt(e.target.value)}
+                />
+            </div>
+        )}
     </div>
 }

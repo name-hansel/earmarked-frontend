@@ -5,6 +5,8 @@ export const EARMARK_SORT_OPTIONS = [
     {value: "ALBUM_NAME_DESC", label: "Album name (Z–A)"},
     {value: "RELEASE_DATE_DESC", label: "Release date (newest)"},
     {value: "RELEASE_DATE_ASC", label: "Release date (oldest)"},
+    {value: "LISTENED_DESC", label: "Listened (newest)"},
+    {value: "LISTENED_ASC", label: "Listened (oldest)"},
 ] as const;
 
 export type EarmarkSort = (typeof EARMARK_SORT_OPTIONS)[number]["value"];
