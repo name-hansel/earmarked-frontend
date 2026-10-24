@@ -20,12 +20,16 @@
     color: var(--color-text-muted);
 }
 
+.input::-webkit-search-cancel-button {
+    appearance: none;
+}
+
 .input:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
 }
 
-.close {
+.clear {
     position: absolute;
     top: 50%;
     right: 0.5rem;
@@ -43,16 +47,17 @@
     cursor: pointer;
 }
 
-.close:hover {
+.clear:hover {
     color: var(--color-primary);
 }
 
-.close:focus-visible {
+.clear:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 640px) {
+
     .field {
         max-width: 40rem;
     }

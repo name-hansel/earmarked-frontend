@@ -5,8 +5,8 @@ import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
 import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
 import {useState} from "react";
-import {EarmarkSearchInput} from "../components/earmarks/EarmarksSearchInput.tsx";
 import EarmarksSearchToggle from "../components/earmarks/EarmarksSearchToggle.tsx";
+import SearchInput from "../../../components/search/SearchInput.tsx";
 
 export default function Earmarks() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -62,7 +62,18 @@ export default function Earmarks() {
             </div>
             {searchOpen && (
                 <div className={styles.search}>
-                    <EarmarkSearchInput value={searchInput} onChange={handleSearchChange} onClose={toggleSearch}/>
+                    <SearchInput
+                        value={searchInput}
+                        onChange={handleSearchChange}
+                        onClear={toggleSearch}
+                        clearLabel="Close search"
+                        alwaysShowClear
+                        placeholder="Search album, artist or note"
+                        aria-label="Search earmarks"
+                        maxLength={100}
+                        autoFocus
+                        onKeyDown={(e) => e.key === "Escape" && toggleSearch()}
+                    />
                 </div>
             )}
             <div className={styles.sort}>
