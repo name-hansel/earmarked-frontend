@@ -1,7 +1,7 @@
 import type {ComponentProps, ReactNode} from "react";
 import {Link, type LinkProps} from "react-router";
 import styles from "./AlbumCard.module.css";
-import CoverImage from "../../../components/CoverImage.tsx";
+import CoverImage from "../../../components/image/CoverImage.tsx";
 import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 

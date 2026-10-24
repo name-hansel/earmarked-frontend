@@ -2,7 +2,7 @@ import {useRecentEarmarks} from "../hooks/useFetchRecentEarmarks.ts";
 import EarmarkAlbumCard from "./EarmarkAlbumCard.tsx";
 import {Link} from "react-router";
 import styles from "./RecentEarmarks.module.css";
-import PageLoader from "../../../components/PageLoader.tsx";
+import PageLoader from "../../../components/page-loader/PageLoader.tsx";
 
 export default function RecentEarmarks() {
     const {data: earmarks, isPending, isError, refetch} = useRecentEarmarks();

@@ -5,7 +5,7 @@ import SpotifySearchAlbumCard from "./SpotifySearchAlbumCard.tsx";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 import {useSearchParams} from "react-router";
 import styles from "./SpotifyAlbumSearch.module.css";
-import PageLoader from "../../../components/PageLoader.tsx";
+import PageLoader from "../../../components/page-loader/PageLoader.tsx";
 import {CloseIcon} from "../../../components/Icon.tsx";
 
 export default function SpotifyAlbumSearch() {

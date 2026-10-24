@@ -1,4 +1,4 @@
-import type {AlbumImage} from "../features/spotify/api/spotify.ts";
+import type {AlbumImage} from "../../features/spotify/api/spotify.ts";
 import {useState} from "react";
 import styles from "./CoverImage.module.css"
 

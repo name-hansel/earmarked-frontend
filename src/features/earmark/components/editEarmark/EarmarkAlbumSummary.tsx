@@ -3,8 +3,8 @@ import styles from "./EarmarkAlbumSummary.module.css";
 import {formatReleaseDate} from "../../../../utils/formatReleaseDate.ts";
 import {pickImage} from "../../../../utils/pickImage.ts";
 import SpotifyLogoLink from "../../../../components/spotify/SpotifyLogoLink.tsx";
-import PageLoader from "../../../../components/PageLoader.tsx";
-import CoverImage from "../../../../components/CoverImage.tsx";
+import PageLoader from "../../../../components/page-loader/PageLoader.tsx";
+import CoverImage from "../../../../components/image/CoverImage.tsx";
 
 export default function EarmarkAlbumSummary({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data: album, isPending, isError} = useSpotifyAlbum(spotifyAlbumId);

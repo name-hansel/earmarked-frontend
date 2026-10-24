@@ -1,4 +1,4 @@
-import PageLoader from "../../../../components/PageLoader.tsx";
+import PageLoader from "../../../../components/page-loader/PageLoader.tsx";
 import {useFetchEarmarks} from "../../hooks/useFetchEarmarks.ts";
 import EarmarkAlbumCard from "../EarmarkAlbumCard.tsx";
 import type {EarmarkSort} from "../../utils/earmarkSort.ts";

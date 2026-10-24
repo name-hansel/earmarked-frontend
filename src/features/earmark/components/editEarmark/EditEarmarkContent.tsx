@@ -1,7 +1,7 @@
 import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import EditEarmarkForm from "./EditEarmarkForm.tsx";
 import styles from "./EditEarmarkContent.module.css";
-import PageLoader from "../../../../components/PageLoader.tsx";
+import PageLoader from "../../../../components/page-loader/PageLoader.tsx";
 
 export default function EditEarmarkContent({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const {data, isPending, isError, refetch} = useAlbumEarmark(spotifyAlbumId);
