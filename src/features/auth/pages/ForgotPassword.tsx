@@ -5,8 +5,11 @@ import {Link, useNavigate} from "react-router";
 import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {type SubmitEvent} from "react";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function ForgotPassword() {
+    useDocumentTitle("Forgot password")
+
     const navigate = useNavigate();
     const forgotPasswordMutation = useMutation({
         mutationFn: forgotPassword,

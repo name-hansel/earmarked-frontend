@@ -6,8 +6,11 @@ import {getErrorCode, getErrorMessage} from "../../../lib/errors.ts";
 import {currentUserKey} from "../queryKeys.ts";
 import {toast} from "sonner";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function Login() {
+    useDocumentTitle("Login")
+
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 

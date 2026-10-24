@@ -5,8 +5,11 @@ import {Link, useNavigate, useSearchParams} from "react-router";
 import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {type SubmitEvent, useState} from "react";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function ResetPassword() {
+    useDocumentTitle("Reset password")
+
     const navigate = useNavigate();
     const [formError, setFormError] = useState<string | null>(null);
     const [searchParams] = useSearchParams();

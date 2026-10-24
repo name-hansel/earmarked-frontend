@@ -5,8 +5,11 @@ import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import {useNavigate} from "react-router";
 import {toast} from "sonner";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function Register() {
+    useDocumentTitle("Register")
+
     const [formError, setFormError] = useState<string | null>(null);
     const navigate = useNavigate();
     const registerMutation = useMutation({
@@ -41,7 +44,7 @@ export default function Register() {
     }
 
     return <section className={styles.card}>
-        <h1 className={styles.title}>Create an account</h1>
+        <h1 className={styles.title}>Register</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
             {/* Username */}
             <div className={styles.field}>

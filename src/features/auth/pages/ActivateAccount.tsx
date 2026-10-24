@@ -5,8 +5,11 @@ import {useMutation} from "@tanstack/react-query";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function ActivateAccount() {
+    useDocumentTitle("Activating account")
+
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const token = searchParams.get("token");

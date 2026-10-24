@@ -11,12 +11,15 @@ import CoverImage from "../../components/image/CoverImage.tsx";
 import AlbumTracks from "./AlbumTracks.tsx";
 import AlbumActions from "./AlbumActions.tsx";
 import AlbumMetadata from "./AlbumMetadata.tsx";
+import {useDocumentTitle} from "../../hooks/useDocumentTitle.ts";
 
 export default function AlbumPage() {
     const location = useLocation();
     const {spotifyAlbumId} = useParams<{ spotifyAlbumId: string }>();
     const {data: album, isPending, isError, error} = useSpotifyAlbum(spotifyAlbumId);
     const backTo = (location.state as { from?: string } | null)?.from ?? "/";
+
+    useDocumentTitle(album?.name)
 
     if (isPending) {
         return <section className={styles.page}>

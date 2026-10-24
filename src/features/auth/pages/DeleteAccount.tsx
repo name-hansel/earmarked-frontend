@@ -6,8 +6,11 @@ import {type SubmitEvent} from "react";
 import {getErrorMessage} from "../../../lib/errors.ts";
 import {currentUserKey} from "../queryKeys.ts";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function DeleteAccount() {
+    useDocumentTitle("Delete account")
+
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 

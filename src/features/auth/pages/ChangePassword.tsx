@@ -4,8 +4,11 @@ import {toast} from "sonner";
 import {type SubmitEvent, useState} from "react";
 import {getErrorMessage, getFieldErrors} from "../../../lib/errors.ts";
 import styles from "../../../styles/Form.module.css";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function ChangePassword() {
+    useDocumentTitle("Change password")
+
     const [formError, setFormError] = useState<string | null>(null);
     const changePasswordMutation = useMutation({
         mutationFn: changePassword,

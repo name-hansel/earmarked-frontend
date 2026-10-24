@@ -9,8 +9,11 @@ import EarmarksSearchToggle from "../components/earmarks/EarmarksSearchToggle.ts
 import SearchInput from "../../../components/search/SearchInput.tsx";
 import {type EarmarkStatus, parseHasNote, parseStatus} from "../utils/earmarkFilters.ts";
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
+import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 
 export default function Earmarks() {
+    useDocumentTitle("Your earmarks")
+
     const [searchParams, setSearchParams] = useSearchParams();
 
     const sortInput = searchParams.get("sort");
