@@ -6,6 +6,7 @@ import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 import {useSearchParams} from "react-router";
 import styles from "./SpotifyAlbumSearch.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
+import {CloseIcon} from "../../../components/Icon.tsx";
 
 export default function SpotifyAlbumSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -41,7 +42,10 @@ export default function SpotifyAlbumSearch() {
             <input className={styles.input} type="search" value={input} onChange={(e) => setInput(e.target.value)}
                    placeholder="Search albums..." aria-label="Search albums"/>
             {
-                input && <button className={styles.clear} type="button" onClick={() => setInput("")}>Clear</button>
+                input && <button className={styles.clear} type="button" onClick={() => setInput("")}
+                                 aria-label="Clear search">
+                    <CloseIcon/>
+                </button>
             }
         </div>
 
