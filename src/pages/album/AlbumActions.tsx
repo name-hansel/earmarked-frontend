@@ -13,7 +13,7 @@ export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
         </div>
         <div className={styles.iconGroup}>
             <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
-            <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name}/>
+            <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name} withConfirmation/>
         </div>
     </div>
 }

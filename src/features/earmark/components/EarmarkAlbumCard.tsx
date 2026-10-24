@@ -2,8 +2,8 @@ import type {Earmark} from "../api/earmark.ts";
 import styles from "./EarmarkAlbumCard.module.css";
 import {pickImage} from "../../../utils/pickImage.ts";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
-import QuickDeleteEarmarkButton from "./QuickDeleteEarmarkButton.tsx";
 import EarmarkDate from "./EarmarkDate.tsx";
+import DeleteEarmarkButton from "./DeleteEarmarkButton.tsx";
 
 export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
@@ -23,7 +23,7 @@ export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
         spotifyUrl={album?.spotifyUrl}
         footerStart={<EarmarkDate spotifyAlbumId={spotifyAlbumId} showIcon/>}
         actions={
-            <QuickDeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name}/>
+            <DeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name}/>
         }>
         {earmark.note && <p className={styles.note}>{earmark.note}</p>}
     </AlbumCard>
