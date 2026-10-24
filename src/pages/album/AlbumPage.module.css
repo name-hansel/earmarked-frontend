@@ -93,6 +93,7 @@
     max-width: 24rem;
     margin-top: 1rem;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .tracks {
