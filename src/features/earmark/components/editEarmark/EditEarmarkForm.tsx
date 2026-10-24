@@ -115,7 +115,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                             disabled={isBusy || isUnchanged}>{submitLabel}</button>
                     <Link className={styles.cancel} to={albumPath}>Cancel</Link>
                     {earmark &&
-                        <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}/>}
+                        <DeleteEarmarkDialog onConfirm={handleDelete} isDeleting={isDeleting} disabled={isBusy}
+                                             hasNote={Boolean(earmark.note)}/>}
                 </div>
             </form>
         </div>

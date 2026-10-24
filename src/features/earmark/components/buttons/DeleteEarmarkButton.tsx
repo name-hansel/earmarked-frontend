@@ -25,7 +25,8 @@ export default function DeleteEarmarkButton({spotifyAlbumId, albumName, withConf
     }
 
     if (withConfirmation) {
-        return <DeleteEarmarkDialog onConfirm={handleConfirm} isDeleting={isPending} disabled={isPending}/>
+        return <DeleteEarmarkDialog onConfirm={handleConfirm} isDeleting={isPending} disabled={isPending}
+                                    hasNote={Boolean(earmark.note)}/>
     }
 
     return <button

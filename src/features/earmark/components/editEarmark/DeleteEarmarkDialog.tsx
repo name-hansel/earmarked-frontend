@@ -2,10 +2,11 @@ import {useId, useRef} from "react";
 import styles from "./DeleteEarmarkDialog.module.css";
 import {CloseIcon, TrashIcon} from "../../../../components/Icon.tsx";
 
-export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
+export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled, hasNote}: {
     onConfirm: () => void;
     isDeleting: boolean;
     disabled: boolean;
+    hasNote: boolean;
 }) {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const titleId = useId();
@@ -24,7 +25,9 @@ export default function DeleteEarmarkDialog({onConfirm, isDeleting, disabled}: {
                     <CloseIcon className={styles.closeIcon}/>
                 </button>
             </div>
-            <p className={styles.text}>This will also remove your note.</p>
+            {
+                hasNote && <p className={styles.text}>This will also remove your note.</p>
+            }
             <div className={styles.actions}>
                 <button className={styles.confirm} type="button" onClick={onConfirm} disabled={isDeleting}>
                     {isDeleting ? "Deleting..." : "Delete"}
