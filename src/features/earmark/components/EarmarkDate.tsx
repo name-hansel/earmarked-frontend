@@ -1,5 +1,5 @@
 import {formatDate} from "../../../utils/formatDate.ts";
-import {BookmarkIcon} from "../../../components/Icon.tsx";
+import {BookmarkIcon, HeadphonesIcon} from "../../../components/Icon.tsx";
 import styles from "./EarmarkDate.module.css"
 import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
 
@@ -10,13 +10,20 @@ export default function EarmarkDate({spotifyAlbumId, showIcon = true}: { spotify
         return null;
     }
 
-    const createdAt = data.earmark.createdAt;
+    const {createdAt, listenedAt} = data.earmark;
+    const date = listenedAt ?? createdAt;
+    const label = listenedAt ? "Listened on" : "Earmarked on";
+    const formatted = listenedAt
+        ? formatDate(`${listenedAt}T00:00:00`)
+        : formatDate(createdAt);
 
     return <time className={styles.date}
-                 dateTime={createdAt}
-                 title={`Earmarked on ${formatDate(createdAt)}`}>
-        {showIcon && <BookmarkIcon className={styles.icon}/>}
-        <span className={styles.srOnly}>Earmarked on </span>
-        {formatDate(createdAt)}
+                 dateTime={date}
+                 title={`${label} ${formatted}`}>
+        {showIcon && (listenedAt
+            ? <HeadphonesIcon className={styles.icon}/>
+            : <BookmarkIcon className={styles.icon}/>)}
+        <span className={showIcon ? styles.srOnly : undefined}>{label} </span>
+        {formatted}
     </time>
 }
