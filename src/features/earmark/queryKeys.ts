@@ -5,5 +5,5 @@ export const earmarkKeys = {
     lists: () => [...earmarkKeys.all, "list"] as const,
     album: (spotifyAlbumId: string) => [...earmarkKeys.all, "album", spotifyAlbumId] as const,
     recent: (size: number) => [...earmarkKeys.lists(), "recent", size] as const,
-    paged: (sort: EarmarkSort) => [...earmarkKeys.lists(), "paged", sort] as const,
+    paged: (sort: EarmarkSort, q: string) => [...earmarkKeys.lists(), "paged", sort, q] as const,
 }

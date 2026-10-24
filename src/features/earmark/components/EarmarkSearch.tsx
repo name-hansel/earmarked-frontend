@@ -10,7 +10,7 @@ export default function EarmarkSearch({value, onChange}: {
     value: string;
     onChange: (value: string) => void;
 }) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(value !== "");
 
     function toggle() {
         if (open) {

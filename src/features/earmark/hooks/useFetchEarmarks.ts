@@ -5,10 +5,10 @@ import type {EarmarkSort} from "../utils/earmarkSort.ts";
 
 const PAGE_SIZE = 20;
 
-export function useFetchEarmarks(sort: EarmarkSort) {
+export function useFetchEarmarks(sort: EarmarkSort, q: string) {
     return useInfiniteQuery({
-        queryKey: earmarkKeys.paged(sort),
-        queryFn: ({pageParam}) => fetchEarmarks(pageParam, PAGE_SIZE, sort),
+        queryKey: earmarkKeys.paged(sort, q),
+        queryFn: ({pageParam}) => fetchEarmarks(pageParam, PAGE_SIZE, sort, q),
         initialPageParam: 0,
         getNextPageParam: (lastPage) => {
             const {number, totalPages} = lastPage.page;

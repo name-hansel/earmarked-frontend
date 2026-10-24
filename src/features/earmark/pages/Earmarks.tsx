@@ -4,14 +4,17 @@ import styles from "./Earmarks.module.css";
 import PageLoader from "../../../components/PageLoader.tsx";
 import {DEFAULT_EARMARK_SORT, EARMARK_SORT_OPTIONS, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
 import {useSearchParams} from "react-router";
-import {useState} from "react";
 import EarmarkSearch from "../components/EarmarkSearch.tsx";
+import {useDebounce} from "../../../hooks/useDebounce.ts";
 
 export default function Earmarks() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [q, setQ] = useState("");
-    const param = searchParams.get("sort");
-    const sort = isEarmarkSort(param) ? param : DEFAULT_EARMARK_SORT;
+
+    const sortInput = searchParams.get("sort");
+    const searchInput = searchParams.get("q") ?? "";
+    const debouncedQ = useDebounce(searchInput.trim(), 500);
+
+    const sort = isEarmarkSort(sortInput) ? sortInput : DEFAULT_EARMARK_SORT;
 
     const {
         data,
@@ -21,7 +24,7 @@ export default function Earmarks() {
         hasNextPage,
         isFetchingNextPage,
         fetchNextPage
-    } = useFetchEarmarks(sort);
+    } = useFetchEarmarks(sort, debouncedQ);
 
     function renderContent() {
         if (isPending) {
@@ -58,17 +61,36 @@ export default function Earmarks() {
         setSearchParams(
             (prev) => {
                 const params = new URLSearchParams(prev);
-                params.set("sort", next);
+
+                if (next) {
+                    params.set("sort", next);
+                } else {
+                    params.delete("sort");
+                }
+
                 return params;
             },
-            {replace: true},
-        );
+            {replace: true});
+    }
+
+    function handleSearchChange(next: string) {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (next) {
+                params.set("q", next);
+            } else {
+                params.delete("q");
+            }
+
+            return params;
+        }, {replace: true});
     }
 
     return <section className={styles.page}>
         <div className={styles.header}>
             <h1 className={styles.title}>Your earmarks</h1>
-            <EarmarkSearch value={q} onChange={setQ}/>
+            <EarmarkSearch value={searchInput} onChange={handleSearchChange}/>
             {sortDropdown(sort, handleSortChange)}
         </div>
         {renderContent()}

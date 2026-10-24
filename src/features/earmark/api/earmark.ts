@@ -44,9 +44,9 @@ export async function fetchRecentEarmarks(size: number): Promise<Earmark[]> {
     return response.data.content;
 }
 
-export async function fetchEarmarks(page: number, size: number, sort: EarmarkSort) {
+export async function fetchEarmarks(page: number, size: number, sort: EarmarkSort, q: string) {
     const response = await api.get<PageResponse<Earmark>>("/earmark", {
-        params: {page, size, sort},
+        params: {page, size, sort, q: q || undefined},
     });
 
     return response.data;
