@@ -1,0 +1,29 @@
+.input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.6rem 0.75rem;
+    font: inherit;
+    font-size: 1rem; /* 16px stops iOS zooming on focus */
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+}
+
+.input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.input:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+@media (min-width: 40rem) {
+    .input {
+        max-width: 24rem;
+    }
+}

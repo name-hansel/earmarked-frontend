@@ -1,16 +1,20 @@
 import styles from "./Earmarks.module.css";
 import {DEFAULT_EARMARK_SORT, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
 import {useSearchParams} from "react-router";
-import EarmarkSearch from "../components/EarmarkSearch.tsx";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
 import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
+import {useState} from "react";
+import {EarmarkSearchInput} from "../components/earmarks/EarmarksSearchInput.tsx";
+import EarmarksSearchToggle from "../components/earmarks/EarmarksSearchToggle.tsx";
 
 export default function Earmarks() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const sortInput = searchParams.get("sort");
     const searchInput = searchParams.get("q") ?? "";
+
+    const [searchOpen, setSearchOpen] = useState(searchInput !== "");
     const debouncedQ = useDebounce(searchInput.trim(), 500);
 
     const sort = isEarmarkSort(sortInput) ? sortInput : DEFAULT_EARMARK_SORT;
@@ -45,13 +49,23 @@ export default function Earmarks() {
         }, {replace: true});
     }
 
+    function toggleSearch() {
+        if (searchOpen) handleSearchChange("");
+        setSearchOpen(!searchOpen);
+    }
+
     return <section className={styles.page}>
         <div className={styles.header}>
-            <h1 className={styles.title}>Your earmarks</h1>
-            <EarmarkSearch value={searchInput} onChange={handleSearchChange}/>
+            <div className={styles.titleRow}>
+                <h1 className={styles.title}>Your earmarks</h1>
+                <EarmarksSearchToggle open={searchOpen} onClick={toggleSearch}/>
+            </div>
             <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
         </div>
-        <EarmarksContent sort={sort} debouncedQ={debouncedQ}/>
+        {searchOpen && (
+            <EarmarkSearchInput value={searchInput} onChange={handleSearchChange} onClose={toggleSearch}/>
+        )}
+        <EarmarksContent sort={sort} q={debouncedQ}/>
     </section>
 }
 

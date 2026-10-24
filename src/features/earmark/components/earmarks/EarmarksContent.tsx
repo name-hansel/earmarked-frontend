@@ -4,9 +4,9 @@ import EarmarkAlbumCard from "../EarmarkAlbumCard.tsx";
 import type {EarmarkSort} from "../../utils/earmarkSort.ts";
 import styles from "./EarmarksContent.module.css"
 
-export default function EarmarksContent({sort, debouncedQ}: {
+export default function EarmarksContent({sort, q}: {
     sort: EarmarkSort;
-    debouncedQ: string;
+    q: string;
 }) {
     const {
         data,
@@ -16,7 +16,7 @@ export default function EarmarksContent({sort, debouncedQ}: {
         hasNextPage,
         isFetchingNextPage,
         fetchNextPage
-    } = useFetchEarmarks(sort, debouncedQ);
+    } = useFetchEarmarks(sort, q);
 
     if (isPending) {
         return <PageLoader/>
@@ -32,13 +32,17 @@ export default function EarmarksContent({sort, debouncedQ}: {
     const earmarks = data.pages.flatMap(page => page.content);
 
     if (earmarks.length === 0) {
-        return <p className={styles.empty}>No earmarks yet. Search for an album to add one.</p>;
+        return q
+            ? <p className={styles.empty}>No earmarks match “{q}”.</p>
+            : <p className={styles.empty}>You haven't earmarked anything yet.</p>;
     }
 
     return <>
-        <ul className={styles.list}>{
-            earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
-        }</ul>
+        <ul className={styles.list}>
+            {
+                earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
+            }
+        </ul>
         {
             hasNextPage && <button className={styles.loadMore} type="button" onClick={() => fetchNextPage()}
                                    disabled={isFetchingNextPage}>
