@@ -1,20 +1,17 @@
-import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import {useUpdateListened} from "../../hooks/useUpdateListened.ts";
 import {toast} from "sonner";
 import {getEarmarkUpdatedAsListened, getEarmarkUpdatedAsToListen} from "../../../../utils/formatEarmarkToastMessage.ts";
 import {getErrorMessage} from "../../../../lib/errors.ts";
 import styles from "./ListenedEarmarkButton.module.css"
 import {ArrowRightIcon} from "../../../../components/Icon.tsx";
+import type {Earmark} from "../../api/earmark.ts";
 
-export default function ListenedEarmarkButton({spotifyAlbumId, albumName}: {
+export default function ListenedEarmarkButton({spotifyAlbumId, albumName, earmark}: {
     spotifyAlbumId: string,
-    albumName: string
+    albumName: string,
+    earmark: Earmark
 }) {
-    const {data} = useAlbumEarmark(spotifyAlbumId);
     const {mutate, isPending} = useUpdateListened(spotifyAlbumId);
-    const earmark = data?.earmark;
-
-    if (!earmark) return null;
 
     const updateListened = () => {
         mutate({

@@ -14,7 +14,10 @@ export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
         <div className={styles.earmarkStatus}>
             {data?.earmark && <EarmarkDate earmark={data.earmark} showIcon={false}/>}
             <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark" albumName={album.name}/>
-            <ListenedEarmarkButton spotifyAlbumId={album.id} albumName={album.name}/>
+            {
+                data?.earmark &&
+                <ListenedEarmarkButton spotifyAlbumId={album.id} albumName={album.name} earmark={data.earmark}/>
+            }
         </div>
         <div className={styles.iconGroup}>
             <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
