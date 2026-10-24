@@ -60,11 +60,15 @@ export default function Earmarks() {
                 <h1 className={styles.title}>Your earmarks</h1>
                 <EarmarksSearchToggle open={searchOpen} onClick={toggleSearch}/>
             </div>
-            <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
+            {searchOpen && (
+                <div className={styles.search}>
+                    <EarmarkSearchInput value={searchInput} onChange={handleSearchChange} onClose={toggleSearch}/>
+                </div>
+            )}
+            <div className={styles.sort}>
+                <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
+            </div>
         </div>
-        {searchOpen && (
-            <EarmarkSearchInput value={searchInput} onChange={handleSearchChange} onClose={toggleSearch}/>
-        )}
         <EarmarksContent sort={sort} q={debouncedQ}/>
     </section>
 }

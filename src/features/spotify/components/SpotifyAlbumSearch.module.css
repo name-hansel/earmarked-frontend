@@ -6,23 +6,24 @@
 
 .field {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 0.5rem;
     width: 100%;
-    max-width: 40rem;
 }
 
 .input {
+    box-sizing: border-box;
+    display: block;
     flex: 1;
     min-width: 0;
-    min-height: 3rem;
-    padding: 0 1.25rem;
-    box-sizing: border-box;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
     font: inherit;
+    font-size: 1rem;
     color: var(--color-text);
     background-color: var(--color-surface);
-    border: 2px solid var(--color-border);
-    border-radius: 999px;
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
 }
 
 .input::placeholder {
@@ -39,20 +40,20 @@
 }
 
 .clear {
-    min-height: 2.75rem;
-    padding: 0 1rem;
-    border: 2px solid var(--color-border);
-    border-radius: 999px;
+    flex-shrink: 0;
+    padding: 0 0.75rem;
     font: inherit;
-    font-weight: var(--font-weight-medium);
+    font-size: 1rem;
     color: var(--color-text);
-    background-color: transparent;
+    background-color: var(--color-surface);
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: background-color 150ms ease;
 }
 
 .clear:hover {
-    background-color: var(--color-surface);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
 }
 
 .clear:focus-visible {
@@ -83,5 +84,9 @@
 @media (min-width: 640px) {
     .results {
         gap: 1.5rem;
+    }
+
+    .field {
+        max-width: 32rem;
     }
 }

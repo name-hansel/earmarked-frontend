@@ -1,4 +1,5 @@
 .input {
+    box-sizing: border-box;
     display: block;
     width: 100%;
     margin-bottom: 1rem;
@@ -24,6 +25,6 @@
 
 @media (min-width: 40rem) {
     .input {
-        max-width: 24rem;
+        max-width: 32rem;
     }
 }
