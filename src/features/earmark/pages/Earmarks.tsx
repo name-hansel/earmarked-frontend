@@ -1,12 +1,10 @@
-import {useFetchEarmarks} from "../hooks/useFetchEarmarks.ts";
-import EarmarkAlbumCard from "../components/EarmarkAlbumCard.tsx";
 import styles from "./Earmarks.module.css";
-import PageLoader from "../../../components/PageLoader.tsx";
 import {DEFAULT_EARMARK_SORT, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
 import {useSearchParams} from "react-router";
 import EarmarkSearch from "../components/EarmarkSearch.tsx";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
+import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
 
 export default function Earmarks() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -16,47 +14,6 @@ export default function Earmarks() {
     const debouncedQ = useDebounce(searchInput.trim(), 500);
 
     const sort = isEarmarkSort(sortInput) ? sortInput : DEFAULT_EARMARK_SORT;
-
-    const {
-        data,
-        isPending,
-        isError,
-        refetch,
-        hasNextPage,
-        isFetchingNextPage,
-        fetchNextPage
-    } = useFetchEarmarks(sort, debouncedQ);
-
-    function renderContent() {
-        if (isPending) {
-            return <PageLoader/>
-        }
-
-        if (isError) {
-            return <div className={styles.error}>
-                <p className={styles.alert} role="alert">Couldn't load your earmarks.</p>
-                <button className={styles.retry} type="button" onClick={() => refetch()}>Retry</button>
-            </div>
-        }
-
-        const earmarks = data.pages.flatMap(page => page.content);
-
-        if (earmarks.length === 0) {
-            return <p className={styles.empty}>No earmarks yet. Search for an album to add one.</p>;
-        }
-
-        return <>
-            <ul className={styles.list}>{
-                earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
-            }</ul>
-            {
-                hasNextPage && <button className={styles.loadMore} type="button" onClick={() => fetchNextPage()}
-                                       disabled={isFetchingNextPage}>
-                    {isFetchingNextPage ? "Loading..." : "Load more"}
-                </button>
-            }
-        </>
-    }
 
     function handleSortChange(next: EarmarkSort) {
         setSearchParams(
@@ -94,7 +51,7 @@ export default function Earmarks() {
             <EarmarkSearch value={searchInput} onChange={handleSearchChange}/>
             <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
         </div>
-        {renderContent()}
+        <EarmarksContent sort={sort} debouncedQ={debouncedQ}/>
     </section>
 }
 
