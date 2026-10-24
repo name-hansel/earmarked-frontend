@@ -40,7 +40,7 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", c
             return null;
         }
 
-        return <span className={styles.earmarked}>{earmark.listenedAt ? 'Listened' : 'Earmarked'}</span>;
+        return <span className={styles.earmarked}>{earmark.listened ? 'Listened' : 'Earmarked'}</span>;
     }
 
     function handleClick() {
