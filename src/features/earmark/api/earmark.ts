@@ -9,6 +9,7 @@ export interface Earmark {
     note: string | null;
     createdAt: string;
     album: SpotifyAlbum | null;
+    listenedAt: string | null;
 }
 
 interface AlbumEarmarkResponse {
@@ -49,5 +50,11 @@ export async function fetchEarmarks(page: number, size: number, sort: EarmarkSor
         params: {page, size, sort, q: q || undefined},
     });
 
+    return response.data;
+}
+
+export async function updateListened(earmarkId: string, listenedAt: string | null) {
+    const response = await api.patch<Earmark>(`/earmark/${earmarkId}/listened`, {listenedAt});
+    
     return response.data;
 }
