@@ -23,8 +23,8 @@ export async function createEarmark(spotifyAlbumId: string, note?: string): Prom
     return response.data;
 }
 
-export async function updateEarmark(earmarkId: string, note: string): Promise<Earmark> {
-    const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note});
+export async function updateEarmark(earmarkId: string, note: string, listenedAt: string | null): Promise<Earmark> {
+    const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note, listenedAt});
     return response.data;
 }
 
@@ -55,6 +55,6 @@ export async function fetchEarmarks(page: number, size: number, sort: EarmarkSor
 
 export async function updateListened(earmarkId: string, listenedAt: string | null) {
     const response = await api.patch<Earmark>(`/earmark/${earmarkId}/listened`, {listenedAt});
-    
+
     return response.data;
 }

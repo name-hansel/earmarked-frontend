@@ -29,6 +29,14 @@
     grid-area: form;
 }
 
+.heading {
+    margin: 0;
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
 .back {
     display: inline-flex;
     align-items: center;
@@ -108,7 +116,7 @@
         gap: 2rem;
     }
 
-    .form > :first-child {
+    .note {
         flex: 1;
     }
 
