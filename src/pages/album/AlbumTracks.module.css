@@ -1,0 +1,67 @@
+.tracks {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    list-style: none;
+    counter-reset: track;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+}
+
+.track {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    counter-increment: track;
+}
+
+.trackInfo {
+    display: flex;
+    align-items: baseline;
+    flex: 1;
+    min-width: 0;
+}
+
+.trackName {
+    flex: 0 0 auto;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.trackArtists {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.track + .track {
+    border-top: 1px dashed var(--color-border);
+}
+
+.track::before {
+    content: counter(track);
+    min-width: 1.5rem;
+    text-align: right;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.duration {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 768px) {
+    .tracks {
+        padding: 0.5rem 1.5rem;
+    }
+}

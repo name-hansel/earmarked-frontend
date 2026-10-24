@@ -96,48 +96,6 @@
     gap: 1rem;
 }
 
-.tracks {
-    margin: 0;
-    padding: 0.5rem 1rem;
-    list-style: none;
-    counter-reset: track;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-}
-
-.track {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    padding: 0.75rem 0;
-    counter-increment: track;
-}
-
-.track + .track {
-    border-top: 1px dashed var(--color-border);
-}
-
-.track::before {
-    content: counter(track);
-    min-width: 1.5rem;
-    text-align: right;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    font-variant-numeric: tabular-nums;
-}
-
-.trackName {
-    flex: 1;
-    min-width: 0;
-}
-
-.duration {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    font-variant-numeric: tabular-nums;
-}
-
 .alert {
     margin: 0;
     padding: 0.75rem 1rem;
@@ -206,10 +164,6 @@
         align-items: stretch;
         width: auto;
         text-align: left;
-    }
-
-    .tracks {
-        padding: 0.5rem 1.5rem;
     }
 
     .imageRow .spotify {
