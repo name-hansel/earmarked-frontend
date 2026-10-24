@@ -2,6 +2,7 @@ import {api} from "../../../lib/client.ts";
 import type {PageResponse} from "../../../lib/types.ts";
 import type {SpotifyAlbum} from "../../spotify/api/spotify.ts";
 import type {EarmarkSort} from "../utils/earmarkSort.ts";
+import type {EarmarkStatus} from "../utils/earmarkFilters.ts";
 
 export interface Earmark {
     id: string;
@@ -45,9 +46,16 @@ export async function fetchRecentEarmarks(size: number): Promise<Earmark[]> {
     return response.data.content;
 }
 
-export async function fetchEarmarks(page: number, size: number, sort: EarmarkSort, q: string) {
+export async function fetchEarmarks(
+    page: number,
+    size: number,
+    sort: EarmarkSort,
+    q: string,
+    status: EarmarkStatus | undefined,
+    hasNote: boolean | undefined,
+) {
     const response = await api.get<PageResponse<Earmark>>("/earmark", {
-        params: {page, size, sort, q: q || undefined},
+        params: {page, size, sort, q: q || undefined, status, hasNote},
     });
 
     return response.data;

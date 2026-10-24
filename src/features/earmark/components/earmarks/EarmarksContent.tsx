@@ -3,10 +3,13 @@ import {useFetchEarmarks} from "../../hooks/useFetchEarmarks.ts";
 import EarmarkAlbumCard from "../EarmarkAlbumCard.tsx";
 import type {EarmarkSort} from "../../utils/earmarkSort.ts";
 import styles from "./EarmarksContent.module.css"
+import type {EarmarkStatus} from "../../utils/earmarkFilters.ts";
 
-export default function EarmarksContent({sort, q}: {
+export default function EarmarksContent({sort, q, status, hasNote}: {
     sort: EarmarkSort;
     q: string;
+    status: EarmarkStatus | undefined;
+    hasNote: boolean | undefined;
 }) {
     const {
         data,
@@ -16,7 +19,7 @@ export default function EarmarksContent({sort, q}: {
         hasNextPage,
         isFetchingNextPage,
         fetchNextPage
-    } = useFetchEarmarks(sort, q);
+    } = useFetchEarmarks(sort, q, status, hasNote);
 
     if (isPending) {
         return <PageLoader/>
@@ -32,9 +35,15 @@ export default function EarmarksContent({sort, q}: {
     const earmarks = data.pages.flatMap(page => page.content);
 
     if (earmarks.length === 0) {
-        return q
-            ? <p className={styles.empty}>No earmarks match “{q}”.</p>
-            : <p className={styles.empty}>You haven't earmarked anything yet.</p>;
+        if (q) {
+            return <p className={styles.empty}>No earmarks match “{q}”.</p>;
+        }
+
+        if (status !== undefined || hasNote !== undefined) {
+            return <p className={styles.empty}>No earmarks match these filters.</p>;
+        }
+        
+        return <p className={styles.empty}>You haven't earmarked anything yet.</p>;
     }
 
     return <>

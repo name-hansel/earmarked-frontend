@@ -1,0 +1,59 @@
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1 1 100%;
+}
+
+.groupLabel {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+}
+
+.select {
+    appearance: none;
+    width: 100%;
+    padding: 0.6rem 2.25rem 0.6rem 0.75rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23f4f8fb' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.select:hover {
+    border-color: var(--color-primary);
+}
+
+.select:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+@media (min-width: 40rem) {
+    .filters {
+        flex: none;
+        flex-wrap: nowrap;
+    }
+
+    .select {
+        width: auto;
+        min-width: 8.5rem;
+    }
+}

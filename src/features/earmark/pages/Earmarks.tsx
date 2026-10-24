@@ -7,12 +7,16 @@ import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
 import {useState} from "react";
 import EarmarksSearchToggle from "../components/earmarks/EarmarksSearchToggle.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
+import {type EarmarkStatus, parseHasNote, parseStatus} from "../utils/earmarkFilters.ts";
+import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
 
 export default function Earmarks() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const sortInput = searchParams.get("sort");
     const searchInput = searchParams.get("q") ?? "";
+    const status = parseStatus(searchParams.get("status"));
+    const hasNote = parseHasNote(searchParams.get("hasNote"));
 
     const [searchOpen, setSearchOpen] = useState(searchInput !== "");
     const debouncedQ = useDebounce(searchInput.trim(), 500);
@@ -49,6 +53,34 @@ export default function Earmarks() {
         }, {replace: true});
     }
 
+    function handleStatusChange(next: EarmarkStatus | undefined) {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (next) {
+                params.set("status", next);
+            } else {
+                params.delete("status");
+            }
+
+            return params;
+        }, {replace: true});
+    }
+
+    function handleHasNoteChange(next: boolean | undefined) {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (next !== undefined) {
+                params.set("hasNote", String(next));
+            } else {
+                params.delete("hasNote");
+            }
+
+            return params;
+        }, {replace: true});
+    }
+
     function toggleSearch() {
         if (searchOpen) handleSearchChange("");
         setSearchOpen(!searchOpen);
@@ -60,7 +92,7 @@ export default function Earmarks() {
                 <h1 className={styles.title}>Your earmarks</h1>
                 {!searchOpen && <EarmarksSearchToggle onClick={toggleSearch}/>}
             </div>
-            {searchOpen && (
+            {searchOpen &&
                 <div className={styles.search}>
                     <SearchInput
                         value={searchInput}
@@ -74,12 +106,20 @@ export default function Earmarks() {
                         autoFocus
                     />
                 </div>
-            )}
-            <div className={styles.sort}>
-                <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
+            }
+            <div className={styles.controls}>
+                <div className={styles.sort}>
+                    <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
+                </div>
+                <EarmarksFilter
+                    status={status}
+                    hasNote={hasNote}
+                    onStatusChange={handleStatusChange}
+                    onHasNoteChange={handleHasNoteChange}
+                />
             </div>
         </div>
-        <EarmarksContent sort={sort} q={debouncedQ}/>
+        <EarmarksContent sort={sort} q={debouncedQ} status={status} hasNote={hasNote}/>
     </section>
 }
 
