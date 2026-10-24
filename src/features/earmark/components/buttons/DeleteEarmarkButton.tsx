@@ -1,11 +1,11 @@
-import DeleteEarmarkDialog from "./editEarmark/DeleteEarmarkDialog.tsx";
-import {TrashIcon} from "../../../components/Icon.tsx";
+import DeleteEarmarkDialog from "../editEarmark/DeleteEarmarkDialog.tsx";
+import {TrashIcon} from "../../../../components/Icon.tsx";
 import styles from "./DeleteEarmarkButton.module.css"
-import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
-import {useDeleteEarmark} from "../hooks/useDeleteEarmark.ts";
+import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
+import {useDeleteEarmark} from "../../hooks/useDeleteEarmark.ts";
 import {toast} from "sonner";
-import {getEarmarkRemovedMessage} from "../../../utils/formatEarmarkToastMessage.ts";
-import {getErrorMessage} from "../../../lib/errors.ts";
+import {getEarmarkRemovedMessage} from "../../../../utils/formatEarmarkToastMessage.ts";
+import {getErrorMessage} from "../../../../lib/errors.ts";
 
 export default function DeleteEarmarkButton({spotifyAlbumId, albumName, withConfirmation = false}: {
     spotifyAlbumId: string;

@@ -50,3 +50,15 @@ export const SearchIcon = (props: SVGProps<SVGSVGElement>) =>
         <circle cx="11" cy="11" r="8"/>
         <path d="m21 21-4.3-4.3"/>
     </Icon>;
+
+export const ArrowRightIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <path d="M5 12h14"/>
+        <path d="m13 6 6 6-6 6"/>
+    </Icon>;
+
+export const HeadphonesIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <path
+            d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
+    </Icon>;

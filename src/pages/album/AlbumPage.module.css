@@ -179,9 +179,9 @@
 
 .earmarkStatus {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
-    min-width: 0;
+    gap: 0.5rem 0.75rem;
 }
 
 @media (min-width: 768px) {

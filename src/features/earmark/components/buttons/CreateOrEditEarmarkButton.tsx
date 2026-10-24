@@ -1,7 +1,7 @@
-import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
+import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import {useNavigate} from "react-router";
 import styles from "./CreateOrEditEarmarkButton.module.css";
-import {PencilIcon} from "../../../components/Icon.tsx";
+import {PencilIcon} from "../../../../components/Icon.tsx";
 
 export default function CreateOrEditEarmarkButton({spotifyAlbumId}: { spotifyAlbumId: string }) {
     const navigate = useNavigate();

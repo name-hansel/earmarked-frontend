@@ -1,9 +1,9 @@
-import {useCreateEarmark} from "../hooks/useCreateEarmark.ts";
-import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
+import {useCreateEarmark} from "../../hooks/useCreateEarmark.ts";
+import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import {toast} from "sonner";
-import {getErrorMessage} from "../../../lib/errors.ts";
+import {getErrorMessage} from "../../../../lib/errors.ts";
 import styles from "./QuickEarmarkButton.module.css";
-import {getEarmarkAddedMessage} from "../../../utils/formatEarmarkToastMessage.ts";
+import {getEarmarkAddedMessage} from "../../../../utils/formatEarmarkToastMessage.ts";
 
 export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", compact = false, albumName}: {
     spotifyAlbumId: string,
@@ -34,12 +34,13 @@ export default function QuickEarmarkButton({spotifyAlbumId, label = "Earmark", c
         );
     }
 
-    if (albumEarmarkResponse.earmark) {
+    const earmark = albumEarmarkResponse.earmark;
+    if (earmark) {
         if (compact) {
             return null;
         }
 
-        return <span className={styles.earmarked}>Earmarked</span>;
+        return <span className={styles.earmarked}>{earmark.listenedAt ? 'Listened' : 'Earmarked'}</span>;
     }
 
     function handleClick() {

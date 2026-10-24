@@ -3,7 +3,7 @@ import styles from "./EarmarkAlbumCard.module.css";
 import {pickImage} from "../../../utils/pickImage.ts";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
 import EarmarkDate from "./EarmarkDate.tsx";
-import DeleteEarmarkButton from "./DeleteEarmarkButton.tsx";
+import DeleteEarmarkButton from "./buttons/DeleteEarmarkButton.tsx";
 import {useLocation} from "react-router";
 
 export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
