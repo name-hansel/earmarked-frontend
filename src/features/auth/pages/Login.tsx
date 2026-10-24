@@ -1,4 +1,4 @@
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {hashKey, useMutation, useQueryClient} from "@tanstack/react-query";
 import {loginUser, resendActivation} from "../api/auth.ts";
 import {Link, useNavigate} from "react-router";
 import {type SubmitEvent} from "react";
@@ -14,6 +14,10 @@ export default function Login() {
     const loginMutation = useMutation({
         mutationFn: loginUser,
         onSuccess: async () => {
+            queryClient.removeQueries({
+                predicate: (query) => query.queryHash !== hashKey(currentUserKey)
+            });
+
             await queryClient.invalidateQueries({queryKey: currentUserKey});
             navigate("/");
         }
@@ -59,7 +63,7 @@ export default function Login() {
             <div className={styles.field}>
                 <label className={styles.label} htmlFor="password">Password</label>
                 <input className={styles.input} id="password" name="password" type="password" required
-                       autoComplete="password" minLength={3} maxLength={128}
+                       autoComplete="current-password" minLength={3} maxLength={128}
                 />
             </div>
 
