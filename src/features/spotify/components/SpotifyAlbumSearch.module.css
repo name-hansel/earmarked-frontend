@@ -14,18 +14,3 @@
     border-radius: 0.625rem;
     color: var(--color-danger);
 }
-
-.results {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-@media (min-width: 640px) {
-    .results {
-        gap: 1.5rem;
-    }
-}

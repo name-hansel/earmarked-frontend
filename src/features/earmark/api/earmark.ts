@@ -14,7 +14,7 @@ export interface Earmark {
     listened: boolean;
 }
 
-interface AlbumEarmarkResponse {
+export interface AlbumEarmarkResponse {
     earmark: Earmark | null;
 }
 
@@ -32,6 +32,13 @@ export async function updateEarmark(earmarkId: string, note: string, listenedAt:
 
 export async function getAlbumEarmark(spotifyAlbumId: string): Promise<AlbumEarmarkResponse> {
     const response = await api.get<AlbumEarmarkResponse>(`/earmark/album/${spotifyAlbumId}`);
+    return response.data;
+}
+
+export async function getAlbumEarmarks(ids: string[]) {
+    const response = await api.get<Record<string, Earmark>>("/earmark/albums", {
+        params: {spotifyAlbumIds: ids.join(", ")}
+    });
     return response.data;
 }
 

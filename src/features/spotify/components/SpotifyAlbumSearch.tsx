@@ -1,12 +1,12 @@
 import {useEffect, useRef, useState} from "react";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import {useSpotifyAlbumSearch} from "../hooks/useSpotifyAlbumSearch.ts";
-import SpotifySearchAlbumCard from "./SpotifySearchAlbumCard.tsx";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
 import {useSearchParams} from "react-router";
 import styles from "./SpotifyAlbumSearch.module.css";
 import PageLoader from "../../../components/page-loader/PageLoader.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
+import SpotifySearchResults from "./SpotifySearchResults.tsx";
 
 export default function SpotifyAlbumSearch() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -40,16 +40,11 @@ export default function SpotifyAlbumSearch() {
     return <section className={styles.search}>
         <SearchInput value={input} onChange={setInput} onClear={() => setInput("")} clearLabel="Clear search"
                      placeholder="Search albums..." aria-label="Search albums"/>
-
         {isSearching && isFetching && <PageLoader/>}
         {isSearching && isError && <p role="alert">{getSearchErrorMessage(error)}</p>}
         {isSearching && !isFetching && albums?.length === 0 && <p>No albums found.</p>}
-
         {
-            isSearching && albums && albums.length > 0 &&
-            <ul className={styles.results}>
-                {albums.map((album) => <SpotifySearchAlbumCard key={album.id} album={album}/>)}
-            </ul>
+            isSearching && albums && albums.length > 0 && <SpotifySearchResults albums={albums}/>
         }
     </section>
 }
