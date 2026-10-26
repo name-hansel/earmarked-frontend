@@ -9,21 +9,22 @@ import {useAlbumEarmark} from "../../features/earmark/hooks/useAlbumEarmark.ts";
 
 export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
     const {data} = useAlbumEarmark(album.id);
+    const earmark = data?.earmark;
 
     return <div className={styles.actions}>
         <div className={styles.earmarkStatus}>
-            {data?.earmark && <EarmarkDate earmark={data.earmark} showIcon={false}/>}
+            {earmark && <EarmarkDate earmark={earmark} showIcon={false}/>}
             <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark" albumName={album.name}/>
             {
-                data?.earmark &&
-                <ListenedEarmarkButton spotifyAlbumId={album.id} albumName={album.name} earmark={data.earmark}/>
+                earmark &&
+                <ListenedEarmarkButton spotifyAlbumId={album.id} albumName={album.name} earmark={earmark}/>
             }
         </div>
         <div className={styles.iconGroup}>
             <CreateOrEditEarmarkButton spotifyAlbumId={album.id}/>
             {
-                data?.earmark && <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name} withConfirmation
-                                                      earmark={data.earmark}/>
+                earmark && <DeleteEarmarkButton spotifyAlbumId={album.id} albumName={album.name} withConfirmation
+                                                earmark={earmark}/>
             }
         </div>
     </div>
