@@ -34,12 +34,12 @@ export default function AlbumPage() {
         const notFound = code === "ALBUM_NOT_FOUND" || code === "VALIDATION_ERROR";
 
         return (
-            <section className={styles.page}>
+            <Page>
                 <p className={styles.alert} role="alert">
                     {notFound ? "Album not found." : "Couldn't load this album. Please try again."}
                 </p>
                 <BackLink backTo={backTo}/>
-            </section>
+            </Page>
         );
     }
 
