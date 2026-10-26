@@ -1,5 +1,7 @@
 import {api} from "../../../lib/client.ts";
 
+const DEFAULT_SPOTIFY_SEARCH_SIZE = 6;
+
 export type AlbumImage = { url: string; width: number; height: number };
 
 export type SpotifyAlbum = {
@@ -29,7 +31,7 @@ export type SpotifyAlbumDetails = SpotifyAlbum & {
 export async function searchAlbums(query: string): Promise<SpotifyAlbum[]> {
     const response = await api.get<SpotifyAlbum[]>("/spotify/albums/search", {
         params: {
-            q: query
+            q: query, size: DEFAULT_SPOTIFY_SEARCH_SIZE
         }
     });
 
