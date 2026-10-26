@@ -8,6 +8,7 @@ export type SpotifyAlbum = {
     artists: string[];
     images: AlbumImage[];
     releaseDate: string;
+    releaseDatePrecision: string;
     albumType: string;
     spotifyUrl: string;
 }

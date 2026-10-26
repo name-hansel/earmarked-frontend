@@ -24,6 +24,7 @@ export default function SpotifySearchAlbumCard({album}: {
         cover={albumCover}
         coverAlt={`Cover for ${album.name}`}
         releaseDate={album.releaseDate}
+        releaseDatePrecision={album.releaseDatePrecision}
         albumType={album.albumType}
         spotifyUrl={album.spotifyUrl}
         footerStart={earmark && <EarmarkDate earmark={earmark} showIcon/>}

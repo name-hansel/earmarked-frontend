@@ -21,6 +21,7 @@ export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
         cover={albumCover}
         coverAlt={album ? `Cover of ${album.name}` : ""}
         releaseDate={album?.releaseDate}
+        releaseDatePrecision={album?.releaseDatePrecision}
         albumType={album?.albumType}
         spotifyUrl={album?.spotifyUrl}
         footerStart={<EarmarkDate earmark={earmark} showIcon/>}

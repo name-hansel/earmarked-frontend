@@ -8,7 +8,7 @@ import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 
 export default function AlbumCard({
                                       to, linkState, linkTitle, name, artists, unavailable,
-                                      cover, coverAlt, releaseDate, albumType, spotifyUrl,
+                                      cover, coverAlt, releaseDate, releaseDatePrecision, albumType, spotifyUrl,
                                       footerStart, actions, children
                                   }: {
     to: string;
@@ -20,13 +20,14 @@ export default function AlbumCard({
     cover: ComponentProps<typeof CoverImage>["image"];
     coverAlt: string;
     releaseDate?: string | undefined;
+    releaseDatePrecision: string | undefined;
     albumType?: string | undefined;
     spotifyUrl?: string | undefined;
     footerStart?: ReactNode;
     actions?: ReactNode;
     children?: ReactNode;
 }) {
-    const meta = [releaseDate && formatReleaseDate(releaseDate), albumType]
+    const meta = [releaseDate && formatReleaseDate(releaseDate, releaseDatePrecision), albumType]
         .filter(Boolean)
         .join(" · ");
 

@@ -7,7 +7,7 @@ export default function AlbumMetadata({album}: { album: SpotifyAlbumDetails }) {
         <h1 className={styles.title}>{album.name}</h1>
         <p className={styles.artists}>{album.artists.join(", ")}</p>
         <p className={styles.meta}>
-            {`${formatReleaseDate(album.releaseDate)} · `}
+            {`${formatReleaseDate(album.releaseDate, album.releaseDatePrecision)} · `}
             <span className={styles.albumType}>{album.albumType}</span>
             {album.totalTracks != null && ` · ${album.totalTracks} ${album.totalTracks === 1 ? "track" : "tracks"}`}
         </p>
