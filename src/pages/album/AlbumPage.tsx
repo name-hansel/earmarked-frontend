@@ -1,4 +1,4 @@
-import {Link, useLocation, useParams} from "react-router";
+import {useLocation, useParams} from "react-router";
 import {useSpotifyAlbum} from "../../features/spotify/hooks/useSpotifyAlbum.ts";
 import {isAxiosError} from "axios";
 import type {ApiErrorBody} from "../../lib/errors.ts";
@@ -12,6 +12,7 @@ import AlbumTracks from "./AlbumTracks.tsx";
 import AlbumActions from "./AlbumActions.tsx";
 import AlbumMetadata from "./AlbumMetadata.tsx";
 import {useDocumentTitle} from "../../hooks/useDocumentTitle.ts";
+import BackLink from "../../components/BackLink.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -36,13 +37,13 @@ export default function AlbumPage() {
                 <p className={styles.alert} role="alert">
                     {notFound ? "Album not found." : "Couldn't load this album. Please try again."}
                 </p>
-                <Link className={styles.back} to={backTo}><span aria-hidden="true">←</span> Back</Link>
+                <BackLink backTo={backTo}/>
             </section>
         );
     }
 
     return <article className={styles.page}>
-        <Link className={styles.back} to={backTo}><span aria-hidden="true">←</span> Back</Link>
+        <BackLink backTo={backTo}/>
         <div className={styles.hero}>
             <div className={styles.imageRow}>
                 <CoverImage image={pickImage(album.images, 640)} alt={`Cover of ${album.name}`}

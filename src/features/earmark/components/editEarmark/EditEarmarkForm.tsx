@@ -18,6 +18,7 @@ import {
     getEarmarkUpdatedMessage
 } from "../../../../utils/formatEarmarkToastMessage.ts";
 import EarmarkListenedOnDatePicker from "./EarmarkListenedOnDatePicker.tsx";
+import BackLink from "../../../../components/BackLink.tsx";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
@@ -96,7 +97,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         : false;
 
     return <section className={styles.earmarkForm}>
-        <Link className={styles.back} to={albumPath}><span aria-hidden="true">←</span> Back</Link>
+        <BackLink backTo={albumPath}/>
         <div className={styles.layout}>
             <div className={styles.album}>
                 <EarmarkAlbumSummary spotifyAlbumId={spotifyAlbumId}/>
