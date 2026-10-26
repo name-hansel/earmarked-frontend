@@ -12,7 +12,7 @@ import AlbumTracks from "./AlbumTracks.tsx";
 import AlbumActions from "./AlbumActions.tsx";
 import AlbumMetadata from "./AlbumMetadata.tsx";
 import {useDocumentTitle} from "../../hooks/useDocumentTitle.ts";
-import BackLink from "../../components/BackLink.tsx";
+import BackLink from "../../components/back-link/BackLink.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
