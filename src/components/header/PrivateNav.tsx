@@ -1,4 +1,4 @@
-import {Link} from "react-router";
+import {NavLink} from "react-router";
 import {useLogout} from "../../features/auth/hooks/useLogout.ts";
 import styles from "./PrivateNav.module.css";
 import {useEffect, useRef, useState} from "react";
@@ -40,12 +40,20 @@ export default function PrivateNav({username}: { username: string }) {
         <div id="private-nav-menu" className={`${styles.menu} ${open ? styles.open : ""}`}>
             <span className={styles.username}>{username}</span>
             <div className={styles.buttons}>
-                <Link to="/change-password" className={styles.secondary} onClick={() => setOpen(false)}>
+                <NavLink
+                    to="/change-password"
+                    className={({isActive}) => isActive ? `${styles.secondary} ${styles.active}` : styles.secondary}
+                    onClick={() => setOpen(false)}
+                >
                     Change password
-                </Link>
-                <Link to="/delete-account" className={styles.danger} onClick={() => setOpen(false)}>
+                </NavLink>
+                <NavLink
+                    to="/delete-account"
+                    className={({isActive}) => isActive ? `${styles.danger} ${styles.active}` : styles.danger}
+                    onClick={() => setOpen(false)}
+                >
                     Delete account
-                </Link>
+                </NavLink>
                 <button type="button"
                         className={styles.logout}
                         onClick={() => logout.mutate()}

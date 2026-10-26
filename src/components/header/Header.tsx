@@ -1,9 +1,9 @@
-import {Link} from "react-router";
 import {useCurrentUser} from "../../features/auth/hooks/useCurrentUser.ts";
 import PublicNav from "./PublicNav.tsx";
 import PrivateNav from "./PrivateNav.tsx";
 import styles from "./Header.module.css";
-import {HomeIcon} from "../Icon.tsx";
+import {BookmarkIcon} from "../Icon.tsx";
+import {Link} from "react-router";
 
 export default function Header() {
     const currentUser = useCurrentUser();
@@ -11,8 +11,9 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
-                <Link to="/" className={styles.home} aria-label="Home" title="Home">
-                    <HomeIcon className={styles.homeIcon}/>
+                <Link to="/" className={styles.logo} aria-label="earmarked home" title="Home">
+                    <BookmarkIcon className={styles.logoIcon}/>
+                    <span className={styles.logoText}>earmarked</span>
                 </Link>
                 {!currentUser.isPending &&
                     (currentUser.data

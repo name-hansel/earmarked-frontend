@@ -42,3 +42,10 @@
 .secondary:hover {
     background-color: var(--color-surface);
 }
+
+.active {
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-text);
+    pointer-events: none;
+}

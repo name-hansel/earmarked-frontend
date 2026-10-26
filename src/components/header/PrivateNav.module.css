@@ -29,6 +29,11 @@
     color: var(--color-danger);
 }
 
+.danger.active {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
 .logout {
     composes: primary from "./PublicNav.module.css";
     font-family: inherit;
@@ -130,6 +135,13 @@
 .logout:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.active {
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-text);
+    pointer-events: none;
 }
 
 @media (min-width: 768px) {

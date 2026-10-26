@@ -1,5 +1,5 @@
 .header {
-    padding: 0.75rem 1rem;
+    padding: 1.5rem 1rem;
 }
 
 .nav {
@@ -8,29 +8,41 @@
     gap: 0.5rem;
 }
 
-.home {
+.logo {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 999px;
+    gap: 0.5rem;
+    min-height: 2.75rem;
     color: var(--color-text);
-    transition: background-color 150ms ease;
+    text-decoration: none;
 }
 
-.home:hover {
-    background-color: var(--color-surface);
+.logoIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-primary);
+    fill: currentColor;
 }
 
-.home:focus-visible {
+.logoText {
+    font-family: var(--font-hero);
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.5rem;
+}
+
+.logo:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
 }
 
-.homeIcon {
-    width: 1.5rem;
-    height: 1.5rem;
+.logo:hover .logoText {
+    color: var(--color-primary);
+}
+
+@media (max-width: 22.5rem) {
+    .logoText {
+        display: none;
+    }
 }
 
 @media (min-width: 640px) {
