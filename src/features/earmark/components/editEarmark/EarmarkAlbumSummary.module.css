@@ -7,12 +7,12 @@
 .cover,
 .placeholder {
     display: block;
-    flex: 0 0 6rem;
-    width: 6rem;
     height: auto;
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: 1rem;
+    flex: 0 0 8.5rem;
+    width: 8.5rem;
 }
 
 .info .spotify {
@@ -79,8 +79,8 @@
 
     .cover,
     .placeholder {
-        flex-basis: 7.5rem;
-        width: 7.5rem;
+        flex-basis: 9.5rem;
+        width: 9.5rem;
     }
 
     .name {

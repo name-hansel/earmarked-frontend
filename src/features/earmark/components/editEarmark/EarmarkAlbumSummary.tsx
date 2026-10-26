@@ -19,7 +19,7 @@ export default function EarmarkAlbumSummary({spotifyAlbumId}: { spotifyAlbumId: 
 
     const releaseDate = album.releaseDate;
 
-    const meta = [releaseDate && formatReleaseDate(releaseDate), album.albumType]
+    const meta = [releaseDate && formatReleaseDate(releaseDate, album.releaseDatePrecision), album.albumType]
         .filter(Boolean)
         .join(" · ");
 
