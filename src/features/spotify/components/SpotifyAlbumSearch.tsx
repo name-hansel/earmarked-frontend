@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import {useSpotifyAlbumSearch} from "../hooks/useSpotifyAlbumSearch.ts";
 import {getSearchErrorMessage} from "../utils/getSearchErrorMessage.ts";
@@ -8,14 +8,16 @@ import PageLoader from "../../../components/page-loader/PageLoader.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
 import SpotifySearchResults from "./SpotifySearchResults.tsx";
 
-export default function SpotifyAlbumSearch() {
+export default function SpotifyAlbumSearch({input, onInputChange}: {
+    input: string;
+    onInputChange: (value: string) => void;
+}) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [input, setInput] = useState(searchParams.get("q") ?? "");
     const debouncedInput = useDebounce(input, 500);
 
     const {data: albums, isFetching, isError, error} = useSpotifyAlbumSearch(debouncedInput);
-    const activeQuery = input.trim().length > 1 ? debouncedInput : "";
-    const isSearching = activeQuery.trim().length > 1;
+    const isSearching = input.trim().length > 1;
+    const isPendingSearch = isSearching && (isFetching || debouncedInput.trim() !== input.trim());
 
     const urlQuery = searchParams.get("q") ?? "";
     const lastWrittenRef = useRef(urlQuery);
@@ -34,15 +36,15 @@ export default function SpotifyAlbumSearch() {
     useEffect(() => {
         if (urlQuery === lastWrittenRef.current) return;
         lastWrittenRef.current = urlQuery;
-        setInput(urlQuery);
+        onInputChange(urlQuery);
     }, [urlQuery]);
 
     return <section className={styles.search}>
-        <SearchInput value={input} onChange={setInput} onClear={() => setInput("")} clearLabel="Clear search"
+        <SearchInput value={input} onChange={onInputChange} onClear={() => onInputChange("")} clearLabel="Clear search"
                      placeholder="Search albums..." aria-label="Search albums"/>
-        {isSearching && isFetching && <PageLoader/>}
+        {isPendingSearch && <PageLoader/>}
         {isSearching && isError && <p role="alert">{getSearchErrorMessage(error)}</p>}
-        {isSearching && !isFetching && albums?.length === 0 && <p>No albums found.</p>}
+        {isSearching && !isPendingSearch && albums?.length === 0 && <p>No albums found.</p>}
         {
             isSearching && albums && albums.length > 0 && <SpotifySearchResults albums={albums}/>
         }
