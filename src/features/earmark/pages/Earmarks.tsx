@@ -10,6 +10,7 @@ import SearchInput from "../../../components/search/SearchInput.tsx";
 import {type EarmarkStatus, parseHasNote, parseStatus} from "../utils/earmarkFilters.ts";
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
 import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
+import Page from "../../../components/page/Page.tsx";
 
 export default function Earmarks() {
     useDocumentTitle("Your earmarks")
@@ -89,7 +90,7 @@ export default function Earmarks() {
         setSearchOpen(!searchOpen);
     }
 
-    return <section className={styles.page}>
+    return <Page>
         <div className={styles.header}>
             <div className={styles.titleRow}>
                 <h1 className={styles.title}>Your earmarks</h1>
@@ -123,6 +124,6 @@ export default function Earmarks() {
             </div>
         </div>
         <EarmarksContent sort={sort} q={debouncedQ} status={status} hasNote={hasNote}/>
-    </section>
+    </Page>
 }
 

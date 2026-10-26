@@ -13,6 +13,7 @@ import AlbumActions from "./AlbumActions.tsx";
 import AlbumMetadata from "./AlbumMetadata.tsx";
 import {useDocumentTitle} from "../../hooks/useDocumentTitle.ts";
 import BackLink from "../../components/back-link/BackLink.tsx";
+import Page from "../../components/page/Page.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -23,9 +24,9 @@ export default function AlbumPage() {
     useDocumentTitle(album?.name)
 
     if (isPending) {
-        return <section className={styles.page}>
+        return <Page>
             <PageLoader label="Loading album..."/>
-        </section>
+        </Page>
     }
 
     if (isError) {
@@ -42,7 +43,7 @@ export default function AlbumPage() {
         );
     }
 
-    return <article className={styles.page}>
+    return <Page>
         <BackLink backTo={backTo}/>
         <div className={styles.hero}>
             <div className={styles.imageRow}>
@@ -57,5 +58,5 @@ export default function AlbumPage() {
             </div>
         </div>
         <AlbumTracks album={album}/>
-    </article>
+    </Page>
 }
