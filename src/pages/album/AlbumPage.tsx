@@ -35,10 +35,10 @@ export default function AlbumPage() {
 
         return (
             <Page>
+                <BackLink backTo={backTo}/>
                 <p className={styles.alert} role="alert">
                     {notFound ? "Album not found." : "Couldn't load this album. Please try again."}
                 </p>
-                <BackLink backTo={backTo}/>
             </Page>
         );
     }
