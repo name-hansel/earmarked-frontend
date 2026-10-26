@@ -46,16 +46,6 @@ export default function Register() {
     return <section className={styles.card}>
         <h1 className={styles.title}>Register</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
-            {/* Username */}
-            <div className={styles.field}>
-                <label className={styles.label} htmlFor="username">Username</label>
-                {fieldErrors.username && <p className={styles.error} id="username-error">{fieldErrors.username}</p>}
-                <input className={styles.input} id="username" type="text" name="username" minLength={3} maxLength={16}
-                       required
-                       aria-invalid={fieldErrors.username ? true : undefined}
-                       aria-describedby={fieldErrors.username ? "username-error" : undefined}/>
-            </div>
-
             {/* Email */}
             <div className={styles.field}>
                 <label className={styles.label} htmlFor="email">Email</label>
@@ -69,6 +59,16 @@ export default function Register() {
                        aria-invalid={fieldErrors.email ? true : undefined}
                        aria-describedby={fieldErrors.email ? "email-error" : undefined}
                        maxLength={320}/>
+            </div>
+
+            {/* Username */}
+            <div className={styles.field}>
+                <label className={styles.label} htmlFor="username">Username</label>
+                {fieldErrors.username && <p className={styles.error} id="username-error">{fieldErrors.username}</p>}
+                <input className={styles.input} id="username" type="text" name="username" minLength={3} maxLength={16}
+                       required
+                       aria-invalid={fieldErrors.username ? true : undefined}
+                       aria-describedby={fieldErrors.username ? "username-error" : undefined}/>
             </div>
 
             {/* Password */}
