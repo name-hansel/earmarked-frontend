@@ -15,6 +15,7 @@ export function useCurrentUser() {
             }
         },
         staleTime: 5 * 60 * 1000,
+        refetchOnWindowFocus: "always",
         retry: 1
     });
 }
