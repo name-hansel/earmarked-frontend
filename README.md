@@ -1,75 +1,52 @@
-# React + TypeScript + Vite
+# earmarked – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+React (TypeScript) frontend for earmarked, an app for earmarking albums you want to listen to. Search Spotify, earmark
+albums with an optional note, mark them as listened, and browse your list with sorting, search and filters. Mobile-first
+and responsive, talking to the backend through the gateway.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
 
-## React Compiler
+- Frontend: React + TypeScript
+- Routing: React Router (declarative mode)
+- Server state: TanStack React Query
+- HTTP client: Axios
+- Optimization: React Compiler
+- Styling: CSS Modules with design tokens (custom fonts and palette, no UI library)
+- Notifications: sonner
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Register, activate account, login, logout, resend activation
+- Forgot, reset and change password, delete account
+- Guest-only and protected routes
+- Dashboard with recent earmarks and Spotify album search
+- Dedicated album page: quick earmark, earmark with a note, edit, delete, mark as listened
+- Earmarks page with "Load more" pagination, sorting, text search and status/note filters (all state kept in the URL)
+- Batch earmark lookup for search results (one request per search)
+- Loading skeletons, empty states and error toasts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Authentication Flow
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Authentication is handled by the backend; tokens live in HttpOnly cookies, so no tokens in JS
+- The current user is loaded via `GET /me` (shared `useCurrentUser` query)
+- Axios interceptor:
+    - On 401, calls the refresh endpoint once and retries the request
+    - If refresh fails, clears the cached user and the session ends
+- Requests are sent with credentials; the gateway's CORS config allows the frontend origin
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `src/features/{auth,earmark,spotify}`: each with `api`, `components`, `hooks` and `queryKeys.ts`
+- `src/components`, `src/pages`, `src/hooks`, `src/lib`: shared code
 
-```
+## Future Improvements
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- Deployment
+- Tags, ratings and reviews
+- Animations and a smoother interface
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Attribution
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+Album data and artwork are provided by Spotify.
