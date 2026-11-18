@@ -11,12 +11,12 @@ export default function RatingInput({value, onChange}: {
     return <div className={styles.field}>
         <span className={styles.label} id="rating-label">Rating (optional)</span>
         <div className={styles.controls} role="group" aria-labelledby="rating-label">
-            <button type="button" className={value === 0 ? styles.zeroButtonActive : styles.zeroButton}
+            <button type="button" className={styles.zeroButton} data-active={value === 0}
                     aria-label="0 out of 3, didn't like it" title="Didn't like it"
                     aria-pressed={value === 0} onClick={() => onChange(value === 0 ? null : 0)}>
-                <MusicNoteOffIcon className={value === 0 ? styles.zeroIcon : styles.empty}/>
+                <MusicNoteOffIcon className={styles.zeroIcon}/>
             </button>
-            <div className={styles.notes}>
+            <div className={styles.notes} data-active={value !== null && value > 0}>
                 {Array.from({length: MAX_RATING}, (_, i) => {
                     const filled = value !== null && i < value;
                     return <button key={i} type="button" className={styles.noteButton}

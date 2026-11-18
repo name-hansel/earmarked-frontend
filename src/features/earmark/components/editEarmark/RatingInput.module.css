@@ -5,22 +5,6 @@
     gap: 0.5rem;
 }
 
-.filled,
-.empty {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.filled {
-    color: var(--color-primary);
-    stroke-width: 2.75;
-}
-
-.empty {
-    color: var(--color-text-muted);
-    opacity: 0.5;
-}
-
 .label {
     font-weight: var(--font-weight-medium);
     color: var(--color-text-muted);
@@ -33,7 +17,8 @@
     gap: 0.5rem;
 }
 
-.notes {
+.notes,
+.zeroButton {
     display: flex;
     align-items: center;
     height: 2.75rem;
@@ -41,6 +26,50 @@
     border: 2px solid var(--color-border);
     border-radius: 0.5rem;
     color: var(--color-text-muted);
+}
+
+.zeroButton {
+    justify-content: center;
+    width: 2.75rem;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.notes:hover,
+.zeroButton:hover,
+.notes[data-active="true"],
+.zeroButton[data-active="true"] {
+    border-color: var(--color-primary);
+}
+
+.filled,
+.empty,
+.zeroIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.filled {
+    color: var(--color-primary);
+    stroke-width: 2.75;
+}
+
+.empty,
+.zeroIcon {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
+
+.notes:hover .empty,
+.zeroButton:hover .zeroIcon {
+    opacity: 1;
+}
+
+.zeroButton[data-active="true"] .zeroIcon {
+    color: var(--color-primary);
+    stroke-width: 2.75;
+    opacity: 1;
 }
 
 .noteButton {
@@ -57,14 +86,13 @@
 }
 
 .noteButton:focus-visible,
-.textButton:focus-visible,
-.textButtonActive:focus-visible {
+.zeroButton:focus-visible,
+.textButton:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
 }
 
-.textButton,
-.textButtonActive {
+.textButton {
     min-height: 2.75rem;
     padding: 0 0.75rem;
     box-sizing: border-box;
@@ -80,41 +108,4 @@
 
 .textButton:hover {
     border-color: var(--color-primary);
-}
-
-.textButtonActive {
-    border-style: solid;
-    border-color: var(--color-primary);
-    color: var(--color-text);
-}
-
-.zeroButton,
-.zeroButtonActive {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    box-sizing: border-box;
-    background: none;
-    border: 2px solid var(--color-border);
-    border-radius: 0.5rem;
-    color: var(--color-text-muted);
-    cursor: pointer;
-}
-
-.zeroButtonActive {
-    border-color: var(--color-primary);
-    color: var(--color-text);
-}
-
-.zeroButton:focus-visible,
-.zeroButtonActive:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
-}
-
-.zeroIcon {
-    width: 1.5rem;
-    height: 1.5rem;
 }
