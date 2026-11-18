@@ -1,0 +1,29 @@
+.rating {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.notes {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.filled,
+.empty {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.filled {
+    color: var(--color-primary);
+    stroke-width: 2.75;
+}
+
+.empty {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}

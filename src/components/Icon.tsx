@@ -57,3 +57,16 @@ export const HeadphonesIcon = (props: SVGProps<SVGSVGElement>) =>
         <path
             d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>
     </Icon>;
+
+export const MusicNoteIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <circle cx="8" cy="18" r="4"/>
+        <path d="M12 18V2l7 4"/>
+    </Icon>;
+
+export const MusicNoteOffIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <circle cx="8" cy="18" r="4"/>
+        <path d="M12 18V2l7 4"/>
+        <path d="M3 3l18 18"/>
+    </Icon>;

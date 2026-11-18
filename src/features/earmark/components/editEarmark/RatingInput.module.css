@@ -1,0 +1,120 @@
+.field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+}
+
+.filled,
+.empty {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.filled {
+    color: var(--color-primary);
+    stroke-width: 2.75;
+}
+
+.empty {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
+
+.label {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.notes {
+    display: flex;
+    align-items: center;
+    height: 2.75rem;
+    box-sizing: border-box;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text-muted);
+}
+
+.noteButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 100%;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.noteButton:focus-visible,
+.textButton:focus-visible,
+.textButtonActive:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.textButton,
+.textButtonActive {
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+    background: none;
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.textButton:hover {
+    border-color: var(--color-primary);
+}
+
+.textButtonActive {
+    border-style: solid;
+    border-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.zeroButton,
+.zeroButtonActive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    box-sizing: border-box;
+    background: none;
+    border: 2px solid var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.zeroButtonActive {
+    border-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.zeroButton:focus-visible,
+.zeroButtonActive:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.zeroIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+}

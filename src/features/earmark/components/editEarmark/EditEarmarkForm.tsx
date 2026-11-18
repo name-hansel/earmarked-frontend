@@ -19,6 +19,7 @@ import {
 } from "../../../../utils/formatEarmarkToastMessage.ts";
 import EarmarkListenedOnDatePicker from "./EarmarkListenedOnDatePicker.tsx";
 import BackLink from "../../../../components/back-link/BackLink.tsx";
+import RatingInput from "./RatingInput.tsx";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
@@ -28,6 +29,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     const [note, setNote] = useState(earmark?.note ?? "");
     const [listenedAt, setListenedAt] = useState(earmark?.listenedAt ?? "");
     const [listened, setListened] = useState(earmark?.listened ?? false);
+    const [rating, setRating] = useState<number | null>(earmark?.rating ?? null);
     const navigate = useNavigate();
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -48,6 +50,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                 note: trimmedNote,
                 listened,
                 listenedAt: listenedAt || null,
+                rating: rating
             }, {
                 onSuccess: () => {
                     toast.success(getEarmarkUpdatedMessage(album?.name));
@@ -83,7 +86,10 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
     function handleListenedChange(next: boolean) {
         setListened(next);
-        if (!next) setListenedAt("");
+        if (!next) {
+            setListenedAt("");
+            setRating(null);
+        }
     }
 
     const submitLabel = earmark
@@ -94,6 +100,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         ? note === (earmark.note ?? "")
         && listened === earmark.listened
         && listenedAt === (earmark.listenedAt ?? "")
+        && rating === (earmark?.rating ?? null)
         : false;
 
     return <section className={styles.earmarkForm}>
@@ -108,6 +115,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                                                          setListened={handleListenedChange}
                                                          listenedAt={listenedAt}
                                                          setListenedAt={setListenedAt}/>}
+                {earmark && listened && <RatingInput value={rating} onChange={setRating}/>}
                 <div className={styles.note}>
                     <EarmarkNoteField value={note} onChange={setNote}/>
                 </div>
