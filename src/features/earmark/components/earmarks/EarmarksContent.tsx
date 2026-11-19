@@ -51,7 +51,7 @@ export default function EarmarksContent({sort, q, status, hasNote}: {
         <p className={styles.count}>{total} {total === 1 ? "earmark" : "earmarks"}</p>
         <ul className={styles.list}>
             {
-                earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark} showDate/>)
+                earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark}/>)
             }
         </ul>
         {

@@ -6,7 +6,7 @@ import DeleteEarmarkButton from "./buttons/DeleteEarmarkButton.tsx";
 import {useLocation} from "react-router";
 import EarmarkNoteIndicator from "./indicators/EarmarkNoteIndicator.tsx";
 
-export default function EarmarkAlbumCard({earmark, showDate = false}: { earmark: Earmark, showDate?: boolean }) {
+export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
     const albumCover = album ? pickImage(album.images, 300) : undefined;
     const location = useLocation();
@@ -26,7 +26,7 @@ export default function EarmarkAlbumCard({earmark, showDate = false}: { earmark:
         spotifyUrl={album?.spotifyUrl}
         footerStart={
             <>
-                <EarmarkStatus earmark={earmark} showIcon showDate={showDate}/>
+                <EarmarkStatus earmark={earmark}/>
                 <EarmarkNoteIndicator earmark={earmark}/>
             </>
         }

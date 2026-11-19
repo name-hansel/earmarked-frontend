@@ -3,26 +3,20 @@ import type {Earmark} from "../../api/earmark.ts";
 import Indicator from "./Indicator.tsx";
 import {BookmarkIcon, HeadphonesIcon} from "../../../../components/Icon.tsx";
 
-export default function EarmarkStatus({earmark, showIcon = false, showDate = true}: {
+export default function EarmarkStatus({earmark}: {
     earmark: Earmark,
-    showIcon?: boolean,
-    showDate?: boolean
 }) {
     const {createdAt, listened, listenedAt} = earmark;
     const icon = listened ? HeadphonesIcon : BookmarkIcon;
 
     if (listened && !listenedAt) {
-        return <Indicator icon={icon} label="Listened" showIcon={showIcon}/>;
+        return <Indicator icon={icon} label="Listened"/>;
     }
 
-    const date = listenedAt ?? createdAt;
     const label = listenedAt ? "Listened on" : "Earmarked on";
     const formatted = listenedAt
         ? formatDate(`${listenedAt}T00:00:00`)
         : formatDate(createdAt);
 
-    return <Indicator icon={icon} label={label} title={`${label} ${formatted}`}
-                      showIcon={showIcon} hideChildren={showIcon && !showDate}>
-        <time dateTime={date}>{formatted}</time>
-    </Indicator>;
+    return <Indicator icon={icon} label={`${label} ${formatted}`}/>
 }

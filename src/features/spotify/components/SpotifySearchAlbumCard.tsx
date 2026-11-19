@@ -27,7 +27,7 @@ export default function SpotifySearchAlbumCard({album}: {
         releaseDatePrecision={album.releaseDatePrecision}
         albumType={album.albumType}
         spotifyUrl={album.spotifyUrl}
-        footerStart={earmark && <EarmarkStatus earmark={earmark} showIcon/>}
+        footerStart={earmark && <EarmarkStatus earmark={earmark}/>}
         actions={
             <>
                 <QuickEarmarkButton spotifyAlbumId={album.id} compact albumName={album.name}/>
