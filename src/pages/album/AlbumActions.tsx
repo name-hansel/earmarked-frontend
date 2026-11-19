@@ -5,7 +5,7 @@ import CreateOrEditEarmarkButton from "../../features/earmark/components/buttons
 import styles from "./AlbumPage.module.css"
 import ListenedEarmarkButton from "../../features/earmark/components/buttons/ListenedEarmarkButton.tsx";
 import {useAlbumEarmark} from "../../features/earmark/hooks/useAlbumEarmark.ts";
-import EarmarkDateLabel from "../../features/earmark/components/indicators/EarmarkDateLabel.tsx";
+import EarmarkDateLabel from "../../features/earmark/components/EarmarkDateLabel.tsx";
 
 export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
     const {data} = useAlbumEarmark(album.id);
