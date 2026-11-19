@@ -1,4 +1,16 @@
+.item {
+    display: flex;
+    flex-direction: column;
+}
+
+.item:has(> [data-card-header]) > .card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: dashed;
+}
+
 .card {
+    flex: 1;
     position: relative;
     display: flex;
     flex-direction: column;
