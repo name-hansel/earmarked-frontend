@@ -3,7 +3,11 @@ import {BookmarkIcon, HeadphonesIcon} from "../../../components/Icon.tsx";
 import styles from "./EarmarkDate.module.css"
 import type {Earmark} from "../api/earmark.ts";
 
-export default function EarmarkDate({earmark, showIcon = true}: { earmark: Earmark, showIcon: boolean }) {
+export default function EarmarkDate({earmark, showIcon = false, showDate = true}: {
+    earmark: Earmark,
+    showIcon?: boolean,
+    showDate?: boolean
+}) {
     const {createdAt, listened, listenedAt} = earmark;
 
     if (listened && !listenedAt) {
@@ -30,6 +34,6 @@ export default function EarmarkDate({earmark, showIcon = true}: { earmark: Earma
             ? <HeadphonesIcon className={styles.icon}/>
             : <BookmarkIcon className={styles.icon}/>)}
         <span className={showIcon ? styles.srOnly : undefined}>{label} </span>
-        {formatted}
+        <span className={showIcon && !showDate ? styles.srOnly : undefined}>{formatted}</span>
     </time>
 }

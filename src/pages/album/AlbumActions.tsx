@@ -13,7 +13,7 @@ export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
 
     return <div className={styles.actions}>
         <div className={styles.earmarkStatus}>
-            {earmark && <EarmarkDate earmark={earmark} showIcon={false}/>}
+            {earmark && <EarmarkDate earmark={earmark}/>}
             <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark" albumName={album.name}/>
             {
                 earmark &&
