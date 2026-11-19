@@ -4,8 +4,8 @@ import {formatDate} from "../../../../utils/formatDate.ts";
 import styles from "./EarmarkSortHeader.module.css"
 
 export default function EarmarkSortHeader({earmark, sort}: {
-    earmark: Earmark,
-    sort: EarmarkSort
+    earmark: Earmark;
+    sort: EarmarkSort;
 }) {
     const text = getText(earmark, sort);
 
