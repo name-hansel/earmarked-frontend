@@ -1,6 +1,6 @@
-import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
+import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import styles from "./EarmarkRating.module.css";
-import {MusicNoteIcon} from "../../../components/Icon.tsx";
+import {MusicNoteIcon} from "../../../../components/Icon.tsx";
 
 const MAX_RATING = 3;
 

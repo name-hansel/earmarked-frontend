@@ -1,6 +1,6 @@
 import PageLoader from "../../../../components/page-loader/PageLoader.tsx";
 import {useFetchEarmarks} from "../../hooks/useFetchEarmarks.ts";
-import EarmarkAlbumCard from "../EarmarkAlbumCard.tsx";
+import EarmarkAlbumCard from "../card/EarmarkAlbumCard.tsx";
 import type {EarmarkSort} from "../../utils/earmarkSort.ts";
 import styles from "./EarmarksContent.module.css"
 import type {EarmarkStatus} from "../../utils/earmarkFilters.ts";

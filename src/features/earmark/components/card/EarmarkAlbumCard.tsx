@@ -1,10 +1,13 @@
-import type {Earmark} from "../api/earmark.ts";
-import {pickImage} from "../../../utils/pickImage.ts";
-import AlbumCard from "../../album/components/AlbumCard.tsx";
-import DeleteEarmarkButton from "./buttons/DeleteEarmarkButton.tsx";
+import type {Earmark} from "../../api/earmark.ts";
+import {pickImage} from "../../../../utils/pickImage.ts";
+import AlbumCard from "../../../album/components/AlbumCard.tsx";
+import DeleteEarmarkButton from "../buttons/DeleteEarmarkButton.tsx";
 import {useLocation} from "react-router";
+import EarmarkSortHeader from "./EarmarkSortHeader.tsx";
 
-export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
+export default function EarmarkAlbumCard({earmark}: {
+    earmark: Earmark;
+}) {
     const {album, spotifyAlbumId} = earmark;
     const albumCover = album ? pickImage(album.images, 300) : undefined;
     const location = useLocation();
@@ -25,5 +28,7 @@ export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
         earmark={earmark}
         actions={
             <DeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name} earmark={earmark}/>
-        }/>
+        }
+        header={<EarmarkSortHeader earmark={earmark} sort={"EARMARKED_DESC"}/>}
+    />
 }

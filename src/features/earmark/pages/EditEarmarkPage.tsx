@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import EditEarmarkContent from "../components/editEarmark/EditEarmarkContent.tsx";
+import EditEarmarkContent from "../components/edit/EditEarmarkContent.tsx";
 import styles from "./EditEarmarkPage.module.css";
 import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 import Page from "../../../components/page/Page.tsx";

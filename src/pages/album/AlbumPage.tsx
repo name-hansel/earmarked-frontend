@@ -2,7 +2,7 @@ import {useLocation, useParams} from "react-router";
 import {useSpotifyAlbum} from "../../features/spotify/hooks/useSpotifyAlbum.ts";
 import {isAxiosError} from "axios";
 import type {ApiErrorBody} from "../../lib/errors.ts";
-import EarmarkNote from "../../features/earmark/components/EarmarkNote.tsx";
+import EarmarkNote from "../../features/earmark/components/card/EarmarkNote.tsx";
 import styles from "./AlbumPage.module.css";
 import {pickImage} from "../../utils/pickImage.ts";
 import SpotifyLogoLink from "../../components/spotify/SpotifyLogoLink.tsx";
@@ -14,7 +14,7 @@ import AlbumMetadata from "./AlbumMetadata.tsx";
 import {useDocumentTitle} from "../../hooks/useDocumentTitle.ts";
 import BackLink from "../../components/back-link/BackLink.tsx";
 import Page from "../../components/page/Page.tsx";
-import EarmarkRating from "../../features/earmark/components/EarmarkRating.tsx";
+import EarmarkRating from "../../features/earmark/components/card/EarmarkRating.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();

@@ -1,4 +1,4 @@
-import DeleteEarmarkDialog from "../editEarmark/DeleteEarmarkDialog.tsx";
+import DeleteEarmarkDialog from "../edit/DeleteEarmarkDialog.tsx";
 import {TrashIcon} from "../../../../components/Icon.tsx";
 import styles from "./DeleteEarmarkButton.module.css"
 import {useDeleteEarmark} from "../../hooks/useDeleteEarmark.ts";

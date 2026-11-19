@@ -1,4 +1,4 @@
-import {useAlbumEarmark} from "../hooks/useAlbumEarmark.ts";
+import {useAlbumEarmark} from "../../hooks/useAlbumEarmark.ts";
 import styles from "./EarmarkNote.module.css";
 
 export default function EarmarkNote({spotifyAlbumId}: { spotifyAlbumId: string }) {
