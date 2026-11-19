@@ -4,7 +4,7 @@ import AlbumCard from "../../../album/components/AlbumCard.tsx";
 import DeleteEarmarkButton from "../buttons/DeleteEarmarkButton.tsx";
 import {useLocation} from "react-router";
 import type {EarmarkSort} from "../../utils/earmarkSort.ts";
-import {getEarmarkSortText} from "../../utils/getEarmarkSortText.ts";
+import EarmarkHeaderSortLabel from "../indicators/EarmarkHeaderSortLabel.tsx";
 
 export default function EarmarkAlbumCard({earmark, sort}: {
     earmark: Earmark;
@@ -31,6 +31,6 @@ export default function EarmarkAlbumCard({earmark, sort}: {
         actions={
             <DeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name} earmark={earmark}/>
         }
-        sortText={sort ? getEarmarkSortText(earmark, sort) : null}
+        sortLabel={sort ? <EarmarkHeaderSortLabel earmark={earmark} sort={sort}/> : null}
     />
 }

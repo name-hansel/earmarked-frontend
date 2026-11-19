@@ -1,0 +1,25 @@
+.notes {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    --note-size: 1.5rem;
+}
+
+.notes[data-size="sm"] {
+    --note-size: 1rem;
+}
+
+.icon {
+    width: var(--note-size);
+    height: var(--note-size);
+}
+
+.filled {
+    color: var(--color-primary);
+    stroke-width: 2.75;
+}
+
+.empty {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+}
