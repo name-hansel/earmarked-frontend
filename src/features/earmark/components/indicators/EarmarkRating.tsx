@@ -1,7 +1,6 @@
 import {MusicNoteIcon, MusicNoteOffIcon} from "../../../../components/Icon";
 import styles from "./EarmarkRating.module.css"
-
-const MAX_RATING = 3;
+import {MAX_RATING} from "../../constants.ts";
 
 export function EarmarkRating({rating, size = "md"}: {
     rating: number,

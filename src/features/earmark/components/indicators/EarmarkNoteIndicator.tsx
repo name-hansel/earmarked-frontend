@@ -7,5 +7,5 @@ export default function EarmarkNoteIndicator({earmark}: { earmark: Earmark }) {
         return null;
     }
 
-    return <Indicator icon={NoteIcon} label="Has a note"/>;
+    return <Indicator icon={NoteIcon} label={earmark.note}/>;
 }

@@ -1,8 +1,6 @@
 import styles from "./RatingInput.module.css"
 import {MusicNoteIcon, MusicNoteOffIcon} from "../../../../components/Icon.tsx";
-
-//TODO: Move to central place
-const MAX_RATING = 3;
+import {MAX_RATING} from "../../constants.ts";
 
 export default function RatingInput({value, onChange}: {
     value: number | null,
