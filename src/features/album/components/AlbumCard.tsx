@@ -11,7 +11,7 @@ import type {Earmark} from "../../earmark/api/earmark.ts";
 export default function AlbumCard({
                                       to, linkState, linkTitle, name, artists, unavailable,
                                       cover, coverAlt, releaseDate, releaseDatePrecision, albumType, spotifyUrl,
-                                      actions, children, earmark, header
+                                      actions, children, earmark, sortText
                                   }: {
     to: string;
     linkState?: LinkProps["state"];
@@ -28,14 +28,17 @@ export default function AlbumCard({
     actions?: ReactNode;
     children?: ReactNode;
     earmark: Earmark | undefined;
-    header?: ReactNode
+    sortText?: string | null;
 }) {
     const meta = [releaseDate && formatReleaseDate(releaseDate, releaseDatePrecision), albumType]
         .filter(Boolean)
         .join(" · ");
 
     return <li className={styles.item}>
-        {header}
+        <div className={styles.strip}>
+            <EarmarkIndicators earmark={earmark}/>
+            {earmark && sortText && <span className={styles.sortText}>{sortText}</span>}
+        </div>
         <div className={styles.card}>
             <div className={styles.main}>
                 <CoverImage className={styles.cover} image={cover} alt={coverAlt}/>
@@ -56,7 +59,6 @@ export default function AlbumCard({
                 </div>
             </div>
             <div className={styles.footer}>
-                <EarmarkIndicators earmark={earmark}/>
                 <div className={styles.footerEnd}>
                     {meta && <p className={styles.meta}>{meta}</p>}
                     {spotifyUrl && <SpotifyLink className={styles.spotify} url={spotifyUrl}/>}
