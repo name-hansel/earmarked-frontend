@@ -3,7 +3,6 @@ import {useLocation} from "react-router";
 import {pickImage} from "../../../utils/pickImage.ts";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
 import QuickEarmarkButton from "../../earmark/components/buttons/QuickEarmarkButton.tsx";
-import EarmarkStatus from "../../earmark/components/indicators/EarmarkStatus.tsx";
 import DeleteEarmarkButton from "../../earmark/components/buttons/DeleteEarmarkButton.tsx";
 import {useAlbumEarmark} from "../../earmark/hooks/useAlbumEarmark.ts";
 
@@ -13,7 +12,7 @@ export default function SpotifySearchAlbumCard({album}: {
     const location = useLocation();
     const albumCover = pickImage(album.images, 300);
     const {data} = useAlbumEarmark(album.id);
-    const earmark = data?.earmark;
+    const earmark = data?.earmark ?? undefined;
 
     return <AlbumCard
         to={`/albums/${album.id}`}
@@ -27,7 +26,7 @@ export default function SpotifySearchAlbumCard({album}: {
         releaseDatePrecision={album.releaseDatePrecision}
         albumType={album.albumType}
         spotifyUrl={album.spotifyUrl}
-        footerStart={earmark && <EarmarkStatus earmark={earmark}/>}
+        earmark={earmark}
         actions={
             <>
                 <QuickEarmarkButton spotifyAlbumId={album.id} compact albumName={album.name}/>

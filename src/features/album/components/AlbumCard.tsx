@@ -4,12 +4,14 @@ import styles from "./AlbumCard.module.css";
 import CoverImage from "../../../components/image/CoverImage.tsx";
 import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
+import EarmarkIndicators from "../../earmark/components/indicators/EarmarkIndicators.tsx";
+import type {Earmark} from "../../earmark/api/earmark.ts";
 
 
 export default function AlbumCard({
                                       to, linkState, linkTitle, name, artists, unavailable,
                                       cover, coverAlt, releaseDate, releaseDatePrecision, albumType, spotifyUrl,
-                                      footerStart, actions, children
+                                      actions, children, earmark
                                   }: {
     to: string;
     linkState?: LinkProps["state"];
@@ -23,9 +25,9 @@ export default function AlbumCard({
     releaseDatePrecision: string | undefined;
     albumType?: string | undefined;
     spotifyUrl?: string | undefined;
-    footerStart?: ReactNode;
     actions?: ReactNode;
     children?: ReactNode;
+    earmark: Earmark | undefined
 }) {
     const meta = [releaseDate && formatReleaseDate(releaseDate, releaseDatePrecision), albumType]
         .filter(Boolean)
@@ -51,7 +53,7 @@ export default function AlbumCard({
             </div>
         </div>
         <div className={styles.footer}>
-            {footerStart}
+            <EarmarkIndicators earmark={earmark}/>
             <div className={styles.footerEnd}>
                 {meta && <p className={styles.meta}>{meta}</p>}
                 {spotifyUrl && <SpotifyLink className={styles.spotify} url={spotifyUrl}/>}

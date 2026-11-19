@@ -1,10 +1,8 @@
 import type {Earmark} from "../api/earmark.ts";
 import {pickImage} from "../../../utils/pickImage.ts";
 import AlbumCard from "../../album/components/AlbumCard.tsx";
-import EarmarkStatus from "./indicators/EarmarkStatus.tsx";
 import DeleteEarmarkButton from "./buttons/DeleteEarmarkButton.tsx";
 import {useLocation} from "react-router";
-import EarmarkNoteIndicator from "./indicators/EarmarkNoteIndicator.tsx";
 
 export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
     const {album, spotifyAlbumId} = earmark;
@@ -24,12 +22,7 @@ export default function EarmarkAlbumCard({earmark}: { earmark: Earmark }) {
         releaseDatePrecision={album?.releaseDatePrecision}
         albumType={album?.albumType}
         spotifyUrl={album?.spotifyUrl}
-        footerStart={
-            <>
-                <EarmarkStatus earmark={earmark}/>
-                <EarmarkNoteIndicator earmark={earmark}/>
-            </>
-        }
+        earmark={earmark}
         actions={
             <DeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name} earmark={earmark}/>
         }/>
