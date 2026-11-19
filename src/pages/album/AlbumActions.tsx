@@ -3,7 +3,7 @@ import QuickEarmarkButton from "../../features/earmark/components/buttons/QuickE
 import DeleteEarmarkButton from "../../features/earmark/components/buttons/DeleteEarmarkButton.tsx";
 import CreateOrEditEarmarkButton from "../../features/earmark/components/buttons/CreateOrEditEarmarkButton.tsx";
 import styles from "./AlbumPage.module.css"
-import EarmarkDate from "../../features/earmark/components/EarmarkDate.tsx";
+import EarmarkStatus from "../../features/earmark/components/indicators/EarmarkStatus.tsx";
 import ListenedEarmarkButton from "../../features/earmark/components/buttons/ListenedEarmarkButton.tsx";
 import {useAlbumEarmark} from "../../features/earmark/hooks/useAlbumEarmark.ts";
 
@@ -13,7 +13,7 @@ export default function AlbumActions({album}: { album: SpotifyAlbumDetails }) {
 
     return <div className={styles.actions}>
         <div className={styles.earmarkStatus}>
-            {earmark && <EarmarkDate earmark={earmark}/>}
+            {earmark && <EarmarkStatus earmark={earmark}/>}
             <QuickEarmarkButton spotifyAlbumId={album.id} label="Quick earmark" albumName={album.name}/>
             {
                 earmark &&
