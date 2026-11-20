@@ -8,6 +8,7 @@ import {
     parseStatus
 } from "../../utils/filter.ts";
 import styles from "./EarmarksFilter.module.css"
+import {useSyncedValue} from "../../../../hooks/useSyncedValue.ts";
 
 export default function EarmarksFilter({status, hasNote, rating, onStatusChange, onHasNoteChange, onRatingChange}: {
     status: EarmarkStatus | undefined;
@@ -17,12 +18,19 @@ export default function EarmarksFilter({status, hasNote, rating, onStatusChange,
     onHasNoteChange: (next: boolean | undefined) => void;
     onRatingChange: (next: EarmarkRating | undefined) => void;
 }) {
+    const [statusValue, setStatusValue] = useSyncedValue(status ?? "");
+    const [noteValue, setNoteValue] = useSyncedValue(hasNote === undefined ? "" : String(hasNote));
+    const [ratingValue, setRatingValue] = useSyncedValue(rating ?? "");
+
     return <div className={styles.filters}>
         <span className={styles.groupLabel}>Filter</span>
         <select aria-label="Filter by status"
                 className={styles.select}
-                value={status ?? ""}
-                onChange={(e) => onStatusChange(parseStatus(e.target.value))}
+                value={statusValue}
+                onChange={(e) => {
+                    setStatusValue(e.target.value);
+                    onStatusChange(parseStatus(e.target.value));
+                }}
         >
             <option value="">All</option>
             <option value="TO_LISTEN">To listen</option>
@@ -31,8 +39,11 @@ export default function EarmarksFilter({status, hasNote, rating, onStatusChange,
 
         <select aria-label="Filter by note"
                 className={styles.select}
-                value={hasNote === undefined ? "" : String(hasNote)}
-                onChange={(e) => onHasNoteChange(parseHasNote(e.target.value))}
+                value={noteValue}
+                onChange={(e) => {
+                    setNoteValue(e.target.value);
+                    onHasNoteChange(parseHasNote(e.target.value));
+                }}
         >
             <option value="">Any note</option>
             <option value="true">Has note</option>
@@ -41,8 +52,11 @@ export default function EarmarksFilter({status, hasNote, rating, onStatusChange,
 
         <select aria-label="Filter by rating"
                 className={styles.select}
-                value={rating ?? ""}
-                onChange={(e) => onRatingChange(parseRatingFilter(e.target.value))}
+                value={ratingValue}
+                onChange={(e) => {
+                    setRatingValue(e.target.value);
+                    onRatingChange(parseRatingFilter(e.target.value));
+                }}
         >
             <option value="">Any rating</option>
             {EARMARK_RATING_FILTERS.map((filter) =>
