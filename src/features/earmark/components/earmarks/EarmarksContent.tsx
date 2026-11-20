@@ -19,7 +19,8 @@ export default function EarmarksContent({sort, q, status, hasNote, rating}: {
         refetch,
         hasNextPage,
         isFetchingNextPage,
-        fetchNextPage
+        fetchNextPage,
+        isPlaceholderData
     } = useFetchEarmarks(sort, q, status, hasNote, rating);
 
     if (isPending) {
@@ -50,7 +51,7 @@ export default function EarmarksContent({sort, q, status, hasNote, rating}: {
 
     return <>
         <p className={styles.count}>{total} {total === 1 ? "earmark" : "earmarks"}</p>
-        <ul className={styles.list}>
+        <ul className={isPlaceholderData ? `${styles.list} ${styles.refreshing}` : styles.list}>
             {
                 earmarks.map(earmark => <EarmarkAlbumCard key={earmark.id} earmark={earmark} sort={sort}/>)
             }

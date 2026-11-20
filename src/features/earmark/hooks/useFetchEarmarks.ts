@@ -1,4 +1,4 @@
-import {useInfiniteQuery} from "@tanstack/react-query";
+import {keepPreviousData, useInfiniteQuery} from "@tanstack/react-query";
 import {earmarkKeys} from "../queryKeys.ts";
 import {fetchEarmarks} from "../api/earmark.ts";
 import type {EarmarkSort} from "../utils/earmarkSort.ts";
@@ -21,5 +21,6 @@ export function useFetchEarmarks(
             const {number, totalPages} = lastPage.page;
             return number + 1 < totalPages ? number + 1 : undefined;
         },
+        placeholderData: keepPreviousData
     });
 }
