@@ -7,7 +7,7 @@ import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
 import {useState} from "react";
 import EarmarksSearchToggle from "../components/earmarks/EarmarksSearchToggle.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
-import {type EarmarkStatus, parseHasNote, parseStatus} from "../utils/earmarkFilters.ts";
+import {type EarmarkRating, type EarmarkStatus, parseHasNote, parseRatingFilter, parseStatus} from "../utils/filter.ts";
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
 import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 import Page from "../../../components/page/Page.tsx";
@@ -21,6 +21,7 @@ export default function Earmarks() {
     const searchInput = searchParams.get("q") ?? "";
     const status = parseStatus(searchParams.get("status"));
     const hasNote = parseHasNote(searchParams.get("hasNote"));
+    const rating = parseRatingFilter(searchParams.get("rating"));
 
     const [searchOpen, setSearchOpen] = useState(searchInput !== "");
     const debouncedQ = useDebounce(searchInput.trim(), 500);
@@ -65,6 +66,20 @@ export default function Earmarks() {
                 params.set("status", next);
             } else {
                 params.delete("status");
+            }
+
+            return params;
+        }, {replace: true});
+    }
+
+    function handleHasRatingChange(next: EarmarkRating | undefined) {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (next !== undefined) {
+                params.set("rating", String(next));
+            } else {
+                params.delete("rating");
             }
 
             return params;
@@ -118,12 +133,14 @@ export default function Earmarks() {
                 <EarmarksFilter
                     status={status}
                     hasNote={hasNote}
+                    rating={rating}
                     onStatusChange={handleStatusChange}
                     onHasNoteChange={handleHasNoteChange}
+                    onRatingChange={handleHasRatingChange}
                 />
             </div>
         </div>
-        <EarmarksContent sort={sort} q={debouncedQ} status={status} hasNote={hasNote}/>
+        <EarmarksContent sort={sort} q={debouncedQ} status={status} hasNote={hasNote} rating={rating}/>
     </Page>
 }
 

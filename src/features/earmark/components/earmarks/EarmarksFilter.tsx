@@ -1,11 +1,21 @@
-import {type EarmarkStatus, parseHasNote, parseStatus} from "../../utils/earmarkFilters.ts";
+import {
+    EARMARK_RATING_FILTER_LABELS,
+    EARMARK_RATING_FILTERS,
+    type EarmarkRating,
+    type EarmarkStatus,
+    parseHasNote,
+    parseRatingFilter,
+    parseStatus
+} from "../../utils/filter.ts";
 import styles from "./EarmarksFilter.module.css"
 
-export default function EarmarksFilter({status, hasNote, onStatusChange, onHasNoteChange}: {
+export default function EarmarksFilter({status, hasNote, rating, onStatusChange, onHasNoteChange, onRatingChange}: {
     status: EarmarkStatus | undefined;
     hasNote: boolean | undefined;
+    rating: EarmarkRating | undefined;
     onStatusChange: (next: EarmarkStatus | undefined) => void;
     onHasNoteChange: (next: boolean | undefined) => void;
+    onRatingChange: (next: EarmarkRating | undefined) => void;
 }) {
     return <div className={styles.filters}>
         <span className={styles.groupLabel}>Filter</span>
@@ -27,6 +37,17 @@ export default function EarmarksFilter({status, hasNote, onStatusChange, onHasNo
             <option value="">Any note</option>
             <option value="true">Has note</option>
             <option value="false">No note</option>
+        </select>
+
+        <select aria-label="Filter by rating"
+                className={styles.select}
+                value={rating ?? ""}
+                onChange={(e) => onRatingChange(parseRatingFilter(e.target.value))}
+        >
+            <option value="">Any rating</option>
+            {EARMARK_RATING_FILTERS.map((filter) =>
+                <option key={filter} value={filter}>{EARMARK_RATING_FILTER_LABELS[filter]}</option>
+            )}
         </select>
     </div>
 }

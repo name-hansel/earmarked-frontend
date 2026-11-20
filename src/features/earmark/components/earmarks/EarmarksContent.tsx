@@ -3,13 +3,14 @@ import {useFetchEarmarks} from "../../hooks/useFetchEarmarks.ts";
 import EarmarkAlbumCard from "../card/EarmarkAlbumCard.tsx";
 import type {EarmarkSort} from "../../utils/earmarkSort.ts";
 import styles from "./EarmarksContent.module.css"
-import type {EarmarkStatus} from "../../utils/earmarkFilters.ts";
+import type {EarmarkRating, EarmarkStatus} from "../../utils/filter.ts";
 
-export default function EarmarksContent({sort, q, status, hasNote}: {
+export default function EarmarksContent({sort, q, status, hasNote, rating}: {
     sort: EarmarkSort;
     q: string;
     status: EarmarkStatus | undefined;
     hasNote: boolean | undefined;
+    rating: EarmarkRating | undefined;
 }) {
     const {
         data,
@@ -19,7 +20,7 @@ export default function EarmarksContent({sort, q, status, hasNote}: {
         hasNextPage,
         isFetchingNextPage,
         fetchNextPage
-    } = useFetchEarmarks(sort, q, status, hasNote);
+    } = useFetchEarmarks(sort, q, status, hasNote, rating);
 
     if (isPending) {
         return <PageLoader/>
