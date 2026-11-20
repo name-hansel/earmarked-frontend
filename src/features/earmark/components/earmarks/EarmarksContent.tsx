@@ -41,7 +41,7 @@ export default function EarmarksContent({sort, q, status, hasNote, rating}: {
             return <p className={styles.empty}>No earmarks match “{q}”.</p>;
         }
 
-        if (status !== undefined || hasNote !== undefined) {
+        if (status !== undefined || hasNote !== undefined || rating !== undefined) {
             return <p className={styles.empty}>No earmarks match these filters.</p>;
         }
 
