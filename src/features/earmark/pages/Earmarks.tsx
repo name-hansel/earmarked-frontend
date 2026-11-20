@@ -4,8 +4,6 @@ import {useSearchParams} from "react-router";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
 import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
-import {useState} from "react";
-import EarmarksSearchToggle from "../components/earmarks/EarmarksSearchToggle.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
 import {type EarmarkRating, type EarmarkStatus, parseHasNote, parseRatingFilter, parseStatus} from "../utils/filter.ts";
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
@@ -23,7 +21,6 @@ export default function Earmarks() {
     const hasNote = parseHasNote(searchParams.get("hasNote"));
     const rating = parseRatingFilter(searchParams.get("rating"));
 
-    const [searchOpen, setSearchOpen] = useState(searchInput !== "");
     const debouncedQ = useDebounce(searchInput.trim(), 500);
 
     const sort = isEarmarkSort(sortInput) ? sortInput : DEFAULT_EARMARK_SORT;
@@ -100,32 +97,23 @@ export default function Earmarks() {
         }, {replace: true});
     }
 
-    function toggleSearch() {
-        if (searchOpen) handleSearchChange("");
-        setSearchOpen(!searchOpen);
-    }
-
     return <Page>
         <div className={styles.header}>
             <div className={styles.titleRow}>
                 <h1 className={styles.title}>Your earmarks</h1>
-                {!searchOpen && <EarmarksSearchToggle onClick={toggleSearch}/>}
             </div>
-            {searchOpen &&
-                <div className={styles.search}>
-                    <SearchInput
-                        value={searchInput}
-                        onChange={handleSearchChange}
-                        onClear={toggleSearch}
-                        clearLabel="Close search"
-                        alwaysShowClear
-                        placeholder="Search album, artist or note"
-                        aria-label="Search earmarks"
-                        maxLength={100}
-                        autoFocus
-                    />
-                </div>
-            }
+            <div className={styles.search}>
+                <SearchInput
+                    value={searchInput}
+                    onChange={handleSearchChange}
+                    onClear={() => handleSearchChange("")}
+                    clearLabel="Clear search"
+                    alwaysShowClear
+                    placeholder="Search album, artist or note"
+                    aria-label="Search earmarks"
+                    maxLength={100}
+                />
+            </div>
             <div className={styles.controls}>
                 <div className={styles.sort}>
                     <EarmarksSortDropdown sort={sort} handleSortChange={handleSortChange}/>
