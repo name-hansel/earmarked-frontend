@@ -1,6 +1,7 @@
 import styles from "./RatingInput.module.css"
 import {MusicNoteIcon, MusicNoteOffIcon} from "../../../../components/Icon.tsx";
 import {MAX_RATING} from "../../constants.ts";
+import ClearButton from "../../../../components/button/ClearButton.tsx";
 
 export default function RatingInput({value, onChange}: {
     value: number | null,
@@ -25,10 +26,7 @@ export default function RatingInput({value, onChange}: {
                     </button>;
                 })}
             </div>
-            {value !== null &&
-                <button type="button" className={styles.textButton} onClick={() => onChange(null)}>
-                    Clear
-                </button>}
+            {value !== null && <ClearButton label="Clear rating" onClick={() => onChange(null)}/>}
         </div>
     </div>
 }

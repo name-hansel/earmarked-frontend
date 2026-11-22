@@ -1,5 +1,6 @@
 import {todayLocalDate} from "../../../../utils/todayLocalDate.ts";
 import styles from "./EarmarkListenedOnDatePicker.module.css"
+import ClearButton from "../../../../components/button/ClearButton.tsx";
 
 export default function EarmarkListenedOnDatePicker({listenedAt, setListenedAt, listened, setListened}: {
     listenedAt: string | undefined,
@@ -20,14 +21,17 @@ export default function EarmarkListenedOnDatePicker({listenedAt, setListenedAt, 
         {listened && (
             <div className={styles.dateField}>
                 <label className={styles.dateLabel} htmlFor="listenedAt">Listened on (optional)</label>
-                <input
-                    id="listenedAt"
-                    className={styles.dateInput}
-                    type="date"
-                    value={listenedAt}
-                    max={todayLocalDate()}
-                    onChange={(e) => setListenedAt(e.target.value)}
-                />
+                <div className={styles.dateRow}>
+                    <input
+                        id="listenedAt"
+                        className={styles.dateInput}
+                        type="date"
+                        value={listenedAt ?? ""}
+                        max={todayLocalDate()}
+                        onChange={(e) => setListenedAt(e.target.value)}
+                    />
+                    {listenedAt && <ClearButton label="Clear listened date" onClick={() => setListenedAt("")}/>}
+                </div>
             </div>
         )}
     </div>

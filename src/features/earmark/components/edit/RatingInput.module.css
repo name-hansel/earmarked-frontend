@@ -86,26 +86,7 @@
 }
 
 .noteButton:focus-visible,
-.zeroButton:focus-visible,
-.textButton:focus-visible {
+.zeroButton:focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
-}
-
-.textButton {
-    min-height: 2.75rem;
-    padding: 0 0.75rem;
-    box-sizing: border-box;
-    background: none;
-    border: 1px dashed var(--color-border);
-    border-radius: 0.5rem;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-muted);
-    cursor: pointer;
-}
-
-.textButton:hover {
-    border-color: var(--color-primary);
 }
