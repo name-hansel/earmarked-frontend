@@ -30,7 +30,7 @@ export default function EarmarkListenedOnDatePicker({listenedAt, setListenedAt, 
                         max={todayLocalDate()}
                         onChange={(e) => setListenedAt(e.target.value)}
                     />
-                    {listenedAt && <ClearButton label="Clear listened date" onClick={() => setListenedAt("")}/>}
+                    <ClearButton label="Clear listened date" disabled={!listenedAt} onClick={() => setListenedAt("")}/>
                 </div>
             </div>
         )}

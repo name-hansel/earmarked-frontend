@@ -26,7 +26,7 @@ export default function RatingInput({value, onChange}: {
                     </button>;
                 })}
             </div>
-            {value !== null && <ClearButton label="Clear rating" onClick={() => onChange(null)}/>}
+            <ClearButton label="Clear rating" disabled={value === null} onClick={() => onChange(null)}/>
         </div>
     </div>
 }
