@@ -1,9 +1,8 @@
 .filters {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-    flex: 1 1 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 .groupLabel {
@@ -12,9 +11,16 @@
     color: var(--color-text-muted);
 }
 
+.filterRow {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
 .select {
     appearance: none;
-    width: 100%;
     padding: 0.6rem 2.25rem 0.6rem 0.75rem;
     font: inherit;
     font-size: 1rem;
@@ -26,6 +32,9 @@
     border: 1px dashed var(--color-border);
     border-radius: 0.5rem;
     cursor: pointer;
+    flex: 1 1 0;
+    min-width: 0;
+    text-overflow: ellipsis;
 }
 
 .select:hover {
@@ -47,6 +56,7 @@
 }
 
 .clearAll {
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -82,13 +92,22 @@
 }
 
 @media (min-width: 40rem) {
+    .groupLabel {
+        display: inline;
+    }
+
     .filters {
-        flex: none;
-        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        width: auto;
+    }
+
+    .filterRow {
+        width: auto;
     }
 
     .select {
+        flex: none;
         width: auto;
-        min-width: 8.5rem;
     }
 }

@@ -36,48 +36,50 @@ export default function EarmarksFilter({
 
     return <div className={styles.filters}>
         <span className={styles.groupLabel}>Filter</span>
-        <select aria-label="Filter by status"
-                className={styles.select}
-                value={statusValue}
-                onChange={(e) => {
-                    setStatusValue(e.target.value);
-                    onStatusChange(parseStatus(e.target.value));
-                }}
-        >
-            <option value="">All</option>
-            <option value="TO_LISTEN">To listen</option>
-            <option value="LISTENED">Listened</option>
-        </select>
+        <div className={styles.filterRow}>
+            <select aria-label="Filter by status"
+                    className={styles.select}
+                    value={statusValue}
+                    onChange={(e) => {
+                        setStatusValue(e.target.value);
+                        onStatusChange(parseStatus(e.target.value));
+                    }}
+            >
+                <option value="">All</option>
+                <option value="TO_LISTEN">To listen</option>
+                <option value="LISTENED">Listened</option>
+            </select>
 
-        <select aria-label="Filter by note"
-                className={styles.select}
-                value={noteValue}
-                onChange={(e) => {
-                    setNoteValue(e.target.value);
-                    onHasNoteChange(parseHasNote(e.target.value));
-                }}
-        >
-            <option value="">Any note</option>
-            <option value="true">Has note</option>
-            <option value="false">No note</option>
-        </select>
+            <select aria-label="Filter by note"
+                    className={styles.select}
+                    value={noteValue}
+                    onChange={(e) => {
+                        setNoteValue(e.target.value);
+                        onHasNoteChange(parseHasNote(e.target.value));
+                    }}
+            >
+                <option value="">Any note</option>
+                <option value="true">Has note</option>
+                <option value="false">No note</option>
+            </select>
 
-        <select aria-label="Filter by rating"
-                className={styles.select}
-                value={ratingValue}
-                onChange={(e) => {
-                    setRatingValue(e.target.value);
-                    onRatingChange(parseRatingFilter(e.target.value));
-                }}
-        >
-            <option value="">Any rating</option>
-            {EARMARK_RATING_FILTERS.map((filter) =>
-                <option key={filter} value={filter}>{EARMARK_RATING_FILTER_LABELS[filter]}</option>
-            )}
-        </select>
-        <button type="button" className={styles.clearAll} disabled={!hasActiveFilters}
-                aria-label="Clear all filters" title="Clear all filters" onClick={onClear}>
-            <FilterOffIcon className={styles.clearIcon}/>
-        </button>
+            <select aria-label="Filter by rating"
+                    className={styles.select}
+                    value={ratingValue}
+                    onChange={(e) => {
+                        setRatingValue(e.target.value);
+                        onRatingChange(parseRatingFilter(e.target.value));
+                    }}
+            >
+                <option value="">Any rating</option>
+                {EARMARK_RATING_FILTERS.map((filter) =>
+                    <option key={filter} value={filter}>{EARMARK_RATING_FILTER_LABELS[filter]}</option>
+                )}
+            </select>
+            <button type="button" className={styles.clearAll} disabled={!hasActiveFilters}
+                    aria-label="Clear all filters" title="Clear all filters" onClick={onClear}>
+                <FilterOffIcon className={styles.clearIcon}/>
+            </button>
+        </div>
     </div>
 }
