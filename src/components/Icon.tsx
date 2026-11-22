@@ -76,3 +76,10 @@ export const NoteIcon = (props: SVGProps<SVGSVGElement>) =>
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         <path d="M8 9h8M8 13h5"/>
     </Icon>;
+
+export const FilterOffIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <path d="M13.013 3H2l8 9.46V19l4 2v-8.54l.9-1.055"/>
+        <path d="m22 3-5 5"/>
+        <path d="m17 3 5 5"/>
+    </Icon>;

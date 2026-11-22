@@ -9,18 +9,30 @@ import {
 } from "../../utils/filter.ts";
 import styles from "./EarmarksFilter.module.css"
 import {useSyncedValue} from "../../../../hooks/useSyncedValue.ts";
+import {FilterOffIcon} from "../../../../components/Icon.tsx";
 
-export default function EarmarksFilter({status, hasNote, rating, onStatusChange, onHasNoteChange, onRatingChange}: {
+export default function EarmarksFilter({
+                                           status,
+                                           hasNote,
+                                           rating,
+                                           onStatusChange,
+                                           onHasNoteChange,
+                                           onRatingChange,
+                                           onClear
+                                       }: {
     status: EarmarkStatus | undefined;
     hasNote: boolean | undefined;
     rating: EarmarkRating | undefined;
     onStatusChange: (next: EarmarkStatus | undefined) => void;
     onHasNoteChange: (next: boolean | undefined) => void;
     onRatingChange: (next: EarmarkRating | undefined) => void;
+    onClear: () => void
 }) {
     const [statusValue, setStatusValue] = useSyncedValue(status ?? "");
     const [noteValue, setNoteValue] = useSyncedValue(hasNote === undefined ? "" : String(hasNote));
     const [ratingValue, setRatingValue] = useSyncedValue(rating ?? "");
+
+    const hasActiveFilters = status !== undefined || hasNote !== undefined || rating !== undefined;
 
     return <div className={styles.filters}>
         <span className={styles.groupLabel}>Filter</span>
@@ -63,5 +75,9 @@ export default function EarmarksFilter({status, hasNote, rating, onStatusChange,
                 <option key={filter} value={filter}>{EARMARK_RATING_FILTER_LABELS[filter]}</option>
             )}
         </select>
+        <button type="button" className={styles.clearAll} disabled={!hasActiveFilters}
+                aria-label="Clear all filters" title="Clear all filters" onClick={onClear}>
+            <FilterOffIcon className={styles.clearIcon}/>
+        </button>
     </div>
 }

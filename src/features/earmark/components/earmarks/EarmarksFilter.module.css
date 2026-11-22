@@ -46,6 +46,41 @@
     white-space: nowrap;
 }
 
+.clearAll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    box-sizing: border-box;
+    background: none;
+    border: 1px dashed var(--color-border);
+    border-radius: 0.5rem;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.clearAll:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.clearAll:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.clearAll:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+}
+
+.clearIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
 @media (min-width: 40rem) {
     .filters {
         flex: none;

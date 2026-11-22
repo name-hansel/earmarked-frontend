@@ -30,26 +30,8 @@
 }
 
 @media (min-width: 40rem) {
-    .header {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-    }
-
-    .titleRow {
-        order: 1;
-    }
-
     .sort {
         flex: none;
-    }
-
-    .search {
-        order: 3;
-        flex-basis: 100%;
-        width: 100%;
     }
 
     .search > * {
@@ -57,7 +39,7 @@
     }
 
     .controls {
-        order: 2;
         align-items: center;
+        justify-content: space-between;
     }
 }

@@ -97,6 +97,17 @@ export default function Earmarks() {
         }, {replace: true});
     }
 
+    function handleClearFilters() {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+            params.delete("status");
+            params.delete("hasNote");
+            params.delete("rating");
+
+            return params;
+        }, {replace: true});
+    }
+
     return <Page>
         <div className={styles.header}>
             <div className={styles.titleRow}>
@@ -125,6 +136,7 @@ export default function Earmarks() {
                     onStatusChange={handleStatusChange}
                     onHasNoteChange={handleHasNoteChange}
                     onRatingChange={handleHasRatingChange}
+                    onClear={handleClearFilters}
                 />
             </div>
         </div>
