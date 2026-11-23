@@ -1,5 +1,5 @@
 import type {Earmark} from "../../api/earmark.ts";
-import {NoteIcon} from "../../../../components/Icon.tsx";
+import {StickyNoteIcon} from "../../../../components/Icon.tsx";
 import Indicator from "./Indicator.tsx";
 
 export default function EarmarkNoteIndicator({earmark}: { earmark: Earmark }) {
@@ -7,5 +7,5 @@ export default function EarmarkNoteIndicator({earmark}: { earmark: Earmark }) {
         return null;
     }
 
-    return <Indicator icon={NoteIcon} label={earmark.note}/>;
+    return <Indicator icon={StickyNoteIcon} label={earmark.note}/>;
 }

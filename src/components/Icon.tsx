@@ -73,10 +73,11 @@ export const MusicNoteOffIcon = (props: SVGProps<SVGSVGElement>) =>
         <path d="M3 3l18 18"/>
     </Icon>;
 
-export const NoteIcon = (props: SVGProps<SVGSVGElement>) =>
+export const StickyNoteIcon = (props: SVGProps<SVGSVGElement>) =>
     <Icon {...props}>
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        <path d="M8 9h8M8 13h5"/>
+        <path d="M5 3h10l6 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+        <path d="M15 3v6h6"/>
+        <path d="M7 13h10M7 17h6"/>
     </Icon>;
 
 export const FilterOffIcon = (props: SVGProps<SVGSVGElement>) =>
