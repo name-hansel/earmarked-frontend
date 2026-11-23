@@ -13,6 +13,7 @@ export interface Earmark {
     listenedAt: string | null;
     listened: boolean;
     rating: number | null;
+    review: string | null;
 }
 
 export interface AlbumEarmarkResponse {
@@ -26,8 +27,8 @@ export async function createEarmark(spotifyAlbumId: string, note?: string): Prom
     return response.data;
 }
 
-export async function updateEarmark(earmarkId: string, note: string, listenedAt: string | null, listened: boolean, rating: number | null): Promise<Earmark> {
-    const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note, listenedAt, listened, rating});
+export async function updateEarmark(earmarkId: string, note: string, listenedAt: string | null, listened: boolean, rating: number | null, review: string | null): Promise<Earmark> {
+    const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note, listenedAt, listened, rating, review});
     return response.data;
 }
 

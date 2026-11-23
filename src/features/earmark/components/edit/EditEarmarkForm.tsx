@@ -7,7 +7,7 @@ import {useUpdateEarmark} from "../../hooks/useUpdateEarmark.ts";
 import {toast} from "sonner";
 import {getErrorMessage} from "../../../../lib/errors.ts";
 import EarmarkAlbumSummary from "./EarmarkAlbumSummary.tsx";
-import EarmarkNoteField from "./EarmarkNoteField.tsx";
+import EarmarkTextField from "./EarmarkTextField.tsx";
 import formStyles from "../../../../styles/Form.module.css";
 import styles from "./EditEarmarkForm.module.css";
 import DeleteEarmarkDialog from "./DeleteEarmarkDialog.tsx";
@@ -17,19 +17,23 @@ import {
     getEarmarkRemovedMessage,
     getEarmarkUpdatedMessage
 } from "../../../../utils/formatEarmarkToastMessage.ts";
-import EarmarkListenedOnDatePicker from "./EarmarkListenedOnDatePicker.tsx";
+import ListenedAtDatePicker from "./ListenedAtDatePicker.tsx";
 import BackLink from "../../../../components/back-link/BackLink.tsx";
 import RatingInput from "./RatingInput.tsx";
+import ListenedCheckbox from "./ListenedCheckbox.tsx";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
     earmark: Earmark | null;
 }) {
     const albumPath = `/albums/${spotifyAlbumId}`;
+    // TODO: Handle null?
     const [note, setNote] = useState(earmark?.note ?? "");
     const [listenedAt, setListenedAt] = useState(earmark?.listenedAt ?? "");
     const [listened, setListened] = useState(earmark?.listened ?? false);
     const [rating, setRating] = useState<number | null>(earmark?.rating ?? null);
+    const [review, setReview] = useState<string | null>(earmark?.review ?? "");
+
     const navigate = useNavigate();
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -43,6 +47,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
         const trimmedNote = note.trim();
+        // TODO: handle null in better way?
+        const trimmedReview = review != null ? review.trim() : null;
 
         if (earmark) {
             updateEarmark({
@@ -50,7 +56,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                 note: trimmedNote,
                 listened,
                 listenedAt: listenedAt || null,
-                rating: rating
+                rating: rating,
+                review: trimmedReview
             }, {
                 onSuccess: () => {
                     toast.success(getEarmarkUpdatedMessage(album?.name));
@@ -89,6 +96,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         if (!next) {
             setListenedAt("");
             setRating(null);
+            setReview(null);
         }
     }
 
@@ -101,6 +109,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
         && listened === earmark.listened
         && listenedAt === (earmark.listenedAt ?? "")
         && rating === (earmark?.rating ?? null)
+        && review === (earmark?.review ?? null)
         : false;
 
     return <section className={styles.earmarkForm}>
@@ -111,13 +120,20 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
             </div>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <h1 className={styles.heading}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
-                {earmark && <EarmarkListenedOnDatePicker listened={listened}
-                                                         setListened={handleListenedChange}
-                                                         listenedAt={listenedAt}
-                                                         setListenedAt={setListenedAt}/>}
-                {earmark && listened && <RatingInput value={rating} onChange={setRating}/>}
                 <div className={styles.note}>
-                    <EarmarkNoteField value={note} onChange={setNote}/>
+                    <EarmarkTextField value={note} onChange={setNote} label={"Note"}/>
+                </div>
+                <div className={styles.listenedField}>
+                    <ListenedCheckbox listened={listened} setListened={handleListenedChange}/>
+                    {
+                        listened && <>
+                            <ListenedAtDatePicker
+                                listenedAt={listenedAt}
+                                setListenedAt={setListenedAt}/>
+                            <RatingInput value={rating} onChange={setRating}/>
+                            <EarmarkTextField value={review} onChange={setReview} label={"Review"}/>
+                        </>
+                    }
                 </div>
                 <div className={styles.actions}>
                     <button className={formStyles.submit} type="submit"

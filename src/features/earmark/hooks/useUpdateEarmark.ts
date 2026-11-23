@@ -6,9 +6,14 @@ export function useUpdateEarmark(spotifyAlbumId: string) {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({earmarkId, note, listenedAt, listened, rating}: {
-            earmarkId: string, note: string, listenedAt: string | null, listened: boolean, rating: number | null
-        }) => updateEarmark(earmarkId, note, listenedAt, listened, rating),
+        mutationFn: ({earmarkId, note, listenedAt, listened, rating, review}: {
+            earmarkId: string,
+            note: string,
+            listenedAt: string | null,
+            listened: boolean,
+            rating: number | null,
+            review: string | null
+        }) => updateEarmark(earmarkId, note, listenedAt, listened, rating, review),
         onSuccess: (earmark) => {
             queryClient.setQueryData(earmarkKeys.album(spotifyAlbumId), {earmark});
         },
