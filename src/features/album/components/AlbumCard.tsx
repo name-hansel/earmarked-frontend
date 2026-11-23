@@ -6,12 +6,13 @@ import SpotifyLink from "../../../components/spotify/SpotifyLink.tsx";
 import {formatReleaseDate} from "../../../utils/formatReleaseDate.ts";
 import EarmarkIndicators from "../../earmark/components/indicators/EarmarkIndicators.tsx";
 import type {Earmark} from "../../earmark/api/earmark.ts";
+import {formatDuration} from "../../../utils/formatDuration.ts";
 
 
 export default function AlbumCard({
                                       to, linkState, linkTitle, name, artists, unavailable,
                                       cover, coverAlt, releaseDate, releaseDatePrecision, albumType, spotifyUrl,
-                                      actions, children, earmark, sortLabel
+                                      actions, children, earmark, sortLabel, durationMs
                                   }: {
     to: string;
     linkState?: LinkProps["state"];
@@ -29,10 +30,13 @@ export default function AlbumCard({
     children?: ReactNode;
     earmark: Earmark | undefined;
     sortLabel?: ReactNode;
+    durationMs?: number | null | undefined
 }) {
-    const meta = [releaseDate && formatReleaseDate(releaseDate, releaseDatePrecision), albumType]
-        .filter(Boolean)
-        .join(" · ");
+    const meta = [
+        releaseDate && formatReleaseDate(releaseDate, releaseDatePrecision),
+        albumType && albumType.charAt(0).toUpperCase() + albumType.slice(1),
+        durationMs != null ? formatDuration(durationMs) : undefined
+    ].filter(Boolean).join(" · ");
 
     return <li className={styles.item}>
         <div className={styles.strip}>
@@ -59,10 +63,8 @@ export default function AlbumCard({
                 </div>
             </div>
             <div className={styles.footer}>
-                <div className={styles.footerEnd}>
-                    {meta && <p className={styles.meta}>{meta}</p>}
-                    {spotifyUrl && <SpotifyLink className={styles.spotify} url={spotifyUrl}/>}
-                </div>
+                {meta && <p className={styles.meta}>{meta}</p>}
+                {spotifyUrl && <SpotifyLink className={styles.spotify} url={spotifyUrl}/>}
             </div>
         </div>
     </li>

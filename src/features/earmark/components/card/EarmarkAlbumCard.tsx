@@ -32,5 +32,6 @@ export default function EarmarkAlbumCard({earmark, sort}: {
             <DeleteEarmarkButton spotifyAlbumId={spotifyAlbumId} albumName={album?.name} earmark={earmark}/>
         }
         sortLabel={sort ? <EarmarkHeaderSortLabel earmark={earmark} sort={sort}/> : null}
+        durationMs={album?.totalDurationMs}
     />
 }

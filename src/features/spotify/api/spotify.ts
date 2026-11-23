@@ -13,6 +13,7 @@ export type SpotifyAlbum = {
     releaseDatePrecision: string;
     albumType: string;
     spotifyUrl: string;
+    totalDurationMs: number | null;
 }
 
 export type SpotifyTrack = {
