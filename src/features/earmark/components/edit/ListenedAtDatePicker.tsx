@@ -3,8 +3,8 @@ import styles from "./ListenedAtDatePicker.module.css"
 import ClearButton from "../../../../components/button/ClearButton.tsx";
 
 export default function ListenedAtDatePicker({listenedAt, setListenedAt,}: {
-    listenedAt: string | undefined,
-    setListenedAt: (value: (((prevState: string) => string) | string)) => void,
+    listenedAt: string | null,
+    setListenedAt: (value: (((prevState: string | null) => string | null) | string | null)) => void,
 }) {
     return <div className={styles.dateField}>
         <label className={styles.dateLabel} htmlFor="listenedAt">Listened on (optional)</label>
@@ -17,7 +17,7 @@ export default function ListenedAtDatePicker({listenedAt, setListenedAt,}: {
                 max={todayLocalDate()}
                 onChange={(e) => setListenedAt(e.target.value)}
             />
-            <ClearButton label="Clear listened date" disabled={!listenedAt} onClick={() => setListenedAt("")}/>
+            <ClearButton label="Clear listened date" disabled={!listenedAt} onClick={() => setListenedAt(null)}/>
         </div>
     </div>
 }
