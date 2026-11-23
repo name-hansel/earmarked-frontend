@@ -40,12 +40,6 @@ export const PencilIcon = (props: SVGProps<SVGSVGElement>) =>
         <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
     </Icon>;
 
-export const SearchIcon = (props: SVGProps<SVGSVGElement>) =>
-    <Icon {...props}>
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.3-4.3"/>
-    </Icon>;
-
 export const ArrowRightIcon = (props: SVGProps<SVGSVGElement>) =>
     <Icon {...props}>
         <path d="M5 12h14"/>
@@ -85,4 +79,10 @@ export const FilterOffIcon = (props: SVGProps<SVGSVGElement>) =>
         <path d="M13.013 3H2l8 9.46V19l4 2v-8.54l.9-1.055"/>
         <path d="m22 3-5 5"/>
         <path d="m17 3 5 5"/>
+    </Icon>;
+
+export const ReviewIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <path d="M5 3h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-2l-4 4v-4H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/>
+        <path d="M7 8h9M7 12h6"/>
     </Icon>;
