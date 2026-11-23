@@ -21,6 +21,7 @@ import ListenedAtDatePicker from "./ListenedAtDatePicker.tsx";
 import BackLink from "../../../../components/back-link/BackLink.tsx";
 import RatingInput from "./RatingInput.tsx";
 import ListenedCheckbox from "./ListenedCheckbox.tsx";
+import {todayLocalDate} from "../../../../utils/todayLocalDate.ts";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
@@ -95,6 +96,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
             setListenedAt(null);
             setRating(null);
             setReview(null);
+        } else {
+            setListenedAt(todayLocalDate());
         }
     }
 
