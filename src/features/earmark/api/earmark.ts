@@ -22,12 +22,12 @@ export interface AlbumEarmarkResponse {
 
 export const ALREADY_EARMARKED_CODE = 'EARMARK_ALREADY_EXISTS';
 
-export async function createEarmark(spotifyAlbumId: string, note?: string): Promise<Earmark> {
+export async function createEarmark(spotifyAlbumId: string, note?: string | null): Promise<Earmark> {
     const response = await api.post<Earmark>("/earmark", {spotifyAlbumId, note});
     return response.data;
 }
 
-export async function updateEarmark(earmarkId: string, note: string, listenedAt: string | null, listened: boolean, rating: number | null, review: string | null): Promise<Earmark> {
+export async function updateEarmark(earmarkId: string, note: string | null, listenedAt: string | null, listened: boolean, rating: number | null, review: string | null): Promise<Earmark> {
     const response = await api.patch<Earmark>(`/earmark/${earmarkId}`, {note, listenedAt, listened, rating, review});
     return response.data;
 }

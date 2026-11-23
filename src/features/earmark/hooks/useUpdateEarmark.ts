@@ -8,7 +8,7 @@ export function useUpdateEarmark(spotifyAlbumId: string) {
     return useMutation({
         mutationFn: ({earmarkId, note, listenedAt, listened, rating, review}: {
             earmarkId: string,
-            note: string,
+            note: string | null,
             listenedAt: string | null,
             listened: boolean,
             rating: number | null,

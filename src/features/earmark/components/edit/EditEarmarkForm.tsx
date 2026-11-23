@@ -27,12 +27,11 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     earmark: Earmark | null;
 }) {
     const albumPath = `/albums/${spotifyAlbumId}`;
-    // TODO: Handle null?
-    const [note, setNote] = useState(earmark?.note ?? "");
+    const [note, setNote] = useState<string | null>(earmark?.note ?? null);
     const [listenedAt, setListenedAt] = useState(earmark?.listenedAt ?? "");
     const [listened, setListened] = useState(earmark?.listened ?? false);
     const [rating, setRating] = useState<number | null>(earmark?.rating ?? null);
-    const [review, setReview] = useState<string | null>(earmark?.review ?? "");
+    const [review, setReview] = useState<string | null>(earmark?.review ?? null);
 
     const navigate = useNavigate();
     const dialogRef = useRef<HTMLDialogElement>(null);
@@ -46,7 +45,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        const trimmedNote = note.trim();
+        const trimmedNote = note != null ? note.trim() : null;
         // TODO: handle null in better way?
         const trimmedReview = review != null ? review.trim() : null;
 
