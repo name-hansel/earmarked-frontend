@@ -45,9 +45,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
 
     function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-        const trimmedNote = note != null ? note.trim() : null;
-        // TODO: handle null in better way?
-        const trimmedReview = review != null ? review.trim() : null;
+        const trimmedNote = note?.trim() ?? null;
+        const trimmedReview = review?.trim() ?? null;
 
         if (earmark) {
             updateEarmark({
