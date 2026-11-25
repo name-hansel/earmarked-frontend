@@ -3,12 +3,11 @@ import styles from "./EarmarkTextField.module.css";
 import formStyles from "../../../../styles/Form.module.css";
 import ClearButton from "../../../../components/button/ClearButton.tsx";
 
-const MAX_TEXT_LENGTH = 256;
-
-export default function EarmarkTextField({value, onChange, label}: {
+export default function EarmarkTextField({value, onChange, label, maxLength}: {
     value: string | null;
     onChange: (value: string) => void;
-    label: string
+    label: string;
+    maxLength: number;
 }) {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const id = `earmark-${label}`;
@@ -17,9 +16,9 @@ export default function EarmarkTextField({value, onChange, label}: {
         <label className={formStyles.label} htmlFor={id}>{label}</label>
         <textarea ref={textareaRef} className={styles.textarea} id={id} value={value ?? ""}
                   onChange={(event) => onChange(event.target.value)}
-                  maxLength={MAX_TEXT_LENGTH} rows={5}/>
+                  maxLength={maxLength} rows={5}/>
         <div className={styles.footer}>
-            <p className={styles.counter}>{value == null ? 0 : value.length}/{MAX_TEXT_LENGTH}</p>
+            <p className={styles.counter}>{value == null ? 0 : value.length}/{maxLength}</p>
             <ClearButton onClick={() => {
                 onChange("");
                 textareaRef.current?.focus();

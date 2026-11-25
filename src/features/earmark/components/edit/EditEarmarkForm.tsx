@@ -22,6 +22,7 @@ import BackLink from "../../../../components/back-link/BackLink.tsx";
 import RatingInput from "./RatingInput.tsx";
 import ListenedCheckbox from "./ListenedCheckbox.tsx";
 import {todayLocalDate} from "../../../../utils/todayLocalDate.ts";
+import {MAX_NOTE_LENGTH, MAX_REVIEW_LENGTH} from "../../constants.ts";
 
 export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
     spotifyAlbumId: string;
@@ -122,7 +123,7 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <h1 className={styles.heading}>{earmark ? "Edit earmark" : "Earmark album"}</h1>
                 <div className={styles.note}>
-                    <EarmarkTextField value={note} onChange={setNote} label={"Note"}/>
+                    <EarmarkTextField value={note} onChange={setNote} label={"Note"} maxLength={MAX_NOTE_LENGTH}/>
                 </div>
                 <div className={styles.listenedField}>
                     <ListenedCheckbox listened={listened} setListened={handleListenedChange}/>
@@ -132,7 +133,8 @@ export default function EditEarmarkForm({spotifyAlbumId, earmark}: {
                                 listenedAt={listenedAt}
                                 setListenedAt={setListenedAt}/>
                             <RatingInput value={rating} onChange={setRating}/>
-                            <EarmarkTextField value={review} onChange={setReview} label={"Review"}/>
+                            <EarmarkTextField value={review} onChange={setReview} label={"Review"}
+                                              maxLength={MAX_REVIEW_LENGTH}/>
                         </>
                     }
                 </div>
