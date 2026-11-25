@@ -4,7 +4,7 @@ import {MAX_RATING} from "../../constants.ts";
 
 export function EarmarkRating({rating, size = "md"}: {
     rating: number,
-    size?: "sm" | "md"
+    size?: "sm" | "md" | "lg"
 }) {
     const label = rating === 0 ? "Didn't like it" : `Rated ${rating} out of ${MAX_RATING}`;
 

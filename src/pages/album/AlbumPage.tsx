@@ -14,7 +14,7 @@ import AlbumMetadata from "./AlbumMetadata.tsx";
 import {useDocumentTitle} from "../../hooks/useDocumentTitle.ts";
 import BackLink from "../../components/back-link/BackLink.tsx";
 import Page from "../../components/page/Page.tsx";
-import EarmarkRating from "../../features/earmark/components/card/EarmarkRating.tsx";
+import EarmarkReview from "../../features/earmark/components/card/EarmarkReview.tsx";
 
 export default function AlbumPage() {
     const location = useLocation();
@@ -50,7 +50,6 @@ export default function AlbumPage() {
             <div className={styles.imageRow}>
                 <CoverImage image={pickImage(album.images, 640)} alt={`Cover of ${album.name}`}
                             className={styles.cover}/>
-                <EarmarkRating spotifyAlbumId={album.id}/>
                 <SpotifyLogoLink className={styles.spotify} url={album.spotifyUrl}/>
             </div>
             <div className={styles.info}>
@@ -59,6 +58,7 @@ export default function AlbumPage() {
                 <AlbumActions album={album}/>
             </div>
         </div>
+        <EarmarkReview spotifyAlbumId={album.id}/>
         <AlbumTracks album={album}/>
     </Page>
 }

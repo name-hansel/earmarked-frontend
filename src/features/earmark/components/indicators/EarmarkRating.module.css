@@ -9,6 +9,10 @@
     --note-size: 1rem;
 }
 
+.notes[data-size="lg"] {
+    --note-size: 1.75rem;
+}
+
 .icon {
     width: var(--note-size);
     height: var(--note-size);
