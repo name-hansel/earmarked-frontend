@@ -1,22 +1,28 @@
 .filters {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "label clear"
+        "selects selects";
+    align-items: center;
     gap: 0.5rem;
     width: 100%;
+    min-width: 0;
 }
 
 .groupLabel {
+    grid-area: label;
     font-family: var(--font-body);
     font-size: 0.875rem;
     color: var(--color-text-muted);
 }
 
 .filterRow {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
+    grid-area: selects;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
-    width: 100%;
+    min-width: 0;
 }
 
 .select {
@@ -32,9 +38,9 @@
     border: 1px dashed var(--color-border);
     border-radius: 0.5rem;
     cursor: pointer;
-    flex: 1 1 0;
     min-width: 0;
     text-overflow: ellipsis;
+    width: 100%;
 }
 
 .select:hover {
@@ -56,7 +62,7 @@
 }
 
 .clearAll {
-    flex: none;
+    grid-area: clear;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,22 +98,19 @@
 }
 
 @media (min-width: 40rem) {
-    .groupLabel {
-        display: inline;
-    }
-
     .filters {
+        display: flex;
         flex-direction: row;
         align-items: center;
         width: auto;
     }
 
     .filterRow {
-        width: auto;
+        display: flex;
+        gap: 0.5rem;
     }
 
     .select {
-        flex: none;
         width: auto;
     }
 }

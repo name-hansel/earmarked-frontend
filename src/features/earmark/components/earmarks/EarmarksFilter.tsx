@@ -37,7 +37,7 @@ export default function EarmarksFilter({
     const [reviewValue, setReviewValue] = useSyncedValue(hasReview === undefined ? "" : String(hasReview));
     const [ratingValue, setRatingValue] = useSyncedValue(rating ?? "");
 
-    const hasActiveFilters = status !== undefined || hasNote !== undefined || rating !== undefined;
+    const hasActiveFilters = status !== undefined || hasNote !== undefined || hasReview !== undefined || rating !== undefined;
 
     return <div className={styles.filters}>
         <span className={styles.groupLabel}>Filter</span>
@@ -94,11 +94,10 @@ export default function EarmarksFilter({
                 <option value="true">Has review</option>
                 <option value="false">No review</option>
             </select>
-
-            <button type="button" className={styles.clearAll} disabled={!hasActiveFilters}
-                    aria-label="Clear all filters" title="Clear all filters" onClick={onClear}>
-                <FilterOffIcon className={styles.clearIcon}/>
-            </button>
         </div>
+        <button type="button" className={styles.clearAll} disabled={!hasActiveFilters}
+                aria-label="Clear all filters" title="Clear all filters" onClick={onClear}>
+            <FilterOffIcon className={styles.clearIcon}/>
+        </button>
     </div>
 }
