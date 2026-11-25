@@ -11,11 +11,12 @@ export function useFetchEarmarks(
     q: string,
     status: EarmarkStatus | undefined,
     hasNote: boolean | undefined,
+    hasReview: boolean | undefined,
     rating: EarmarkRating | undefined,
 ) {
     return useInfiniteQuery({
-        queryKey: earmarkKeys.paged(sort, q, status, hasNote, rating),
-        queryFn: ({pageParam}) => fetchEarmarks(pageParam, PAGE_SIZE, sort, q, status, hasNote, rating),
+        queryKey: earmarkKeys.paged(sort, q, status, hasNote, hasReview, rating),
+        queryFn: ({pageParam}) => fetchEarmarks(pageParam, PAGE_SIZE, sort, q, status, hasNote, hasReview, rating),
         initialPageParam: 0,
         getNextPageParam: (lastPage) => {
             const {number, totalPages} = lastPage.page;

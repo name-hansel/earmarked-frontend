@@ -5,7 +5,7 @@ import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
 import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
-import {type EarmarkRating, type EarmarkStatus, parseHasNote, parseRatingFilter, parseStatus} from "../utils/filter.ts";
+import {type EarmarkRating, type EarmarkStatus, parseHas, parseRatingFilter, parseStatus} from "../utils/filter.ts";
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
 import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 import Page from "../../../components/page/Page.tsx";
@@ -18,7 +18,8 @@ export default function Earmarks() {
     const sortInput = searchParams.get("sort");
     const searchInput = searchParams.get("q") ?? "";
     const status = parseStatus(searchParams.get("status"));
-    const hasNote = parseHasNote(searchParams.get("hasNote"));
+    const hasNote = parseHas(searchParams.get("hasNote"));
+    const hasReview = parseHas(searchParams.get("hasReview"));
     const rating = parseRatingFilter(searchParams.get("rating"));
 
     const debouncedQ = useDebounce(searchInput.trim(), 500);
@@ -97,6 +98,20 @@ export default function Earmarks() {
         }, {replace: true});
     }
 
+    function handleHasReviewChange(next: boolean | undefined) {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (next !== undefined) {
+                params.set("hasReview", String(next));
+            } else {
+                params.delete("hasReview");
+            }
+
+            return params;
+        }, {replace: true});
+    }
+
     function handleClearFilters() {
         setSearchParams((prev) => {
             const params = new URLSearchParams(prev);
@@ -132,15 +147,18 @@ export default function Earmarks() {
                 <EarmarksFilter
                     status={status}
                     hasNote={hasNote}
+                    hasReview={hasReview}
                     rating={rating}
                     onStatusChange={handleStatusChange}
                     onHasNoteChange={handleHasNoteChange}
+                    onHasReviewChange={handleHasReviewChange}
                     onRatingChange={handleHasRatingChange}
                     onClear={handleClearFilters}
                 />
             </div>
         </div>
-        <EarmarksContent sort={sort} q={debouncedQ} status={status} hasNote={hasNote} rating={rating}/>
+        <EarmarksContent sort={sort} q={debouncedQ} status={status} hasNote={hasNote} hasReview={hasReview}
+                         rating={rating}/>
     </Page>
 }
 

@@ -5,11 +5,12 @@ import type {EarmarkSort} from "../../utils/earmarkSort.ts";
 import styles from "./EarmarksContent.module.css"
 import type {EarmarkRating, EarmarkStatus} from "../../utils/filter.ts";
 
-export default function EarmarksContent({sort, q, status, hasNote, rating}: {
+export default function EarmarksContent({sort, q, status, hasNote, hasReview, rating}: {
     sort: EarmarkSort;
     q: string;
     status: EarmarkStatus | undefined;
     hasNote: boolean | undefined;
+    hasReview: boolean | undefined;
     rating: EarmarkRating | undefined;
 }) {
     const {
@@ -21,7 +22,7 @@ export default function EarmarksContent({sort, q, status, hasNote, rating}: {
         isFetchingNextPage,
         fetchNextPage,
         isPlaceholderData
-    } = useFetchEarmarks(sort, q, status, hasNote, rating);
+    } = useFetchEarmarks(sort, q, status, hasNote, hasReview, rating);
 
     if (isPending) {
         return <PageLoader/>

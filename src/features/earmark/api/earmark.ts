@@ -63,10 +63,11 @@ export async function fetchEarmarks(
     q: string,
     status: EarmarkStatus | undefined,
     hasNote: boolean | undefined,
+    hasReview: boolean | undefined,
     rating: EarmarkRating | undefined
 ) {
     const response = await api.get<PageResponse<Earmark>>("/earmark", {
-        params: {page, size, sort, q: q || undefined, status, hasNote, rating},
+        params: {page, size, sort, q: q || undefined, status, hasNote, hasReview, rating},
     });
 
     return response.data;

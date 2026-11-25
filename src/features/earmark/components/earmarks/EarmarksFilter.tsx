@@ -3,7 +3,7 @@ import {
     EARMARK_RATING_FILTERS,
     type EarmarkRating,
     type EarmarkStatus,
-    parseHasNote,
+    parseHas,
     parseRatingFilter,
     parseStatus
 } from "../../utils/filter.ts";
@@ -14,22 +14,27 @@ import {FilterOffIcon} from "../../../../components/Icon.tsx";
 export default function EarmarksFilter({
                                            status,
                                            hasNote,
+                                           hasReview,
                                            rating,
                                            onStatusChange,
                                            onHasNoteChange,
+                                           onHasReviewChange,
                                            onRatingChange,
                                            onClear
                                        }: {
     status: EarmarkStatus | undefined;
     hasNote: boolean | undefined;
+    hasReview: boolean | undefined;
     rating: EarmarkRating | undefined;
     onStatusChange: (next: EarmarkStatus | undefined) => void;
     onHasNoteChange: (next: boolean | undefined) => void;
+    onHasReviewChange: (next: boolean | undefined) => void;
     onRatingChange: (next: EarmarkRating | undefined) => void;
     onClear: () => void
 }) {
     const [statusValue, setStatusValue] = useSyncedValue(status ?? "");
     const [noteValue, setNoteValue] = useSyncedValue(hasNote === undefined ? "" : String(hasNote));
+    const [reviewValue, setReviewValue] = useSyncedValue(hasReview === undefined ? "" : String(hasReview));
     const [ratingValue, setRatingValue] = useSyncedValue(rating ?? "");
 
     const hasActiveFilters = status !== undefined || hasNote !== undefined || rating !== undefined;
@@ -55,7 +60,7 @@ export default function EarmarksFilter({
                     value={noteValue}
                     onChange={(e) => {
                         setNoteValue(e.target.value);
-                        onHasNoteChange(parseHasNote(e.target.value));
+                        onHasNoteChange(parseHas(e.target.value));
                     }}
             >
                 <option value="">Any note</option>
@@ -76,6 +81,20 @@ export default function EarmarksFilter({
                     <option key={filter} value={filter}>{EARMARK_RATING_FILTER_LABELS[filter]}</option>
                 )}
             </select>
+
+            <select aria-label="Filter by review"
+                    className={styles.select}
+                    value={reviewValue}
+                    onChange={(e) => {
+                        setReviewValue(e.target.value);
+                        onHasReviewChange(parseHas(e.target.value));
+                    }}
+            >
+                <option value="">Any review</option>
+                <option value="true">Has review</option>
+                <option value="false">No review</option>
+            </select>
+
             <button type="button" className={styles.clearAll} disabled={!hasActiveFilters}
                     aria-label="Clear all filters" title="Clear all filters" onClick={onClear}>
                 <FilterOffIcon className={styles.clearIcon}/>

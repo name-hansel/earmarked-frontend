@@ -6,7 +6,7 @@ export const earmarkKeys = {
     lists: () => [...earmarkKeys.all, "list"] as const,
     album: (spotifyAlbumId: string) => [...earmarkKeys.all, "album", spotifyAlbumId] as const,
     recent: (size: number) => [...earmarkKeys.lists(), "recent", size] as const,
-    paged: (sort: EarmarkSort, q: string, status: EarmarkStatus | undefined, hasNote: boolean | undefined, rating: EarmarkRating | undefined) =>
-        [...earmarkKeys.lists(), "paged", sort, q, status, hasNote, rating] as const,
+    paged: (sort: EarmarkSort, q: string, status: EarmarkStatus | undefined, hasNote: boolean | undefined, hasReview: boolean | undefined, rating: EarmarkRating | undefined) =>
+        [...earmarkKeys.lists(), "paged", sort, q, status, hasNote, hasReview, rating] as const,
     albums: (ids: string[]) => [...earmarkKeys.all, "albums", ids] as const,
 }
