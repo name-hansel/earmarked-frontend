@@ -8,7 +8,7 @@ type SortFieldConfig = {
     directionLabels: Record<SortDirection, string>;
 };
 
-const NEWEST_OLDEST = {DESC: "Newest first", ASC: "Oldest first"};
+const NEWEST_OLDEST = {DESC: "Newest", ASC: "Oldest"};
 
 export const SORT_FIELDS: SortFieldConfig[] = [
     {value: "EARMARKED", label: "Earmarked date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},
@@ -20,12 +20,7 @@ export const SORT_FIELDS: SortFieldConfig[] = [
     },
     {value: "RELEASE_DATE", label: "Release date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},
     {value: "LISTENED", label: "Listened date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},
-    {
-        value: "RATING",
-        label: "Rating",
-        defaultDirection: "DESC",
-        directionLabels: {DESC: "Highest first", ASC: "Lowest first"}
-    },
+    {value: "RATING", label: "Rating", defaultDirection: "DESC", directionLabels: {DESC: "Highest", ASC: "Lowest"}},
 ];
 
 export const EARMARK_SORT_OPTIONS = [

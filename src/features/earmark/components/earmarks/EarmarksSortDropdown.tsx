@@ -25,9 +25,10 @@ export default function EarmarksSortDropdown({sort, handleSortChange}: {
             <Dropdown ariaLabel="Sort by" className={styles.sortSelect}
                       value={field} options={FIELD_OPTIONS} onChange={handleFieldChange}/>
             <button type="button" className={styles.directionButton}
-                    title={config.directionLabels[direction]}
+                    title={`Switch to ${config.directionLabels[nextDirection]}`}
                     aria-label={`${config.directionLabels[direction]}. Switch to ${config.directionLabels[nextDirection]}`}
                     onClick={() => handleSortChange(joinSort(field, nextDirection))}>
+                <span>{config.directionLabels[direction]}</span>
                 <DirectionIcon className={styles.directionIcon}/>
             </button>
         </div>
