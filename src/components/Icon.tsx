@@ -86,3 +86,15 @@ export const ReviewIcon = (props: SVGProps<SVGSVGElement>) =>
         <path d="M5 3h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-2l-4 4v-4H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3z"/>
         <path d="M7 8h9M7 12h6"/>
     </Icon>;
+
+export const ArrowUpIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <path d="m5 12 7-7 7 7"/>
+        <path d="M12 19V5"/>
+    </Icon>;
+
+export const ArrowDownIcon = (props: SVGProps<SVGSVGElement>) =>
+    <Icon {...props}>
+        <path d="M12 5v14"/>
+        <path d="m19 12-7 7-7-7"/>
+    </Icon>;

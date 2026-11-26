@@ -1,19 +1,53 @@
+export type SortField = "EARMARKED" | "ALBUM_NAME" | "RELEASE_DATE" | "LISTENED" | "RATING";
+export type SortDirection = "ASC" | "DESC";
+
+type SortFieldConfig = {
+    value: SortField;
+    label: string;
+    defaultDirection: SortDirection;
+    directionLabels: Record<SortDirection, string>;
+};
+
+const NEWEST_OLDEST = {DESC: "Newest first", ASC: "Oldest first"};
+
+export const SORT_FIELDS: SortFieldConfig[] = [
+    {value: "EARMARKED", label: "Earmarked date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},
+    {
+        value: "ALBUM_NAME",
+        label: "Album name",
+        defaultDirection: "ASC",
+        directionLabels: {ASC: "A to Z", DESC: "Z to A"}
+    },
+    {value: "RELEASE_DATE", label: "Release date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},
+    {value: "LISTENED", label: "Listened date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},
+    {
+        value: "RATING",
+        label: "Rating",
+        defaultDirection: "DESC",
+        directionLabels: {DESC: "Highest first", ASC: "Lowest first"}
+    },
+];
+
 export const EARMARK_SORT_OPTIONS = [
-    {value: "ALBUM_NAME_ASC", label: "Album name (A–Z)"},
-    {value: "ALBUM_NAME_DESC", label: "Album name (Z–A)"},
-    {value: "RELEASE_DATE_DESC", label: "Release date (newest)"},
-    {value: "RELEASE_DATE_ASC", label: "Release date (oldest)"},
-    {value: "EARMARKED_DESC", label: "Earmarked (newest)"},
-    {value: "EARMARKED_ASC", label: "Earmarked (oldest)"},
-    {value: "LISTENED_DESC", label: "Listened (newest)"},
-    {value: "LISTENED_ASC", label: "Listened (oldest)"},
-    {value: "RATING_DESC", label: "Rating (high to low)"},
-    {value: "RATING_ASC", label: "Rating (low to high)"},
+    "ALBUM_NAME_ASC", "ALBUM_NAME_DESC",
+    "RELEASE_DATE_DESC", "RELEASE_DATE_ASC",
+    "EARMARKED_DESC", "EARMARKED_ASC",
+    "LISTENED_DESC", "LISTENED_ASC",
+    "RATING_DESC", "RATING_ASC",
 ] as const;
 
-export type EarmarkSort = (typeof EARMARK_SORT_OPTIONS)[number]["value"];
+export function splitSort(sort: EarmarkSort): { field: SortField; direction: SortDirection } {
+    const index = sort.lastIndexOf("_");
+    return {field: sort.slice(0, index) as SortField, direction: sort.slice(index + 1) as SortDirection};
+}
+
+export function joinSort(field: SortField, direction: SortDirection): EarmarkSort {
+    return `${field}_${direction}`;
+}
+
+export type EarmarkSort = (typeof EARMARK_SORT_OPTIONS)[number];
 export const DEFAULT_EARMARK_SORT: EarmarkSort = "EARMARKED_DESC";
 
 export function isEarmarkSort(value: string | null): value is EarmarkSort {
-    return EARMARK_SORT_OPTIONS.some((o) => o.value === value);
+    return EARMARK_SORT_OPTIONS.some((option) => option === value);
 }
