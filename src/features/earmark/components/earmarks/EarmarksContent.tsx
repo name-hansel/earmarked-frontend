@@ -43,8 +43,14 @@ export default function EarmarksContent({sort, q, status, hasNote, hasReview, ra
             return <p className={styles.empty}>No earmarks match “{q}”.</p>;
         }
 
-        if (status !== undefined || hasNote !== undefined || rating !== undefined) {
-            return <p className={styles.empty}>No earmarks match these filters.</p>;
+        if (status !== undefined || hasNote !== undefined || hasReview !== undefined || rating !== undefined) {
+            const toListenConflict = status === "TO_LISTEN"
+                && (hasReview === true || (rating !== undefined && rating !== "NO_RATING"));
+
+            return <p className={styles.empty}>
+                No earmarks match these filters.
+                {toListenConflict && " Ratings and reviews only exist for albums you've listened to."}
+            </p>;
         }
 
         return <p className={styles.empty}>You haven't earmarked anything yet.</p>;
