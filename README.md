@@ -3,8 +3,8 @@
 ## Overview
 
 React (TypeScript) frontend for earmarked, an app for earmarking albums you want to listen to. Search Spotify, earmark
-albums with an optional note, mark them as listened, and browse your list with sorting, search and filters. Mobile-first
-and responsive, talking to the backend through the gateway.
+albums with an optional note, mark them as listened, rate and review them, and browse your list with sorting, search and
+filters. Mobile-first and responsive, talking to the backend through the gateway.
 
 ## Tech Stack
 
@@ -15,6 +15,7 @@ and responsive, talking to the backend through the gateway.
 - Optimization: React Compiler
 - Styling: CSS Modules with design tokens (custom fonts and palette, no UI library)
 - Notifications: sonner
+- Shared UI building blocks: reusable dropdown, clear button, indicators and album card components
 
 ## Features
 
@@ -22,8 +23,14 @@ and responsive, talking to the backend through the gateway.
 - Forgot, reset and change password, delete account
 - Guest-only and protected routes
 - Dashboard with recent earmarks and Spotify album search
-- Dedicated album page: quick earmark, earmark with a note, edit, delete, mark as listened
-- Earmarks page with "Load more" pagination, sorting, text search and status/note filters (all state kept in the URL)
+- Dedicated album page: quick earmark, earmark with a note, edit, delete, mark as listened, album duration and track
+  list
+- Rating (0–3 musical notes) and a written review once an album is listened to, shown in their own section on the album
+  page
+- Earmark cards with a status strip: icons for earmarked or listened, note, rating and review, plus the value you're
+  sorting by
+- Earmarks page with "Load more" pagination, text search, sorting (field plus ascending/descending) and filters for
+  status, note, rating and review, with a clear-all button (all state kept in the URL)
 - Batch earmark lookup for search results (one request per search)
 - Loading skeletons, empty states and error toasts
 
@@ -44,7 +51,8 @@ and responsive, talking to the backend through the gateway.
 ## Future Improvements
 
 - Deployment
-- Tags, ratings and reviews
+- Tags for earmarks
+- A "listening" state between to listen and listened
 - Animations and a smoother interface
 
 ## Attribution
