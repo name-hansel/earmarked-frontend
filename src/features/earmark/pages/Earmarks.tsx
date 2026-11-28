@@ -5,7 +5,14 @@ import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
 import EarmarksContent from "../components/earmarks/EarmarksContent.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
-import {type EarmarkRating, type EarmarkStatus, parseHas, parseRatingFilter, parseStatus} from "../utils/filter.ts";
+import {
+    type EarmarkRating,
+    type EarmarkStatus,
+    FILTER_PARAMS,
+    parseHas,
+    parseRatingFilter,
+    parseStatus
+} from "../utils/filter.ts";
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
 import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 import Page from "../../../components/page/Page.tsx";
@@ -26,99 +33,31 @@ export default function Earmarks() {
 
     const sort = isEarmarkSort(sortInput) ? sortInput : DEFAULT_EARMARK_SORT;
 
-    function handleSortChange(next: EarmarkSort) {
-        setSearchParams(
-            (prev) => {
-                const params = new URLSearchParams(prev);
-
-                if (next) {
-                    params.set("sort", next);
-                } else {
-                    params.delete("sort");
-                }
-
-                return params;
-            },
-            {replace: true});
-    }
-
-    function handleSearchChange(next: string) {
-        setSearchParams((prev) => {
-            const params = new URLSearchParams(prev);
-
-            if (next) {
-                params.set("q", next);
-            } else {
-                params.delete("q");
-            }
-
-            return params;
-        }, {replace: true});
-    }
-
-    function handleStatusChange(next: EarmarkStatus | undefined) {
-        setSearchParams((prev) => {
-            const params = new URLSearchParams(prev);
-
-            if (next) {
-                params.set("status", next);
-            } else {
-                params.delete("status");
-            }
-
-            return params;
-        }, {replace: true});
-    }
-
-    function handleHasRatingChange(next: EarmarkRating | undefined) {
-        setSearchParams((prev) => {
-            const params = new URLSearchParams(prev);
-
-            if (next !== undefined) {
-                params.set("rating", String(next));
-            } else {
-                params.delete("rating");
-            }
-
-            return params;
-        }, {replace: true});
-    }
-
-    function handleHasNoteChange(next: boolean | undefined) {
-        setSearchParams((prev) => {
-            const params = new URLSearchParams(prev);
-
-            if (next !== undefined) {
-                params.set("hasNote", String(next));
-            } else {
-                params.delete("hasNote");
-            }
-
-            return params;
-        }, {replace: true});
-    }
-
-    function handleHasReviewChange(next: boolean | undefined) {
-        setSearchParams((prev) => {
-            const params = new URLSearchParams(prev);
-
-            if (next !== undefined) {
-                params.set("hasReview", String(next));
-            } else {
-                params.delete("hasReview");
-            }
-
-            return params;
-        }, {replace: true});
-    }
+    const handleSortChange = (next: EarmarkSort) => updateParam("sort", next);
+    const handleSearchChange = (next: string) => updateParam("q", next);
+    const handleStatusChange = (next: EarmarkStatus | undefined) => updateParam(FILTER_PARAMS.status, next);
+    const handleHasNoteChange = (next: boolean | undefined) => updateParam(FILTER_PARAMS.hasNote, next?.toString());
+    const handleHasReviewChange = (next: boolean | undefined) => updateParam(FILTER_PARAMS.hasReview, next?.toString());
+    const handleRatingChange = (next: EarmarkRating | undefined) => updateParam(FILTER_PARAMS.rating, next);
 
     function handleClearFilters() {
         setSearchParams((prev) => {
             const params = new URLSearchParams(prev);
-            params.delete("status");
-            params.delete("hasNote");
-            params.delete("rating");
-            params.delete("hasReview");
+            Object.values(FILTER_PARAMS).forEach((param) => params.delete(param));
+
+            return params;
+        }, {replace: true});
+    }
+
+    function updateParam(key: string, value: string | undefined) {
+        setSearchParams((prev) => {
+            const params = new URLSearchParams(prev);
+
+            if (value) {
+                params.set(key, value);
+            } else {
+                params.delete(key);
+            }
 
             return params;
         }, {replace: true});
@@ -153,7 +92,7 @@ export default function Earmarks() {
                     onStatusChange={handleStatusChange}
                     onHasNoteChange={handleHasNoteChange}
                     onHasReviewChange={handleHasReviewChange}
-                    onRatingChange={handleHasRatingChange}
+                    onRatingChange={handleRatingChange}
                     onClear={handleClearFilters}
                 />
             </div>

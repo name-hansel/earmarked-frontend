@@ -2,6 +2,13 @@ export type EarmarkStatus = "TO_LISTEN" | "LISTENED";
 export const EARMARK_RATING_FILTERS = ["NO_RATING", "ZERO", "ONE", "TWO", "THREE"] as const;
 export type EarmarkRating = (typeof EARMARK_RATING_FILTERS)[number];
 
+export const FILTER_PARAMS = {
+    status: "status",
+    hasNote: "hasNote",
+    hasReview: "hasReview",
+    rating: "rating",
+} as const;
+
 export const EARMARK_RATING_FILTER_LABELS: Record<EarmarkRating, string> = {
     ZERO: "Rated 0",
     ONE: "Rated 1",
