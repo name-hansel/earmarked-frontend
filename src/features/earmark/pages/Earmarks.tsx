@@ -1,5 +1,5 @@
 import styles from "./Earmarks.module.css";
-import {DEFAULT_EARMARK_SORT, type EarmarkSort, isEarmarkSort} from "../utils/earmarkSort.ts";
+import {DEFAULT_EARMARK_SORT, type EarmarkSort, isEarmarkSort, SORT_PARAM} from "../utils/earmarkSort.ts";
 import {useSearchParams} from "react-router";
 import {useDebounce} from "../../../hooks/useDebounce.ts";
 import EarmarksSortDropdown from "../components/earmarks/EarmarksSortDropdown.tsx";
@@ -16,25 +16,26 @@ import {
 import EarmarksFilter from "../components/earmarks/EarmarksFilter.tsx";
 import {useDocumentTitle} from "../../../hooks/useDocumentTitle.ts";
 import Page from "../../../components/page/Page.tsx";
+import {SEARCH_PARAM} from "../api/earmark.ts";
 
 export default function Earmarks() {
     useDocumentTitle("Your earmarks")
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const sortInput = searchParams.get("sort");
-    const searchInput = searchParams.get("q") ?? "";
-    const status = parseStatus(searchParams.get("status"));
-    const hasNote = parseHas(searchParams.get("hasNote"));
-    const hasReview = parseHas(searchParams.get("hasReview"));
-    const rating = parseRatingFilter(searchParams.get("rating"));
+    const sortInput = searchParams.get(SORT_PARAM);
+    const searchInput = searchParams.get(SEARCH_PARAM) ?? "";
+    const status = parseStatus(searchParams.get(FILTER_PARAMS.status));
+    const hasNote = parseHas(searchParams.get(FILTER_PARAMS.hasNote));
+    const hasReview = parseHas(searchParams.get(FILTER_PARAMS.hasReview));
+    const rating = parseRatingFilter(searchParams.get(FILTER_PARAMS.rating));
 
     const debouncedQ = useDebounce(searchInput.trim(), 500);
 
     const sort = isEarmarkSort(sortInput) ? sortInput : DEFAULT_EARMARK_SORT;
 
-    const handleSortChange = (next: EarmarkSort) => updateParam("sort", next);
-    const handleSearchChange = (next: string) => updateParam("q", next);
+    const handleSortChange = (next: EarmarkSort) => updateParam(SORT_PARAM, next);
+    const handleSearchChange = (next: string) => updateParam(SEARCH_PARAM, next);
     const handleStatusChange = (next: EarmarkStatus | undefined) => updateParam(FILTER_PARAMS.status, next);
     const handleHasNoteChange = (next: boolean | undefined) => updateParam(FILTER_PARAMS.hasNote, next?.toString());
     const handleHasReviewChange = (next: boolean | undefined) => updateParam(FILTER_PARAMS.hasReview, next?.toString());

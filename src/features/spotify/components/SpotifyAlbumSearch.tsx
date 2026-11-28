@@ -7,6 +7,7 @@ import styles from "./SpotifyAlbumSearch.module.css";
 import PageLoader from "../../../components/page-loader/PageLoader.tsx";
 import SearchInput from "../../../components/search/SearchInput.tsx";
 import SpotifySearchResults from "./SpotifySearchResults.tsx";
+import {SEARCH_PARAM} from "../../earmark/api/earmark.ts";
 
 export default function SpotifyAlbumSearch({input, onInputChange}: {
     input: string;
@@ -19,7 +20,7 @@ export default function SpotifyAlbumSearch({input, onInputChange}: {
     const isSearching = input.trim().length > 1;
     const isPendingSearch = isSearching && (isFetching || debouncedInput.trim() !== input.trim());
 
-    const urlQuery = searchParams.get("q") ?? "";
+    const urlQuery = searchParams.get(SEARCH_PARAM) ?? "";
     const lastWrittenRef = useRef(urlQuery);
 
     // debounced input -> URL

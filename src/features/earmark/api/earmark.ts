@@ -21,6 +21,7 @@ export interface AlbumEarmarkResponse {
 }
 
 export const ALREADY_EARMARKED_CODE = 'EARMARK_ALREADY_EXISTS';
+export const SEARCH_PARAM = "q";
 
 export async function createEarmark(spotifyAlbumId: string, note?: string | null): Promise<Earmark> {
     const response = await api.post<Earmark>("/earmark", {spotifyAlbumId, note});

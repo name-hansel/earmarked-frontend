@@ -9,6 +9,7 @@ type SortFieldConfig = {
 };
 
 const NEWEST_OLDEST = {DESC: "Newest", ASC: "Oldest"};
+export const SORT_PARAM = "sort";
 
 export const SORT_FIELDS: SortFieldConfig[] = [
     {value: "EARMARKED", label: "Earmarked date", defaultDirection: "DESC", directionLabels: NEWEST_OLDEST},

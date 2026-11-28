@@ -4,11 +4,12 @@ import RecentEarmarks from "../features/earmark/components/RecentEarmarks.tsx";
 import {useDocumentTitle} from "../hooks/useDocumentTitle.ts";
 import {useState} from "react";
 import {useSearchParams} from "react-router";
+import {SEARCH_PARAM} from "../features/earmark/api/earmark.ts";
 
 export default function Dashboard({username}: { username: string }) {
     useDocumentTitle("Dashboard");
     const [searchParams] = useSearchParams();
-    const [input, setInput] = useState(searchParams.get("q") ?? "");
+    const [input, setInput] = useState(searchParams.get(SEARCH_PARAM) ?? "");
     const isSearching = input.trim().length > 1;
 
     return <section className={styles.dashboard}>
