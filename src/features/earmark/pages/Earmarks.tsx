@@ -118,6 +118,7 @@ export default function Earmarks() {
             params.delete("status");
             params.delete("hasNote");
             params.delete("rating");
+            params.delete("hasReview");
 
             return params;
         }, {replace: true});
